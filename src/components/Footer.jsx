@@ -7,7 +7,8 @@ const StyledFooter = styled.footer`
   color: ${({ theme }) => theme.textColor};
   position: relative;
   padding: 0 3rem 2rem 3rem;
-  font-family: 'GT Haptik Regular';
+  background-color: #12072eaa;
+  color: #ffff;
   @media (max-width: 1155px) {
     display: block;
   }
@@ -30,15 +31,8 @@ const StyledFooterLink = styled.a`
 export const Footer = () => {
   return (
     <StyledFooter>
-      <p>© {new Date().getFullYear()} Uniswap</p>
-      <StyledFooterLinkSection>
-        <StyledFooterLink to="/about">About</StyledFooterLink>
-        <StyledFooterLink to="/disclaimer" style={{ marginRight: '12px' }}>
-          Disclaimer
-        </StyledFooterLink>
-        <StyledFooterLink to="/trademarks">Trademarks</StyledFooterLink>
-        <StyledFooterLink to="/about#brand">Brand</StyledFooterLink>
-      </StyledFooterLinkSection>
+      <p>© {new Date().getFullYear()} Crowdfy</p>
+      <p>Made with love and coffe</p>
     </StyledFooter>
   )
 }

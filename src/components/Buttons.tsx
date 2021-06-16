@@ -4,16 +4,16 @@ import styled, {css} from "styled-components";
 const ButtonStyles = css`
   padding: 0.35rem 0.85rem;
   text-decoration: none;
-  border-radius: 12px;
   transform: scale(0.98);
   transition: transform 0.25s ease;
   box-sizing: border-box;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
   cursor: pointer;
-  margin-inline: 4em;
+  margin-inline: 2em;
   margin-block:1em;
-  width: fit-content;
+  width: 9em;
 	border: solid 1.8px black; /*#ffffff;*/
 	border-radius: 1rem;
 
@@ -41,7 +41,6 @@ ${ButtonStyles}
 export const ButtonStyles2 = css`
   padding: 0.35rem 0.85rem;
   text-decoration: none;
-  border-radius: 12px;
   transform: scale(0.98);
   transition: transform 0.25s ease;
   box-sizing: border-box;
