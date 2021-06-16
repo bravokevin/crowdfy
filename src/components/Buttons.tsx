@@ -41,14 +41,20 @@ ${ButtonStyles}
 export const ButtonStyles2 = css`
   padding: 0.35rem 0.85rem;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 12px;
   transform: scale(0.98);
   transition: transform 0.25s ease;
   box-sizing: border-box;
-  font-size: 5px;
+  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
-	border: solid 1.8px black;
+  margin-inline: 3em;
+  margin-block:1em;
+  width: fit-content;
+	border: solid 1.8px black; /*#ffffff;*/
+	border-radius: 1rem;
 
+  
   @media (max-width: 960px) {
     /* margin: 0 0.5rem 0 0.5rem; */
     text-align: center;
@@ -63,8 +69,9 @@ export const ButtonStyles2 = css`
     transform: scale(1);
   }
 
+
 `
 
 export const Button2 = styled.a`
-${ButtonStyles}
+${ButtonStyles2}
 `

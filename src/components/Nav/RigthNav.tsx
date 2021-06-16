@@ -30,7 +30,6 @@ function RightNav(props: Props) {
                 </NavLink>
                 <NavLink to="/menu2"
                     activeStyle={{
-                        fontWeight: "bold",
                         color: "#b709da"
                     }}
                 >

@@ -42,15 +42,12 @@ export const StyledBurger = styled.div<INav>`
 export const Nav = styled.nav`
   height: 5em;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #f8f8f8f8;
   align-items: center;
   /* position: relative; */
   @media (max-width: 678px) {
     width: 100%;
-    justify-content: center;
-  align-items: center;
-
     
   }
   span {
@@ -77,7 +74,7 @@ export const Ul = styled.ul<INav>`
   align-items: center;
   font-size: 17px;
   height: 5em;
-  margin-left: 10px;
+  /* margin-left: 0px; */
   a {
     text-decoration: none;
     text-transform: none;
@@ -114,7 +111,7 @@ export const Ul = styled.ul<INav>`
 `
 
 export const Logo = styled.img`
-  margin: 20px 50px 20px 7%;
+  margin: 20px 40px 20px 3%;
   width: 100px;
   height: 70px;
   object-fit: contain;
@@ -126,7 +123,7 @@ export const Logo = styled.img`
 `
 
 export const LogoUl = styled.img`
-  margin: 10px 50px 20px 5%;
+  margin: 10px 40px 20px 5%;
   display: none;
   @media (max-width: 768px) {
     display: flex;
