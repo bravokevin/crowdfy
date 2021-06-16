@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './Buttons';
+import {Button} from './Buttons';
 import styled, { css } from "styled-components";
 
 
@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content :center;
+    margin-top: 50vh;
 `
 
 class HomePage extends Component {

@@ -9,10 +9,10 @@ const ButtonStyles = css`
   transition: transform 0.25s ease;
   box-sizing: border-box;
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   cursor: pointer;
   margin-inline: 4em;
-  margin-top: 50vh;
+  margin-block:1em;
   width: fit-content;
 	border: solid 1.8px black; /*#ffffff;*/
 	border-radius: 1rem;
@@ -34,8 +34,37 @@ const ButtonStyles = css`
 
 `
 
-const Button = styled.a`
+export const Button = styled.a`
 ${ButtonStyles}
 `
 
-export default Button;
+export const ButtonStyles2 = css`
+  padding: 0.35rem 0.85rem;
+  text-decoration: none;
+  border-radius: 10px;
+  transform: scale(0.98);
+  transition: transform 0.25s ease;
+  box-sizing: border-box;
+  font-size: 5px;
+  cursor: pointer;
+	border: solid 1.8px black;
+
+  @media (max-width: 960px) {
+    /* margin: 0 0.5rem 0 0.5rem; */
+    text-align: center;
+    text-decoration: none;
+    padding: 0.25rem 1rem;
+  }
+  @media (max-width: 640px) {
+    width: 100%;
+    padding: 0.85rem 0.85rem;
+  }
+  :hover {
+    transform: scale(1);
+  }
+
+`
+
+export const Button2 = styled.a`
+${ButtonStyles}
+`
