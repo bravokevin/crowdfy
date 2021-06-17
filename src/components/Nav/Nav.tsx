@@ -3,6 +3,11 @@ import * as S from './styles';
 import Logo from "../../Crowdfy.png"
 
 import Burger from './Burger';
+import { Button2 } from '../Buttons'
+
+
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+
 
 type Props = {
     children?: any;
@@ -10,12 +15,30 @@ type Props = {
 
 export default function Navbar(props: Props) {
     return (
-        <>
-            <S.Nav>
-                <S.Logo src={Logo} alt="Logo" />
-                <Burger />
-            </S.Nav>
-            {props.children}
-        </>
+            <Router>
+                <S.Nav>
+                    <S.Logo src={Logo} alt="Logo" />
+
+                    <NavLink to="/menu1"
+                        activeStyle={{
+                            fontWeight: "bold",
+                            color: "#b709da"
+                        }}
+                    >
+                        <li>Campaigns</li>
+                    </NavLink>
+                    <NavLink to="/menu2"
+                        activeStyle={{
+                            color: "#b709da"
+                        }}
+                    >
+                        <li><Button2>Create campaign</Button2></li>
+                    </NavLink>
+
+                    <Burger />
+                    {props.children}
+                </S.Nav>
+            </Router>
+         
     )
 }

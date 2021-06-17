@@ -17,8 +17,6 @@ const StyledText = styled.p`
   color: #ffff;
 `
 
-
-
 export const Footer = () => {
   return (
     <StyledFooter>

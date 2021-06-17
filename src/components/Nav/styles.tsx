@@ -40,17 +40,22 @@ export const StyledBurger = styled.div<INav>`
 `
 
 export const Nav = styled.nav`
+  list-style: none;
+  justify-content: flex-end;
   height: 5em;
   display: flex;
-  justify-content: center;
   background-color: #f8f8f8f8;
   align-items: center;
-  /* position: relative; */
-  @media (max-width: 678px) {
-    width: 100%;
-    
+  a {
+    text-decoration: none;
+    text-transform: none;
+    cursor: pointer;
+    &:hover {
+      color: #da0cc9;
+    }
   }
-  span {
+  /* position: relative; */
+  /* span {
     font-size: 10px;
     @media only screen and (max-width: 600px) {
       font-size: 20px;
@@ -60,9 +65,11 @@ export const Nav = styled.nav`
         margin-top: 0px !important;
       }
     }
-  }
+  } */
 `
 
+
+//Burger navigation barr
 export const Ul = styled.ul<INav>`
   list-style: none;
   display: flex;
@@ -72,7 +79,6 @@ export const Ul = styled.ul<INav>`
   justify-content: flex-end;
   align-items: center;
   font-size: 25px;
-  height: 4.5em;
   /* margin-left: 0px; */
   a {
     text-decoration: none;
@@ -109,14 +115,12 @@ export const Ul = styled.ul<INav>`
 `
 
 export const Logo = styled.img`
-  margin: 20px 40px 20px 3%;
-  width: 100px;
-  height: 70px;
+  justify-self: start;
+  margin: 20px auto 20px 3%;
+  width: 150px;
   object-fit: contain;
   @media (max-width: 768px) {
     margin: 20px 35% ;
-    width: 160px;
-
   }
 `
 

@@ -13,7 +13,7 @@ const Burger = () => {
         <div />
         <div />
       </S.StyledBurger>
-      <RightNav open={open} />
+      {/* <RightNav open={open} /> */}
     </>
   )
 }

@@ -15,27 +15,27 @@ type Props = {
 function RightNav(props: Props) {
 
     return (
-        <Router>
+        // <Router>
 
-            <S.Ul open={props.open}>
-                <S.LogoUl src={Logo} alt={'Logo'} />
+        //     <S.Ul open={props.open}>
+        //         <S.LogoUl src={Logo} alt={'Logo'} />
 
-                <NavLink to="/menu1"
-                    activeStyle={{
-                        fontWeight: "bold",
-                        color: "#b709da"
-                    }}
-                >
-                    <li>Campaigns</li>
-                </NavLink>
-                <NavLink to="/menu2"
-                    activeStyle={{
-                        color: "#b709da"
-                    }}
-                >
-                    <li><Button2>Create campaign</Button2></li>
-                </NavLink>
-            </S.Ul>
+        //         <NavLink to="/menu1"
+        //             activeStyle={{
+        //                 fontWeight: "bold",
+        //                 color: "#b709da"
+        //             }}
+        //         >
+        //             <li>Campaigns</li>
+        //         </NavLink>
+        //         <NavLink to="/menu2"
+        //             activeStyle={{
+        //                 color: "#b709da"
+        //             }}
+        //         >
+        //             <li><Button2>Create campaign</Button2></li>
+        //         </NavLink>
+        //     </S.Ul>
 
 
             {/* <Switch>
@@ -51,7 +51,7 @@ function RightNav(props: Props) {
         </Route>
         <Redirect to='/menu1' />
       </Switch> */}
-        </Router >
+        // </Router >
     )
 }
 

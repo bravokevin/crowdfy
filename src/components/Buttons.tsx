@@ -16,7 +16,6 @@ const ButtonStyles = css`
 	border: solid 1.8px #ffffff;
 	border-radius: 1rem;
 
-  
   @media (max-width: 960px) {
     /* margin: 0 0.5rem 0 0.5rem; */
     text-decoration: none;
@@ -28,7 +27,7 @@ const ButtonStyles = css`
     padding: 0.85rem 0.85rem;
   }
   :hover {
-    transform: scale(1);
+    transform: scale(1.05);
   }
 
 `
