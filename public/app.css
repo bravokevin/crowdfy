@@ -1,7 +1,7 @@
 html {
 	background: linear-gradient(#dc9de4, #B721EC) fixed;
 	background-repeat: repeat;
-	height: 100vh;
+	height: 100%;
 	/* font-size: 1em; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

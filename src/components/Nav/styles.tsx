@@ -69,11 +69,10 @@ export const Ul = styled.ul<INav>`
   flex-flow: row nowrap;
   /* position: absolute; */
   width: 100%;
-  top: 0;
   justify-content: flex-end;
   align-items: center;
   font-size: 25px;
-  height: 5em;
+  height: 4.5em;
   /* margin-left: 0px; */
   a {
     text-decoration: none;

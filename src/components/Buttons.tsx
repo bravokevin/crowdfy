@@ -7,12 +7,11 @@ const ButtonStyles = css`
   transform: scale(0.98);
   transition: transform 0.25s ease;
   box-sizing: border-box;
-  font-weight: 500;
-  font-size: 2rem;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: #ffffff;
   text-align: center;
   cursor: pointer;
-  margin-inline: 2em;
-  margin-block:1em;
   width: 9em;
 	border: solid 1.8px #ffffff;
 	border-radius: 1rem;
@@ -45,7 +44,7 @@ export const ButtonStyles2 = css`
   transform: scale(0.98);
   transition: transform 0.25s ease;
   box-sizing: border-box;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1rem;
   cursor: pointer;
   margin-inline: 3em;

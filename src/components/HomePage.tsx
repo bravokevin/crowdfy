@@ -3,13 +3,6 @@ import {Button} from './Buttons';
 import styled, { css } from "styled-components";
 
 
-const Container = styled.div`
-	display: grid;
-	grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr;
-	justify-items: center;
-	
-`
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -28,14 +21,12 @@ color: #f2ebe9;
 class HomePage extends Component {
     render() {
         return (
-            <Container>
                 <Wrapper>
                     <Title>Fundraise the people and causes that matter to you</Title>
                     {/* <Subtitle>Start helping now</Subtitle> */}
                     <Button>Create campaign</Button>
                     <Button>See campaigns</Button>
                 </Wrapper>
-            </Container>
         )
     }
 }
