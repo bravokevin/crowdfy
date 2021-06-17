@@ -5,7 +5,8 @@ import styled, { css } from "styled-components";
 
 const Container = styled.div`
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
 	justify-items: center;
 	
 `

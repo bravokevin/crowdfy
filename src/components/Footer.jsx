@@ -3,36 +3,34 @@ import React from 'react'
 
 const StyledFooter = styled.footer`
   display: flex;
-  justify-content: space-between;
-  color: ${({ theme }) => theme.textColor};
-  position: relative;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: space-between;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  clear: both;
+  margin-top: -200px;
   padding: 0 3rem 2rem 3rem;
+  min-height:50px; 
   background-color: #12072eaa;
-  color: #ffff;
-  @media (max-width: 1155px) {
-    display: block;
-  }
+
   @media (max-width: 960px) {
     padding: 1rem;
   }
 `
 
-const StyledFooterLinkSection = styled.ul`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin: 0;
+const StyledText = styled.p`
+  color: #ffff;
 `
 
-const StyledFooterLink = styled.a`
-  margin-right: 12px;
-`
+
 
 export const Footer = () => {
   return (
     <StyledFooter>
-      <p>© {new Date().getFullYear()} Crowdfy</p>
-      <p>Made with love and coffe</p>
+      <StyledText>© {new Date().getFullYear()} Crowdfy </StyledText>
     </StyledFooter>
   )
 }

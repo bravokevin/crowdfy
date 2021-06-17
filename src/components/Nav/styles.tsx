@@ -72,16 +72,15 @@ export const Ul = styled.ul<INav>`
   top: 0;
   justify-content: flex-end;
   align-items: center;
-  font-size: 17px;
+  font-size: 25px;
   height: 5em;
   /* margin-left: 0px; */
   a {
     text-decoration: none;
     text-transform: none;
-    color: #000;
     cursor: pointer;
     &:hover {
-      color: #0c54da;
+      color: #da0cc9;
     }
   }
 
@@ -127,7 +126,7 @@ export const LogoUl = styled.img`
   display: none;
   @media (max-width: 768px) {
     display: flex;
-    width: 230px;
+    width: 200px;
     object-fit: contain;
   }
 `
