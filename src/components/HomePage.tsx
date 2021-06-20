@@ -1,34 +1,28 @@
-import React, { Component } from 'react';
-import {Button} from './Buttons';
-import styled, { css } from "styled-components";
+import React, { Component, useState } from 'react';
+import Navbar from './NavBar/Nav.js';
+import SideBar from './NavBar/sideBar/SideBar.js';
 
 
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content :center;
-    /* margin-top: 50vh; */
-`
-const Title = styled.h1`
-color: #ffff;
-font-size: 3.5em;
-text-align: center;
-`
-const Subtitle = styled.h2`
-color: #f2ebe9;
-`
-class HomePage extends Component {
-    render() {
-        return (
-                <Wrapper>
-                    <Title>Fundraise the people and causes that matter to you</Title>
-                    {/* <Subtitle>Start helping now</Subtitle> */}
-                    <Button>Create campaign</Button>
-                    <Button>See campaigns</Button>
-                </Wrapper>
-        )
+const ITEMS = ["campaigns"]
+
+
+export const HomePage = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    const toggle = () => {
+        setIsOpen(!isOpen)
     }
+
+    return (
+        <>
+            <Navbar toggle={toggle} items={ITEMS} />
+            <SideBar isOpen={isOpen} toggle={toggle} items ={ITEMS} />
+
+
+        </>
+    )
 }
 
 export default HomePage;

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import * as S from './styles';
-
-import RightNav from './RigthNav';
+import { BurgerS } from './SideBar.styles.js';
 
 const Burger = () => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <S.StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <BurgerS open={open} onClick={() => setOpen(!open)}>
         <div />
         <div />
         <div />
-      </S.StyledBurger>
+      </BurgerS>
       {/* <RightNav open={open} /> */}
     </>
   )

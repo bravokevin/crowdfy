@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 interface INav {
-    open: boolean;
-    href?: string;
+  open: boolean;
+  href?: string;
 }
 
 export const StyledBurger = styled.div<INav>`
@@ -10,7 +10,7 @@ export const StyledBurger = styled.div<INav>`
   height: 2rem;
   /* position: */
   top: 15px;
-  right: 20px;
+  /* right: 20px; */
   z-index: 20;
   display: none;
   @media (max-width: 768px) {
@@ -21,7 +21,7 @@ export const StyledBurger = styled.div<INav>`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${(props) => props.open ? '#000' : '#000'};
+    background-color: #fff;
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
@@ -54,40 +54,37 @@ export const Nav = styled.nav`
       color: #da0cc9;
     }
   }
-  /* position: relative; */
-  /* span {
-    font-size: 10px;
-    @media only screen and (max-width: 600px) {
-      font-size: 20px;
+  @media (max-width: 768px) {
+    li{
+      display:none;
+      justify-content: space-around;
 
-      :nth-child(2) {
-        font-size: 16px !important;
-        margin-top: 0px !important;
-      }
     }
-  } */
+  }
+
+ 
 `
 
 
 //Burger navigation barr
 export const Ul = styled.ul<INav>`
-  list-style: none;
+  /* list-style: none;
   display: flex;
   flex-flow: row nowrap;
-  /* position: absolute; */
+  position: absolute;
   width: 100%;
   justify-content: flex-end;
   align-items: center;
   font-size: 25px;
   /* margin-left: 0px; */
-  a {
+  /* a {
     text-decoration: none;
     text-transform: none;
     cursor: pointer;
     &:hover {
       color: #da0cc9;
     }
-  }
+  } */ 
 
   @media (max-width: 768px) {
     flex-flow: column nowrap;
@@ -120,12 +117,12 @@ export const Logo = styled.img`
   width: 150px;
   object-fit: contain;
   @media (max-width: 768px) {
-    margin: 20px 35% ;
+    /* margin: 20px 35% ; */
   }
 `
 
 export const LogoUl = styled.img`
-  margin: 10px 40px 20px 5%;
+  /* margin: 10px 40px 20px 5%; */
   display: none;
   @media (max-width: 768px) {
     display: flex;
