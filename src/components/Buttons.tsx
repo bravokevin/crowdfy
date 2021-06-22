@@ -6,21 +6,19 @@ const ButtonStyles = css`
   text-decoration: none;
   transform: scale(0.98);
   transition: transform 0.25s ease;
-  box-sizing: border-box;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 21px;
   color: #ffffff;
   text-align: center;
   cursor: pointer;
-  width: 9em;
 	border: solid 1.8px #ffffff;
 	border-radius: 1rem;
+  margin: 10px;
 
   @media (max-width: 960px) {
     /* margin: 0 0.5rem 0 0.5rem; */
-    text-decoration: none;
     padding: 0.25rem 1rem;
-    font-size: 1.8rem;
+    /* font-size: 1rem; */
   }
   @media (max-width: 640px) {
     width: 100%;
@@ -44,7 +42,7 @@ export const ButtonStyles2 = css`
   transition: transform 0.25s ease;
   box-sizing: border-box;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 2rem;
   cursor: pointer;
   margin-inline: 3em;
   margin-block:1em;
@@ -57,7 +55,6 @@ export const ButtonStyles2 = css`
   @media (max-width: 960px) {
     /* margin: 0 0.5rem 0 0.5rem; */
     text-align: center;
-    text-decoration: none;
     padding: 0.25rem 1rem;
   }
   @media (max-width: 640px) {

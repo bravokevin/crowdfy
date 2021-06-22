@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper } from './hero.styles'
-import { Button2 } from "../Buttons.tsx";
+import { Button } from "../Buttons.tsx";
 
 const Hero = () => {
 
@@ -22,9 +22,12 @@ const Hero = () => {
                     Helps people from all around the world in a descentralize way.
                 </HeroP>
                 <HeroBtnWrapper>
-                    <Button2 to="signup" onMouseEnter={onHover} onMouseLeave={onHover} >
-                        Get started
-                    </Button2>
+                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover} >
+                        Create Campaign
+                    </Button>
+                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover} >
+                        Found a campaign
+                    </Button>
                 </HeroBtnWrapper>
 
             </HeroContent>

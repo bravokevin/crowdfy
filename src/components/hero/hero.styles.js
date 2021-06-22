@@ -63,6 +63,6 @@ font-size: 18px;
 export const HeroBtnWrapper = styled.div`
 margin-top:32px;
 display: flex;
-flex-DIRECTION: column;
+flex-direction: row;
 align-items: center;
 `
