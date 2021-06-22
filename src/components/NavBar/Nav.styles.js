@@ -38,7 +38,8 @@ export const NavLogo = styled.img`
     margin: auto 0;
 
 @media screen and (max-width: 768px){
-    margin: 0 auto;
+    margin: auto;
+
 }
 
 `
@@ -61,7 +62,7 @@ display: flex;
 align-items: center;
 list-style: none;
 text-align: center;
-margin-right: -37%;
+margin-right: -30%;
 
 @media screen and (max-width: 768px){
     display: none;
@@ -103,7 +104,7 @@ export const NavBtnLink = styled(LinkR)`
 border-radius: 13px;
 background: #01bf71;
 white-space: nowrap;
-padding: 8px 30px;
+padding: 8px 25px;
 background: linear-gradient(#dc9de4, #B721EC);
 font-size: 16px;
 outline: none;
@@ -111,9 +112,11 @@ border: none;
 cursor: pointer;
 transition: all 0.2s ease-in-out;
 text-decoration: none;
+color: #fff;
 
 &:hover{
     /* transition: 0.2s ease-in-out; */
     background: #fff;
+    color: #000;
 }
 `
