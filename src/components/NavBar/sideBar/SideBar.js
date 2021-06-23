@@ -4,20 +4,24 @@ import React from 'react'
 import {
     SidebarContainer,
     Icon,
-    SidebarWrapper, 
-    SidebarMenu, 
-    SidebarLink, 
-    SideBtnWrap, 
+    SidebarWrapper,
+    SidebarMenu,
+    SidebarLink,
+    SideBtnWrap,
     SidebarRoute,
     BurgerS
 } from './SideBar.styles.js'
 
-const SideBar = ({ isOpen, toggle, items }) => {
+const SideBar = ({ isOpen, toggle, items, open }) => {
     return (
         <SidebarContainer isOpen={isOpen} onClick={toggle}>
-            {/* <Icon onClick={toggle}> */}
-                <BurgerS />
-            {/* </Icon> */}
+            <Icon>
+                <BurgerS open={open} onClick={toggle}>
+                    <div />
+                    <div />
+                    <div />
+                </BurgerS>
+            </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
                     {items.map((item, index) => (
@@ -27,7 +31,7 @@ const SideBar = ({ isOpen, toggle, items }) => {
                     ))}
                 </SidebarMenu>
                 <SideBtnWrap>
-                    <SidebarRoute to="./signIn">Sign In</SidebarRoute>
+                    <SidebarRoute to="./signIn">Create campaign</SidebarRoute>
                 </SideBtnWrap>
             </SidebarWrapper>
         </SidebarContainer>

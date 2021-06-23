@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 import { Link as LinkR } from 'react-router-dom';
 
-import Burger from './Burger';
 
 export const SidebarContainer = styled.aside`
 position: fixed;
-z-index: 999;
+z-index: 899;
 width: 100%;
 height: 100%;
 background: #0d0d0d;
@@ -18,6 +17,10 @@ transition: 0.3s ease-in-out;
 //sets the sidebar opacity for only be avalible when {isOpen} is true
 opacity: ${({ isOpen }) => (isOpen ? '100' : '0')};
 right: ${({ isOpen }) => (isOpen ? '0' : '-100%')}; 
+
+@media screen and (min-width: 768px){
+  right: -100%;
+}
 `
 
 export const Icon = styled.div`
@@ -92,18 +95,16 @@ text-align: center;
 `
 
 export const BurgerS = styled.div`
-
     width: 2rem;
     height: 2rem;
-    /* position: */
     top: 15px;
-    /* right: 20px; */
-    z-index: 999;
-    display: none;
+    right: 20px;
+    display: none; 
     @media (max-width: 760px) {
       display: flex;
       justify-content: space-around;
       flex-flow: column nowrap;
+
     }
     div {
       width: 2rem;
@@ -124,11 +125,4 @@ export const BurgerS = styled.div`
         transform: ${(props) => props.open ? 'rotate(-45deg)' : 'rotate(0)'};
       }
     }
-    position: absolute;
-top: 1.2rem;
-right: 1.5rem;
-background: 'transparent';
-font-size: 2rem;
-cursor: pointer;
-outline: none;
   `
