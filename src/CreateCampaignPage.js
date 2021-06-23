@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import Navbar from "./components/NavBar/Nav"
+import SideBar from "./components/NavBar/sideBar/SideBar"
 
 const ITEMS = ["campaigns"]
 
@@ -11,7 +12,6 @@ const CreateCampaign = () =>{
     }
     return(
         <>
-        <Navbar toggle={toggle} items={ITEMS} />
         </>
     )
 

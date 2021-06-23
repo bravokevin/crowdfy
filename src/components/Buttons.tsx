@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import styled, {css} from "styled-components";
 
 
 
 
 
-export const Button = styled.button`
+export const Button = styled(Link)`
     border-radius: 16px;
     background: ${({ primary }) => (primary ? 'linear-gradient(#dd0df0, #ff12b0)' : 'transparent')};
     white-space: nowrap;

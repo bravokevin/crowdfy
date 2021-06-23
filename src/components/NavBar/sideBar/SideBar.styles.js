@@ -38,7 +38,7 @@ color: #fff;
 
 `
 
-export const SidebarLink = styled.a`
+export const SidebarLink = styled(LinkR)`
 display: flex;
 align-items: center;
 justify-content: center;
@@ -55,6 +55,10 @@ cursor: pointer;
     color:#ff12b0;
     transition: all 0.2s ease-in-out;
 }
+&:active {
+    color:#ff12b0;
+        
+    }
 `
 
 export const SideBtnWrap = styled.div`

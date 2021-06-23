@@ -31,7 +31,7 @@ const SideBar = ({ isOpen, toggle, items, open }) => {
                     ))}
                 </SidebarMenu>
                 <SideBtnWrap>
-                    <SidebarRoute to="./signIn">Create campaign</SidebarRoute>
+                    <SidebarRoute to="/newCampaign">Create campaign</SidebarRoute>
                 </SideBtnWrap>
             </SidebarWrapper>
         </SidebarContainer>

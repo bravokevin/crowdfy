@@ -1,9 +1,10 @@
 import React from 'react';
 import Logo from "../../Crowdfy.png"
+import { Link } from 'react-router-dom';
 
 import { BurgerS } from './sideBar/SideBar.styles';
 
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './Nav.styles'
+import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink, NavLogoWrapper  } from './Nav.styles'
 
 
 
@@ -12,7 +13,9 @@ const Navbar = ({ toggle, items }) => {
         <>
             <Nav>
                 <NavbarContainer>
-                    <NavLogo src={Logo} to="/"></NavLogo>
+                    <NavLogoWrapper to="/">
+                    <NavLogo  src={Logo}></NavLogo>
+                    </NavLogoWrapper >
                     <MobileIcon onClick={toggle}>
                         <BurgerS>
                             <div />
