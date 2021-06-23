@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper } from './hero.styles'
 import { Button } from "../Buttons.tsx";
+const image = require("../../images/bg.jpg")
 
 const Hero = () => {
 
@@ -15,6 +16,7 @@ const Hero = () => {
     return (
         <HeroContainer>
             <HeroBg>
+                <VideoBg src={image.default}/>
             </HeroBg>
             <HeroContent>
                 <HeroH1> Founds the people that you care about</HeroH1>
@@ -22,10 +24,15 @@ const Hero = () => {
                     Helps people from all around the world in a descentralize way.
                 </HeroP>
                 <HeroBtnWrapper>
-                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover} >
+                    <Button to="/newCampaign" 
+                    primary={true}
+                    light={true}
+                    onMouseEnter={onHover} onMouseLeave={onHover} >
                         Create Campaign
                     </Button>
-                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover} >
+                    <Button to="/campaigns" 
+                    primary={false}
+                    onMouseEnter={onHover} onMouseLeave={onHover}>
                         Found a campaign
                     </Button>
                 </HeroBtnWrapper>

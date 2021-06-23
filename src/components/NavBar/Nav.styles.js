@@ -83,10 +83,13 @@ export const NavLinks = styled.a`
     height: 100%;
 text-transform: capitalize;
     cursor: pointer;
-    &.active {
-        border-bottom: 3px solid #01bf71;
-
+    &:active {
+        border-bottom: 3px solid #dd0df0;
     }
+    &:hover{
+        color: #dd0df0;
+    }
+
 `
 
 
@@ -100,12 +103,12 @@ align-items: center;
 }`
 
 export const NavBtnLink = styled(LinkR)`
-
+  transform: scale(0.98);
+  transition: transform 0.25s ease;
 border-radius: 13px;
-background: #01bf71;
 white-space: nowrap;
 padding: 8px 25px;
-background: linear-gradient(#dc9de4, #B721EC);
+background: linear-gradient(#dd0df0, #ff12b0);
 font-size: 16px;
 outline: none;
 border: none;
@@ -115,8 +118,8 @@ text-decoration: none;
 color: #fff;
 
 &:hover{
-    /* transition: 0.2s ease-in-out; */
-    background: #fff;
-    color: #000;
+    transition: 0.2s ease-in-out;
+    transform: scale(1);
 }
 `
+
