@@ -49,7 +49,7 @@ text-transform: capitalize;
 cursor: pointer;
 
 &:hover{
-    color:#01bf71;
+    color:#ff12b0;
     transition: all 0.2s ease-in-out;
 }
 `
@@ -61,7 +61,7 @@ justify-content: center;
 
 export const SidebarRoute = styled(LinkR)`
 border-radius: 50px;
-background: #01bf71;
+background: linear-gradient(#dd0df0, #ff12b0);
 white-space: nowrap;
 padding: 16px 64px;
 color: #010606;
