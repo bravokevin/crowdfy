@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import HomePage from "./components/HomePage";
+
+import CreateCampaign from "./CreateCampaignPage"
 
 import styled from "styled-components";
 
@@ -11,7 +13,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <HomePage />
+        <Route path= "/" exact component={HomePage} />
+        <Route path="/newCampaign" component={CreateCampaign} />
       </Router>
     );
   }

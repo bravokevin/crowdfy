@@ -26,7 +26,7 @@ const Navbar = ({toggle, items}) => {
                         ))}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to="/signin">Create campaign</NavBtnLink>
+                        <NavBtnLink to="/newCampaign">Create campaign</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>
