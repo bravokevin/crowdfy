@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import CreateCampaign from "./CreateCampaignPage"
 import Navbar from "./components/NavBar/Nav";
 import SideBar from "./components/NavBar/sideBar/SideBar";
+import Campaigns from "./Campaigns";
 
 
 const ITEMS = ["campaigns"]
@@ -28,6 +29,7 @@ const App = () => {
     <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} />
       <Route path="/" exact component={HomePage} />
       <Route path="/newCampaign" component={CreateCampaign} />
+      <Route path="/campaigns" component={Campaigns}/>
     </Router>
     </>
   );

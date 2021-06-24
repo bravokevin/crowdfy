@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP, HeroBtnWrapper } from './hero.styles'
-import { Button } from "../Buttons.tsx";
+import { Button } from "../Buttons.js";
 const image = require("../../images/bg.jpg")
 
 const Hero = () => {
