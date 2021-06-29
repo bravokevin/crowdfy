@@ -12,6 +12,7 @@ display: flex;
 flex-direction: row;
 height: 860px;
 width: 100%;
+flex-wrap: wrap;
 justify-content: center;
 align-items: center;
 top: 0;
@@ -27,13 +28,23 @@ height: 400px;
 text-decoration: none;
 cursor: pointer;
 text-align: center;
-padding: 10px 15px;
+padding: 10px 15px 0px 15px;
 font-size: 2rem;
 border-radius: 9px;
 background: #000;
 border: none;
 outline: none;
 margin: 20px;
+
+@media screen and (max-width: 768px){
+    width: 200px;
+    height: 350px;
+}
+
+@media screen and (max-width: 560px){
+    width: 300px;
+    height: 450px;
+}
 `
 
 export const ImgContainer= styled.div`
@@ -74,14 +85,13 @@ margin-bottom: 16px;
 
 export const CardTittle = styled.h1`
     margin-bottom: 24px;
-    font-size: 16px;
+    font-size: 18px;
     text-align: left;
     line-height: 1.1;
     font-weight: 600;
     /* color: #000; */
-    @media screen and (max-width: 480px){
-        font-size: 10px;
-    }
+
+
 `
 
 export const CardDescription = styled.p`
@@ -97,5 +107,5 @@ font-size: 15px;
 margin-top: 80px;
 font-weight: 700;
 letter-spacing: 1.4px;
-margin-bottom: -20px;
+/* margin-bottom: -20px; */
 `

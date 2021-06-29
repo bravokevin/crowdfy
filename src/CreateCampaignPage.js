@@ -1,20 +1,12 @@
-import React, {useState} from "react"
-import Navbar from "./components/NavBar/Nav"
-import SideBar from "./components/NavBar/sideBar/SideBar"
+import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 
-const ITEMS = ["campaigns"]
+export const CreateCampaignPage = () => {
 
-
-const CreateCampaign = () =>{
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => {
-        setIsOpen(!isOpen)
-    }
-    return(
+    return (
         <>
+            <CreateCampaign/>
         </>
     )
-
 }
 
-export default CreateCampaign
+export default CreateCampaignPage;
