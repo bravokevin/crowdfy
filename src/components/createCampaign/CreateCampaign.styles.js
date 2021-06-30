@@ -84,6 +84,7 @@ export const ShortFieldsWrapper = styled.div`
 padding: 25px 15px;
 display: flex;
 flex-direction: column;
+text-transform: capitalize;
 justify-content: flex-start;
 
 @media screen and (max-width:500px){
