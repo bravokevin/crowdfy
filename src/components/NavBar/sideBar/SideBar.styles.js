@@ -12,6 +12,7 @@ display: grid;
 align-items: center;
 top: 0;
 right: 0;
+overflow: hidden;
 transition: 0.3s ease-in-out;
 
 //sets the sidebar opacity for only be avalible when {isOpen} is true
@@ -35,6 +36,7 @@ outline: none;
 
 export const SidebarWrapper = styled.div`
 color: #fff;
+text-align: center;
 
 `
 
@@ -87,11 +89,12 @@ text-decoration: none;
 
 `
 
-export const SidebarMenu = styled.ul`
+export const SidebarMenu = styled.div`
 display: grid;
 grid-template-columns: 1fr;
-grid-template-rows: repeat(6, 80px);
+grid-template-rows: repeat(6, 60px);
 text-align: center;
+align-items:center;
 
 @media screen and (max-width: 488px){
     grid-template-rows: repeat(6, 60px)

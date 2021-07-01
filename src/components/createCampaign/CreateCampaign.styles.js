@@ -35,24 +35,31 @@ top: 0;
 right: 0;
 bottom: 0;
 left: 0;
-width: 100%;
-height: 300px;
+height: 450px;
 overflow:hidden;
-background: #fff;
+background: #f1f1f6;
+@media screen and (max-width:768px){
+    height: 350px;
 
+}
 
 `
 export const FormInputImage = styled.input`
-opacity: 0;
-width: 110%;
-height: 100%;
-overflow: hidden;
-z-index: -1;
-&:hover{
-    cursor:pointer;
-}
+display:none;
 `
+export const FormImageLabel = styled.label`
+cursor: pointer;
+position:absolute;
+margin: 25px 20px 20px 20px;
 
+@media screen and (max-width:600px){
+    img{
+        width: 40px; 
+}
+margin: 30px 20px 20px 20px;
+}
+
+`
 
 
 export const Form = styled.form`
@@ -63,6 +70,7 @@ width: 100%;
 z-index: 1;
 display: grid;
 padding: 0px 0px 15px 0px;
+margin-top: 100px;
 border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
 `
@@ -73,22 +81,23 @@ display: grid;
 justify-content: center;
 grid-template-columns: 1fr 1fr;
 z-index: 3;
-border-bottom: 2px solid #000;
+border-bottom: 2px solid rgba(0,0,0,0.3);
 
-@media screen and (max-width:500px){
+@media screen and (max-width:560px){
     grid-template-columns: 1fr;
 
 }
 `
-export const ShortFieldsWrapper = styled.div`
-padding: 25px 15px;
-display: flex;
-flex-direction: column;
-text-transform: capitalize;
-justify-content: flex-start;
 
-@media screen and (max-width:500px){
-    justify-content: center;
+export const ShortFieldWrapper =styled.div`
+display: flex;
+flex-direction:column;
+justify-content: flex-start;
+padding: 8px 15px;
+text-transform: capitalize;
+
+@media screen and (max-width:560px){
+    grid-column-start:1;
 
 }
 `
@@ -106,7 +115,16 @@ border: none;
 outline: none;
 border-radius: 9px;
 `
-
+export const Image = styled.img`
+width: 100%;
+height: 100%;
+-o-object-fit: cover;
+object-fit: cover;
+position: absolute;
+background: black;
+border: none;
+outline: none;
+`
 
 
 export const FormLargeFields = styled.div`

@@ -5,19 +5,21 @@ import {
   Container,
   Wrapper,
   FormContent,
-  FormImage,
+  ShortFieldsGeneralWrapper,
   ImageWrapper,
   FormInputImage,
   Form,
   FormShortsFields,
-  ShortFieldsWrapper,
+  ShortFieldWrapper,
   FormLabel,
+  Image,
   FormInput,
   FormLargeFields,
   LargerFieldsWrapper,
   TextArea,
   TextDescription,
   TextTittle,
+  FormImageLabel,
   TopLine
 } from './CreateCampaign.styles'
 
@@ -26,31 +28,36 @@ import {
 
 export const CreateCampaign = ({ CampaignFields }) => {
 
+  const captureFile = (event) => {
+    const imagePlace = document.querySelector("#coverImage")
+    imagePlace.src = URL.createObjectURL(event.target.files[0]);
+  }
+
   return (
     <Container>
       <Wrapper>
-
         <FormContent>
-
-          {/* <FormImage> */}
           <ImageWrapper>
-            <FormInputImage type="file" accept="image/*" name="image" />
+            <Image id="coverImage"/>
           </ImageWrapper>
-          {/* </FormImage> */}
-
           <Form>
+            {/* The image handler */}
+            <FormInputImage id="imageInput" type="file" accept="image/*" name="image" onChange={captureFile} />
+
+            <FormImageLabel htmlFor="imageInput">
+            <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add icon"/>
+            </FormImageLabel>
+
             <TopLine>Your Campain</TopLine>
             <FormShortsFields>
-              <ShortFieldsWrapper>
-                {CampaignFields.map(({ label, type, autoFocus }) => (
-                  <>
-                <FormLabel >{label}</FormLabel>
-                <FormInput type={type} autoFocus={autoFocus} />
-                </>
+              {/* <ShortFieldsGeneralWrapper> */}
+                {CampaignFields.map(({ label, type, autoFocus,start,  finish}) => (
+                  <ShortFieldWrapper style={{gridColumnEnd: finish, gridColumnStart:start}} >
+                    <FormLabel >{label}</FormLabel>
+                    <FormInput type={type} autoFocus={autoFocus} />
+                  </ShortFieldWrapper>
                 ))}
-                {/* <input type="image"> */}
-
-              </ShortFieldsWrapper>
+              {/* </ShortFieldsGeneralWrapper> */}
 
             </FormShortsFields>
 
