@@ -6,8 +6,8 @@ export const Container = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 0 15px;
-height: 1400px;
+padding: 20px 15px;
+height: 1300px;
 position: relative;
 z-index: 1;
 `
@@ -19,6 +19,8 @@ max-width: 1100px;
 z-index: 1;
 justify-content: center;
 `
+
+
 export const CampaignImageWrapper = styled.div`
 width: 100%;
 position: absolute;
@@ -42,4 +44,32 @@ object-fit: cover;
 position: absolute;
 border: none;
 outline: none;
+`
+
+export const CampaignWrapper = styled.div`
+background: whitesmoke;
+max-width: 1100px;
+width: 100%;
+z-index: 1;
+display: grid;
+grid-template-rows: 60px 80px auto; 
+padding: 20px;
+margin-top: 100px;
+border-radius: 15px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.9);
+`
+
+export const CampaignTittle = styled.h1`
+text-align: center;
+`
+
+export const CampaignShortDescription = styled.p`
+font-size: 16px;
+align-self: flex-start;
+color: gray;
+`
+
+export const CampaignLongDescription = styled.p`
+font-size: 16px;
+align-self: flex-start;
 `
