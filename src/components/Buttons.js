@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 
 
-export const Button = styled(Link)`
+export const Button = styled.button`
     border-radius: 16px;
     background: ${({ primary }) => (primary ? 'linear-gradient(#dd0df0, #ff12b0)' : 'transparent')};
     white-space: nowrap;

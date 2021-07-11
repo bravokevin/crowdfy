@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from '../Buttons'
+import {ipfsClient} from 'ipfs-http-client'
 
 import {
   Container,
@@ -24,13 +25,19 @@ import {
 } from './CreateCampaign.styles'
 
 
-
-
 export const CreateCampaign = ({ CampaignFields }) => {
 
   const captureFile = (event) => {
     const imagePlace = document.querySelector("#coverImage")
-    imagePlace.src = URL.createObjectURL(event.target.files[0]);
+    let file = URL.createObjectURL(event.target.files[0]);
+    imagePlace.src = file;
+    // const reader = new window.FileReader()
+    // reader.readAsArrayBuffer(file)
+  }
+
+  const submit =(event) =>{
+    event.preventDefault();
+    console.log(event.target)
   }
 
   return (
@@ -40,7 +47,7 @@ export const CreateCampaign = ({ CampaignFields }) => {
           <ImageWrapper>
             <Image id="coverImage"/>
           </ImageWrapper>
-          <Form>
+          <Form onSubmit={submit}>
             {/* The image handler */}
             <FormInputImage id="imageInput" type="file" accept="image/*" name="image" onChange={captureFile} />
 
@@ -71,7 +78,7 @@ export const CreateCampaign = ({ CampaignFields }) => {
 
             </FormLargeFields>
 
-            <Button type="submit" > Submit Campaign</Button>
+            <Button type="submit"> Submit Campaign</Button>
           </Form>
         </FormContent>
 
