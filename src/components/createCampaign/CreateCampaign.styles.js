@@ -6,7 +6,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 padding: 0 15px;
-height: 1400px;
+height: 1500px;
 position: relative;
 z-index: 1;
 `
@@ -65,7 +65,7 @@ margin: 30px 20px 20px 20px;
 export const Form = styled.form`
 background: whitesmoke;
 max-width: 1200px;
-height: auto;
+height: 800;
 width: 100%;
 z-index: 1;
 display: grid;
@@ -196,4 +196,11 @@ box-sizing: border-box;
 
 export const TopLine = styled.h1`
 text-align: center;
+`
+
+export const ButtonWrapper =styled.div`
+width:300px;
+display: flex;
+justify-content: center;
+margin:0 auto;
 `

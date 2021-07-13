@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button } from '../Buttons'
-import {ipfsClient} from 'ipfs-http-client'
+import { NButton } from '../Buttons'
+import { ipfsClient } from 'ipfs-http-client'
 
 import {
   Container,
@@ -21,49 +21,50 @@ import {
   TextDescription,
   TextTittle,
   FormImageLabel,
-  TopLine
+  TopLine,
+  ButtonWrapper
 } from './CreateCampaign.styles'
 
 
-export const CreateCampaign = ({ CampaignFields }) => {
-
-  const captureFile = (event) => {
-    const imagePlace = document.querySelector("#coverImage")
-    let file = URL.createObjectURL(event.target.files[0]);
-    imagePlace.src = file;
-    // const reader = new window.FileReader()
-    // reader.readAsArrayBuffer(file)
-  }
-
-  const submit =(event) =>{
-    event.preventDefault();
-    console.log(event.target)
-  }
+export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, captureFile }) => {
 
   return (
     <Container>
       <Wrapper>
         <FormContent>
           <ImageWrapper>
-            <Image id="coverImage"/>
+            <Image id="coverImage" />
           </ImageWrapper>
           <Form onSubmit={submit}>
             {/* The image handler */}
-            <FormInputImage id="imageInput" type="file" accept="image/*" name="image" onChange={captureFile} />
+            <FormInputImage
+              id="imageInput"
+              type="file"
+              accept="image/*"
+              name="campaignImage"
+              onChange={captureFile}
+              defaultValue={values.campaignImage}
+            />
 
             <FormImageLabel htmlFor="imageInput">
-            <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add icon"/>
+              <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add icon" />
             </FormImageLabel>
 
             <TopLine>Your Campain</TopLine>
             <FormShortsFields>
               {/* <ShortFieldsGeneralWrapper> */}
-                {CampaignFields.map(({ label, type, autoFocus,start,  finish}) => (
-                  <ShortFieldWrapper style={{gridColumnEnd: finish, gridColumnStart:start}} >
-                    <FormLabel >{label}</FormLabel>
-                    <FormInput type={type} autoFocus={autoFocus} />
-                  </ShortFieldWrapper>
-                ))}
+              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder }) => (
+                <ShortFieldWrapper style={{ gridColumnEnd: finish, gridColumnStart: start }} >
+                  <FormLabel >{label}</FormLabel>
+                  <FormInput
+                    type={type}
+                    autoFocus={autoFocus}
+                    onChange={handleChange(label)}
+                    defaultValue={value}
+                    placeholder={placeholder}
+                  />
+                </ShortFieldWrapper>
+              ))}
               {/* </ShortFieldsGeneralWrapper> */}
 
             </FormShortsFields>
@@ -72,13 +73,20 @@ export const CreateCampaign = ({ CampaignFields }) => {
 
               <LargerFieldsWrapper>
                 <TextTittle placeholder="Tittle" type="text" maxLength="60" />
-                <TextDescription placeholder="Short Description" type="text" maxLength="220" />
-                <TextArea placeholder="Write your history" type="text" />
+
+                <TextDescription onChange={handleChange("shortDescription")} defaultValue={values.shortDescription} placeholder="Short Description" type="text" maxLength="220"
+                />
+
+                <TextArea placeholder="Write your history" type="text"
+                  onChange={handleChange("longDescription")}
+                  defaultValue={values.longDescription}
+                />
               </LargerFieldsWrapper>
 
             </FormLargeFields>
-
-            <Button type="submit"> Submit Campaign</Button>
+            <ButtonWrapper>
+              <NButton primary={true}type="submit"> Submit Campaign</NButton>
+            </ButtonWrapper>
           </Form>
         </FormContent>
 
