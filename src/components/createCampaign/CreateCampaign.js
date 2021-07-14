@@ -22,11 +22,13 @@ import {
   TextTittle,
   FormImageLabel,
   TopLine,
-  ButtonWrapper
+  ButtonWrapper, 
+  Error
 } from './CreateCampaign.styles'
 
 
 export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, captureFile }) => {
+
 
   return (
     <Container>
@@ -53,16 +55,33 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             <TopLine>Your Campain</TopLine>
             <FormShortsFields>
               {/* <ShortFieldsGeneralWrapper> */}
-              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder }) => (
+              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError }) => (
                 <ShortFieldWrapper style={{ gridColumnEnd: finish, gridColumnStart: start }} >
                   <FormLabel >{label}</FormLabel>
+
+                  {/* sets min value to the date input only */}
+                  { type === 'datetime-local'  ?
+                  <FormInput
+                  type={type}
+                  autoFocus={autoFocus}
+                  onChange={handleChange(label)}
+                  defaultValue={value}
+                  placeholder={placeholder}
+                  required
+                  min={minimum()}
+                  />  
+                  :
                   <FormInput
                     type={type}
                     autoFocus={autoFocus}
                     onChange={handleChange(label)}
                     defaultValue={value}
                     placeholder={placeholder}
+                    required
                   />
+                  }
+                  {customError && <Error>{customError}</Error>}
+
                 </ShortFieldWrapper>
               ))}
               {/* </ShortFieldsGeneralWrapper> */}
@@ -85,7 +104,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
 
             </FormLargeFields>
             <ButtonWrapper>
-              <NButton primary={true}type="submit"> Submit Campaign</NButton>
+              <NButton primary={true} type="submit"> Submit Campaign</NButton>
             </ButtonWrapper>
           </Form>
         </FormContent>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 export const Container = styled.div`
 /* background: #0c0c0c; */
@@ -40,7 +40,6 @@ overflow:hidden;
 background: #f1f1f6;
 @media screen and (max-width:768px){
     height: 350px;
-
 }
 
 `
@@ -203,4 +202,11 @@ width:300px;
 display: flex;
 justify-content: center;
 margin:0 auto;
+`
+
+export const Error = styled.p`
+ font-size: 0.8rem;
+  margin-top: -27px;
+  margin-left:5px;
+  color: #f00e0e;
 `
