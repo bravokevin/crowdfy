@@ -55,7 +55,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             <TopLine>Your Campain</TopLine>
             <FormShortsFields>
               {/* <ShortFieldsGeneralWrapper> */}
-              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError }) => (
+              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError, name}) => (
                 <ShortFieldWrapper style={{ gridColumnEnd: finish, gridColumnStart: start }} >
                   <FormLabel >{label}</FormLabel>
 
@@ -65,7 +65,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                   type={type}
                   autoFocus={autoFocus}
                   onChange={handleChange(label)}
-                  defaultValue={value}
+                  value={value}
                   placeholder={placeholder}
                   required
                   min={minimum()}
@@ -74,12 +74,13 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                   <FormInput
                     type={type}
                     autoFocus={autoFocus}
-                    onChange={handleChange(label)}
+                    onChange={handleChange(name)}
                     defaultValue={value}
                     placeholder={placeholder}
                     required
                   />
                   }
+                  {/* if there is a custom error shows up */}
                   {customError && <Error>{customError}</Error>}
 
                 </ShortFieldWrapper>

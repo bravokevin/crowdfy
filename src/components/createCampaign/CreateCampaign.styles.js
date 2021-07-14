@@ -208,5 +208,6 @@ export const Error = styled.p`
  font-size: 0.8rem;
   margin-top: -27px;
   margin-left:5px;
+  text-transform: none;
   color: #f00e0e;
 `
