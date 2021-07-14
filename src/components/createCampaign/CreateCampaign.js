@@ -52,7 +52,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
               <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add icon" />
             </FormImageLabel>
 
-            <TopLine>Your Campain</TopLine>
+            <TopLine id='campaignTittle'>My campaign</TopLine>
             <FormShortsFields>
               {/* <ShortFieldsGeneralWrapper> */}
               {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError, name}) => (
@@ -92,7 +92,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             <FormLargeFields>
 
               <LargerFieldsWrapper>
-                <TextTittle placeholder="Tittle" type="text" maxLength="60" />
+                {/* <TextTittle placeholder="Tittle" type="text" maxLength="60" id='text' readOnly/> */}
 
                 <TextDescription onChange={handleChange("shortDescription")} defaultValue={values.shortDescription} placeholder="Short Description" type="text" maxLength="220"
                 />
