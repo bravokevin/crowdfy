@@ -17,7 +17,6 @@ width: 100%;
 max-width: 1100px;
 z-index: 1;
 justify-content: center;
-
 `
 
 export const FormContent = styled.div`
@@ -41,7 +40,6 @@ background: #f1f1f6;
 @media screen and (max-width:768px){
     height: 350px;
 }
-
 `
 export const FormInputImage = styled.input`
 display:none;
@@ -50,14 +48,12 @@ export const FormImageLabel = styled.label`
 cursor: pointer;
 position:absolute;
 margin: 25px 20px 20px 20px;
-
 @media screen and (max-width:600px){
     img{
         width: 40px; 
 }
 margin: 30px 20px 20px 20px;
 }
-
 `
 
 
@@ -83,10 +79,8 @@ justify-content: center;
 grid-template-columns: 1fr 1fr;
 z-index: 3;
 border-bottom: 2px solid rgba(0,0,0,0.3);
-
 @media screen and (max-width: 700px){
     grid-template-columns: 1fr;
-
 }
 `
 
@@ -96,10 +90,8 @@ flex-direction:column;
 justify-content: flex-start;
 padding: 8px 15px;
 text-transform: capitalize;
-
 @media screen and (max-width:700px){
     grid-column-start:1;
-
 }
 `
 export const FormLabel = styled.label`
@@ -141,7 +133,6 @@ display: flex;
 font-family: Segoe UI;
 flex-direction: column;
 justify-content: stretch;
-
 `
 
 export const TextTittle = styled.input`
@@ -155,19 +146,14 @@ width: 100%;
 word-wrap: break-word;
 word-break: break-all;
 word-break: break-word;
-
-
 /* padding: 0px 10px; */
 margin: 5px 0px 0px;
 box-sizing: border-box;
-
-
 `
 
 export const TextDescription = styled.textarea`
 font-size: 18px;
 font-family: Segoe UI;
-
 background: none;
 outline: none;
 word-wrap: break-word;
@@ -186,7 +172,6 @@ outline: none;
 word-wrap: break-word;
 border: none;
 font-family: Segoe UI;
-
 align-self: flex-start;
 resize: none;
 margin: 20px 0px 0px;

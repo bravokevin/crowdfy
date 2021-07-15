@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, NButton } from '../Buttons';
 
 import {
   Container,
@@ -11,7 +12,9 @@ import {
   CampaignLongDescription,
   ShortFieldsWrapepr,
   ValuesWrapper,
- Field
+ Field,
+ ValueField,
+ ButtonWrapper
 
 } from './SingleCampaign.styles';
 
@@ -22,6 +25,22 @@ export const SingleCampaign = ({values}) => {
         <CampaignImageWrapper>
           <CampaignImage />
         </CampaignImageWrapper>
+        
+        <ShortFieldsWrapepr>
+              <ValuesWrapper>
+                <Field>Mi cabana grande</Field>
+                <ValueField>pepeito</ValueField>
+              </ValuesWrapper>
+              <ValuesWrapper>
+                <Field>Mi cabana grande</Field>
+                <ValueField>pepeito</ValueField>
+              </ValuesWrapper>
+              <ValuesWrapper>
+                <Field>Mi cabana grande</Field>
+                <ValueField>pepeito</ValueField>
+              </ValuesWrapper>
+
+            </ShortFieldsWrapepr>
 
         <CampaignWrapper>
             {/* <ShortFieldsWrapepr>
@@ -34,15 +53,11 @@ export const SingleCampaign = ({values}) => {
 
 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</CampaignLongDescription>
 
-            <ShortFieldsWrapepr>
-              <ValuesWrapper>
-                <Field>Mi cabana grande</Field>
-                <Field>pepeito</Field>
-              </ValuesWrapper>
 
-            </ShortFieldsWrapepr>
 
-     
+     <ButtonWrapper>
+       <NButton primary={true}>Fund campaign</NButton>
+     </ButtonWrapper>
         </CampaignWrapper>
       </Wrapper>
     </Container>
