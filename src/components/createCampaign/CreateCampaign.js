@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NButton } from '../Buttons'
-import { ipfsClient } from 'ipfs-http-client'
 
 import {
   Container,
@@ -37,7 +36,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
           <ImageWrapper>
             <Image id="coverImage" />
           </ImageWrapper>
-          <Form onSubmit={submit}>
+          <Form onSubmit={submit} method='POST' action=''>
             {/* The image handler */}
             <FormInputImage
               id="imageInput"
@@ -105,7 +104,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
 
             </FormLargeFields>
             <ButtonWrapper>
-              <NButton primary={true} type="submit"> Submit Campaign</NButton>
+              <NButton primary={true} type="submit">Submit Campaign</NButton>
             </ButtonWrapper>
           </Form>
         </FormContent>

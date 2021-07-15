@@ -1,12 +1,18 @@
-import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import { useState, useEffect } from 'react';
+import {create} from 'ipfs-http-client'
+
 
 import useForm from "./components/createCampaign/useForm";
-
+import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
 
 export const CreateCampaignPage = () => {
 
+    const ipfs = create({
+        host: 'ipfs.infura.io',
+        port: 5001,
+        protocol: 'https',
+    })
     ///campaign fields
     const [values, setValue] = useState({
         campaignImage: '',
@@ -15,7 +21,6 @@ export const CreateCampaignPage = () => {
         deadline: '',
         fundingCap: null,
         beneficiary: '',
-        tittle: '',
         shortDescription: '',
         longDescription: ''
     })
@@ -24,9 +29,12 @@ export const CreateCampaignPage = () => {
 
     const handleChange = input => e => {
         const { value } = e.target
-        const titleS = document.querySelector('#campaignTittle')
 
-        titleS.textContent = value || "My campaign"
+        //sets title to the topline 
+        const titleS = document.querySelector('#campaignTittle')
+        if (input === 'campaignName') {
+            titleS.textContent = value || "My campaign"
+        }
         setValue({
             ...values,
             [input]: value
@@ -34,35 +42,43 @@ export const CreateCampaignPage = () => {
     }
 
     const captureFile = (event) => {
+        //sets the image to the cover
         const imagePlace = document.querySelector("#coverImage")
-        let file = event.target.files[0]
+        const file = event.target.files[0]
         imagePlace.src = URL.createObjectURL(file);
-        let imageStr = file.toString('base64')
+
+        //convert the image to a buffer
+        const reader = new window.FileReader();
+        reader.readAsArrayBuffer(file)
         const { name } = event.target
-        let bufferImage = Buffer.from(imageStr, 'base64')
-        setValue({
-            ...values,
-            [name]: bufferImage
-        })
+        reader.onloadend = () => {
+            setValue({
+                ...values,
+                [name]: Buffer(reader.result)
+            })
+        }
     }
 
-    const submit = (event) => {
+    const submit = async (event) => {
         event.preventDefault();
         setErrors(customValidation(values));
-        console.log(values)
+        const valueObj = JSON.stringify(values)
+        console.log('uploading data')
+        const cid = await ipfs.add(valueObj);
+        console.log(cid)
+
+        // guardar el hash en el contrato
     }
 
+// example hash QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
 
+// example direction https://ipfs.infura.io/ipfs/QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
     const {
-        CampaignImage,
         campaignName,
         fundingGoal,
         deadline,
         fundingCap,
-        beneficiary,
-        tittle,
-        shortDescription,
-        longDescription
+        beneficiary
     } = values
 
     const falseAddress = "0x00000000000000000000000000000000000000000"
