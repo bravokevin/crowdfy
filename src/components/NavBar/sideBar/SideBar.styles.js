@@ -69,7 +69,7 @@ justify-content: center;
 `
 
 export const SidebarRoute = styled(LinkR)`
-border-radius: 50px;
+border-radius: 14px;
 background: linear-gradient(#dd0df0, #ff12b0);
 white-space: nowrap;
 padding: 16px 64px;
@@ -107,7 +107,7 @@ export const BurgerS = styled.div`
     top: 15px;
     right: 20px;
     display: none; 
-    @media (max-width: 760px) {
+    @media (max-width: 768px) {
       display: flex;
       justify-content: space-around;
       flex-flow: column nowrap;

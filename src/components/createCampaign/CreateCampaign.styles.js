@@ -74,6 +74,8 @@ border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
 `
 export const FormShortsFields = styled.div`
+width:100%;
+max-width:1100px;
 background-color: whitesmoke;
 border-radius: 15px 15px 0px 0px;
 display: grid;
@@ -82,7 +84,7 @@ grid-template-columns: 1fr 1fr;
 z-index: 3;
 border-bottom: 2px solid rgba(0,0,0,0.3);
 
-@media screen and (max-width:560px){
+@media screen and (max-width: 700px){
     grid-template-columns: 1fr;
 
 }
@@ -95,7 +97,7 @@ justify-content: flex-start;
 padding: 8px 15px;
 text-transform: capitalize;
 
-@media screen and (max-width:560px){
+@media screen and (max-width:700px){
     grid-column-start:1;
 
 }

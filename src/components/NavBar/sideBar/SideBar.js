@@ -12,6 +12,10 @@ import {
     BurgerS
 } from './SideBar.styles.js'
 
+import Logo from "../../../Crowdfy.png"
+import { NavLogo } from '../Nav.styles.js'
+
+
 const SideBar = ({ isOpen, toggle, items, open }) => {
     return (
         <SidebarContainer isOpen={isOpen} onClick={toggle}>
@@ -25,7 +29,7 @@ const SideBar = ({ isOpen, toggle, items, open }) => {
             <SidebarWrapper>
                 <SidebarMenu>
                     {items.map((item, index) => (
-                        <SidebarLink to={item} onClick={toggle}>
+                        <SidebarLink to={item} onClick={toggle} key={index}>
                             {item}
                         </SidebarLink>
                     ))}

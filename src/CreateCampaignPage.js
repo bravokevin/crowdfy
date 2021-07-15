@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import {create} from 'ipfs-http-client'
+import { create } from 'ipfs-http-client'
 
 
 import useForm from "./components/createCampaign/useForm";
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
+import { SingleCampaign } from './components/SingleCampaign/SingleCampaign';
+import { Route } from 'react-router-dom';
 
-export const CreateCampaignPage = () => {
+export const CreateCampaignPage = ({ sendData }) => {
 
     const ipfs = create({
         host: 'ipfs.infura.io',
@@ -27,18 +29,28 @@ export const CreateCampaignPage = () => {
 
     const [errors, setErrors] = useState({})
 
-    const handleChange = input => e => {
-        const { value } = e.target
+    //prevent the user submit twice the information
+    const [isSubmiting, setIsSubmiting] = useState(false);
 
-        //sets title to the topline 
+
+    const setTopTittle = (input, value) => {
         const titleS = document.querySelector('#campaignTittle')
         if (input === 'campaignName') {
             titleS.textContent = value || "My campaign"
         }
+
+    }
+
+    const handleChange = input => e => {
+        const { value } = e.target
+
+        //sets title to the topline 
         setValue({
             ...values,
             [input]: value
         })
+
+        setTopTittle(input, value);
     }
 
     const captureFile = (event) => {
@@ -59,20 +71,47 @@ export const CreateCampaignPage = () => {
         }
     }
 
+
     const submit = async (event) => {
-        event.preventDefault();
         setErrors(customValidation(values));
+        event.preventDefault();
+
+        // if (Object.keys(errors).length > 0) {
+        //     alert("check the fields");
+        //     return
+        // }
+
+        setIsSubmiting(true);
         const valueObj = JSON.stringify(values)
         console.log('uploading data')
         const cid = await ipfs.add(valueObj);
         console.log(cid)
 
-        // guardar el hash en el contrato
+        //send data to the parent
+        sendData(values, cid.path.toString())
+
+        //reset all values.
+        setValue({
+            campaignImage: '',
+            campaignName: '',
+            fundingGoal: 0,
+            deadline: '',
+            fundingCap: 0,
+            beneficiary: '',
+            shortDescription: '',
+            longDescription: ''
+        })
+        setTopTittle("campaignName", "My campaign");
+
+        // se le envia informacion al contrato
+
+        setIsSubmiting(false);
+        // TODO: guardar el hash en el contrato
     }
 
-// example hash QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
+    // example hash QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
 
-// example direction https://ipfs.infura.io/ipfs/QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
+    // example direction https://ipfs.infura.io/ipfs/QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
     const {
         campaignName,
         fundingGoal,
@@ -92,11 +131,11 @@ export const CreateCampaignPage = () => {
 
 
     const CampaignFields = [
-        { label: "campaign name", type: "text", autoFocus: true, value: campaignName, placeholder: "My campaign", name: "campaignName" },
-        { label: "funding goal", type: "number", value: fundingGoal, placeholder: "In WEI", name: "fundingGoal" },
+        { label: "campaign name", type: "text", autoFocus: true, value: values.campaignName, placeholder: "My campaign", name: "campaignName" },
+        { label: "funding goal", type: "number", value: values.fundingGoal, placeholder: "In WEI", name: "fundingGoal" },
         { label: "deadline", type: "datetime-local", value: deadline, minimum: getDate, name: "deadline" },
-        { label: "funding cap", type: "number", value: fundingCap, placeholder: "In WEI", customError: errors.fundingCap, name: "fundingCap" },
-        { label: "beneficiary", type: "text", finish: 3, start: 1, value: beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
+        { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In WEI", customError: errors.fundingCap, name: "fundingCap" },
+        { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
     ]
 
     return (
@@ -107,7 +146,11 @@ export const CreateCampaignPage = () => {
                 values={values}
                 captureFile={captureFile}
                 submit={submit}
+                isSubmiting={isSubmiting}
             />
+            {/* <Route exact path="/post/:id" render={({ match }) => (
+                <SingleCampaign values={values} id={(p => p.id === match.params.id)}/> */}
+            )} />
         </>
     )
 }

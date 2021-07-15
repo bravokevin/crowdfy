@@ -12,7 +12,7 @@ import { SingleCampaign } from "./components/SingleCampaign/SingleCampaign";
 
 const ITEMS = ["campaigns"]
 
-const App = () => {
+const App: any = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false)
@@ -22,13 +22,19 @@ const App = () => {
       setOpen(!open)
   }
 
+  const campaignCreationData = (values: any, cid:string) =>{
+    console.log(values, cid)
+  } 
+
   return (
     <>
     <Router>
     <Navbar toggle={toggle} items={ITEMS} />
     <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} />
       <Route path="/" exact component={HomePage} />
-      <Route path="/newCampaign" component={CreateCampaignPage} />
+      <Route path="/newCampaign" >
+        <CreateCampaignPage sendData ={campaignCreationData}/>
+      </Route>
       <Route path="/campaigns" component={Campaigns}/>
       <Route path='/single' component={SingleCampaign}/>
     </Router>

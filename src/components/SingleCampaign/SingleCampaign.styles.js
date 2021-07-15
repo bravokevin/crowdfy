@@ -73,3 +73,33 @@ export const CampaignLongDescription = styled.p`
 font-size: 16px;
 align-self: flex-start;
 `
+
+//********************TABLE ELEMENTS********************** */
+
+export const ShortFieldsWrapepr = styled.div`
+background-color: whitesmoke;
+border-radius: 15px 15px 0px 0px;
+display: grid;
+justify-content: center;
+grid-template-columns: 1fr 1fr;
+z-index: 3;
+border-bottom: 2px solid rgba(0,0,0,0.3);
+font-size: 15px;
+text-transform: capitalize;
+@media screen and (max-width:560px){
+    grid-template-columns: 1fr;
+
+}
+
+`
+export const ValuesWrapper = styled.div`
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+padding:10px 20px;
+`
+export const Field = styled.p`
+display:inline;
+`
+export const ValueField = styled.span`
+`

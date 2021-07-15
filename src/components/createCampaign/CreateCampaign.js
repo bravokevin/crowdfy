@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NButton } from '../Buttons'
+import { SingleCampaign } from '../SingleCampaign/SingleCampaign'
 
 import {
   Container,
@@ -26,7 +27,7 @@ import {
 } from './CreateCampaign.styles'
 
 
-export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, captureFile }) => {
+export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, captureFile, isSubmiting}) => {
 
 
   return (
@@ -74,7 +75,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                     type={type}
                     autoFocus={autoFocus}
                     onChange={handleChange(name)}
-                    defaultValue={value}
+                    value={value}
                     placeholder={placeholder}
                     required
                   />
@@ -93,23 +94,24 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
               <LargerFieldsWrapper>
                 {/* <TextTittle placeholder="Tittle" type="text" maxLength="60" id='text' readOnly/> */}
 
-                <TextDescription onChange={handleChange("shortDescription")} defaultValue={values.shortDescription} placeholder="Short Description" type="text" maxLength="220"
+                <TextDescription onChange={handleChange("shortDescription")} value={values.shortDescription} placeholder="Short Description" type="text" maxLength="220"
                 />
 
                 <TextArea placeholder="Write your history" type="text"
                   onChange={handleChange("longDescription")}
-                  defaultValue={values.longDescription}
+                  value={values.longDescription}
                 />
               </LargerFieldsWrapper>
 
             </FormLargeFields>
             <ButtonWrapper>
-              <NButton primary={true} type="submit">Submit Campaign</NButton>
+              <NButton primary={true} type="submit" disabled={isSubmiting}>Submit Campaign</NButton>
             </ButtonWrapper>
           </Form>
         </FormContent>
 
       </Wrapper>
+
     </Container>
   )
 }

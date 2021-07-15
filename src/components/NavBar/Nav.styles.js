@@ -3,9 +3,9 @@ import { Link as LinkR } from 'react-router-dom';
 
 
 export const Nav = styled.nav`
-background:#000;
+background:transparent;
 height: 80px;
-/* margin-top: -80px; */
+margin-top: -80px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -26,19 +26,27 @@ height: 80px;
 z-index: 1;
 width: 100%;
 padding: 0 24px;
-max-width: 1100px;
+max-width: 1500px;
 
 `
 
 export const NavLogo = styled.img`
     width: 150px;
     height: 60px;
+    transform: scale(0.98);
+  transition: transform 0.25s ease;
+    &:hover{
+    transition: 0.2s ease-in-out;
+    transform: scale(1);
+}
 `
 export const NavLogoWrapper = styled(LinkR)`
     justify-self: flex-start;
     cursor: pointer;
     width: 150px;
     height: 60px;
+    margin-right: 500px;
+
     margin: auto 0;
 
 @media screen and (max-width: 768px){
@@ -64,8 +72,16 @@ display: flex;
 align-items: center;
 list-style: none;
 text-align: center;
-margin-right: -30%;
+ list-style-type: none;
+margin-right: -60%;
 
+@media screen and (max-width: 1211px){
+    margin-right: -50%;
+}
+
+@media screen and (max-width: 1000px){
+    margin-right: -35%;
+}
 @media screen and (max-width: 768px){
     display: none;
 }
@@ -99,7 +115,7 @@ export const NavBtn = styled.div`
 display: flex;
 align-items: center;
 
-@media screen and (max-width: 760px){
+@media screen and (max-width: 768px){
     display: none;
 
 }`
@@ -107,7 +123,7 @@ align-items: center;
 export const NavBtnLink = styled(LinkR)`
   transform: scale(0.98);
   transition: transform 0.25s ease;
-border-radius: 13px;
+border-radius: 11px;
 white-space: nowrap;
 padding: 8px 25px;
 background: linear-gradient(#dd0df0, #ff12b0);
@@ -117,11 +133,13 @@ border: none;
 cursor: pointer;
 transition: all 0.2s ease-in-out;
 text-decoration: none;
-color: #fff;
+color: #000;
 
 &:hover{
     transition: 0.2s ease-in-out;
     transform: scale(1);
+color: #fff;
+
 }
 `
 
