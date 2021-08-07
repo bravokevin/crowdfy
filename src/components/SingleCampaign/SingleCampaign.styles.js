@@ -7,20 +7,30 @@ display: flex;
 justify-content: center;
 align-items: center;
 padding: 20px 15px;
-height: 1100px;
 position: relative;
 z-index: 1;
+height: min-content;
+overflow: hidden;
 `
 
 
 export const Wrapper = styled.div`
-display: flex;
-height: 1200px;
+display: grid;
+height: min-content;
+overflow: hidden;
 width: 100%;
-max-width: 1200px;
-padding: 20px 20px;
-z-index: 1;
+grid-template-columns: 300px 1fr;
+max-width: 1100px;
+padding: 10px 20px;
 justify-content: space-between;
+/* justify-content: stretch; */
+
+@media screen and (max-width:768px){
+grid-template-columns: 1fr;
+justify-content: stretch;
+
+
+}
 `
 
 
@@ -50,14 +60,15 @@ outline: none;
 `
 
 export const CampaignWrapper = styled.div`
+box-sizing:border-box;
 background: whitesmoke;
-max-width: 1100px;
+max-width: 900px;
 width: 100%;
 height: min-content;
 overflow: hidden;
 z-index: 1;
 display: grid;
-justify-content: stretch;
+justify-content: center;
 grid-template-rows: 70px 90px;
 grid-auto-rows: min-content;
 justify-items: center;
@@ -66,6 +77,10 @@ padding: 20px;
 margin-top: 240px;
 border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
+@media screen and (max-width:768px){
+    max-width: 100%;
+    margin-top: 35px;
+}
 `
 
 export const CampaignTittle = styled.h1`
@@ -96,6 +111,7 @@ align-self: end;
 //********************TABLE ELEMENTS********************** */
 
 export const ShortFieldsWrapepr = styled.div`
+box-sizing:border-box;
 background: whitesmoke;
 max-width: 250px;
 max-height: 400px;
@@ -110,7 +126,11 @@ align-items: center;
 margin-top: 240px;
 border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
-margin-right:40px;
+@media screen and (max-width:768px){
+    max-width: 100%;
+    max-height: 250px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 `
 
 
@@ -120,14 +140,23 @@ justify-self: center;
 display: flex;
 justify-content: flex-start;
 align-items: flex-start;
-padding:5px 0px;
-height:40px;
+padding:10px 0px;
+/* height:40px; */
+@media screen and (max-width:768px){
+flex-direction: column;
+}
 `
 export const Field = styled.p`
 display:inline;
 margin-right: 10px;
 font-weight:620;
+@media screen and (max-width:768px){
+    margin: 0px;
+}
 `
 export const ValueField = styled.p`
 display:inline;
+@media screen and (max-width:768px){
+    margin: 0px;
+}
 `
