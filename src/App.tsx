@@ -16,10 +16,15 @@ const App: any = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false)
+  const [wallet, setWallet] = useState(false);
 
   const toggle = () => {
       setIsOpen(!isOpen)
       setOpen(!open)
+  }
+
+  const connectMetamaskWallet = async ()  =>{
+    
   }
 
   const campaignCreationData = (values: any, cid:string) =>{

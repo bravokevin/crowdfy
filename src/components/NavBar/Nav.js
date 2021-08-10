@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { BurgerS } from './sideBar/SideBar.styles';
 
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink, NavLogoWrapper  } from './Nav.styles'
+import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink, NavLogoWrapper, AddrWrapper, AddrText, ColorBall  } from './Nav.styles'
 
 
 
@@ -36,6 +36,12 @@ const Navbar = ({ toggle, items }) => {
                     <NavBtn>
                         <NavBtnLink to="/newCampaign">Create campaign</NavBtnLink>
                     </NavBtn>
+                    <AddrWrapper>
+                    <ColorBall/>
+                        <AddrText>
+                            0x00000
+                        </AddrText>
+                    </AddrWrapper>
                 </NavbarContainer>
             </Nav>
         </>

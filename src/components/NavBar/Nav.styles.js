@@ -27,6 +27,7 @@ z-index: 1;
 width: 100%;
 padding: 0 24px;
 max-width: 1500px;
+align-items: center;
 
 `
 
@@ -138,8 +139,33 @@ color: #000;
 &:hover{
     transition: 0.2s ease-in-out;
     transform: scale(1);
-color: #fff;
-
+    color: #fff;
+    
 }
 `
+/** **************  ADDRESS BOX ***************** */
 
+
+export const AddrWrapper = styled.div`
+display: flex;
+height: 20px;
+border-radius: 11px;
+padding: 8px 15px;
+background: #001111;
+    align-items: center;
+/* flex-direction: row; */
+justify-content: flex-start;
+
+`
+
+export const AddrText = styled.span`
+font-size: 16px;
+color: #ffffff;
+`
+export const ColorBall = styled.div`
+border-radius: 800px;
+padding: 3px;
+background: red;
+margin-right: 10px;
+margin-top: 4px;
+`
