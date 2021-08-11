@@ -17,20 +17,38 @@ const App: any = () => {
   
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false)
-  const [wallet, setWallet] = useState(false);
+  const [wallet, setWallet] = useState({
+    account: ''
+  });
+  const[isWallet, setIsWallet] = useState(false);
+
 
   const toggle = () => {
       setIsOpen(!isOpen)
       setOpen(!open)
   }
 
-  const loadWeb3  = async ()=>{
+  //detects metamask and stores the ethereum wallet
+  const addWallet  = async ()=>{
+
     if(window.ethereum) {
+      
         window.web3 = new Web3(window.ethereum)
         await window.ethereum.enable();
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const account = sliceAccount(accounts[0]);
+        setWallet(account)
+        setIsWallet(true)
+
+
     }
     else if(window.web3) {
         window.web3 = new Web3(window.web3.currentProvider)
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const account = sliceAccount(accounts[0]);
+        setWallet(account)
+        setIsWallet(true)
+
     }
     else {
         window.alert('Non-ehtereum browser detected. Try instaling metamask')
@@ -38,14 +56,18 @@ const App: any = () => {
 
 }
 
-useEffect(() =>{
-    const DefiningMetamask = async ()=>{
+const sliceAccount = (account: any) => {
+  return account.slice(0,10)
+}
 
-        await loadWeb3()
-    } 
-     DefiningMetamask();
-}, [])
-// detect metamask 
+// useEffect(() =>{
+//     const DefiningMetamask = async ()=>{
+
+//         await loadWeb3()
+//     } 
+//      DefiningMetamask();
+// }, [])
+// // detect metamask 
 
 
   const campaignCreationData = (values: any, cid:string) =>{
@@ -55,7 +77,8 @@ useEffect(() =>{
   return (
     <>
     <Router>
-    <Navbar toggle={toggle} items={ITEMS} />
+    <Navbar toggle={toggle} items={ITEMS} isWallet={isWallet} setAddress={addWallet} address ={wallet} />
+
     <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} />
       <Route path="/" exact component={HomePage} />
       <Route path="/newCampaign" >

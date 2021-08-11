@@ -164,11 +164,10 @@ color: #ffffff;
 export const ColorBall = styled.button`
 border-radius: 800px;
 padding: 3.5px;
-background: red;
+background:  ${({ active }) => (active ? "green" : "red")};
 margin-right: 10px;
 margin-top: 4px;
-cursor: pointer;
+cursor: ${({ active }) => (active ? "default" : "pointer")};
 outline: none;
 border: none;
-
 `

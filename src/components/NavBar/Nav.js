@@ -9,7 +9,7 @@ import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, 
 
 
 
-const Navbar = ({ toggle, items }) => {
+const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
     return (
         <>
             <Nav>
@@ -37,9 +37,9 @@ const Navbar = ({ toggle, items }) => {
                         <NavBtnLink to="/newCampaign">Create campaign</NavBtnLink>
                     </NavBtn>
                     <AddrWrapper>
-                    <ColorBall/>
-                        <AddrText>
-                            0x00000
+                    <ColorBall active={isWallet}/>
+                        <AddrText onClick={setAddress}>
+                            {isWallet ? address : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 </NavbarContainer>
