@@ -155,17 +155,20 @@ background: #001111;
     align-items: center;
 /* flex-direction: row; */
 justify-content: flex-start;
-
 `
 
 export const AddrText = styled.span`
 font-size: 16px;
 color: #ffffff;
 `
-export const ColorBall = styled.div`
+export const ColorBall = styled.button`
 border-radius: 800px;
-padding: 3px;
+padding: 3.5px;
 background: red;
 margin-right: 10px;
 margin-top: 4px;
+cursor: pointer;
+outline: none;
+border: none;
+
 `
