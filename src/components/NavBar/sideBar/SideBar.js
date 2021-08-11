@@ -9,14 +9,16 @@ import {
     SidebarLink,
     SideBtnWrap,
     SidebarRoute,
-    BurgerS
+    BurgerS, AddrWrapper, AddrText, ColorBall 
 } from './SideBar.styles.js'
+
+
 
 import Logo from "../../../Crowdfy.png"
 import { NavLogo } from '../Nav.styles.js'
 
 
-const SideBar = ({ isOpen, toggle, items, open }) => {
+const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) => {
     return (
         <SidebarContainer isOpen={isOpen} onClick={toggle}>
             <Icon>
@@ -27,12 +29,19 @@ const SideBar = ({ isOpen, toggle, items, open }) => {
                 </BurgerS>
             </Icon>
             <SidebarWrapper>
+            <AddrWrapper>
+                    <ColorBall active={isWallet}/>
+                        <AddrText onClick={setAddress}>
+                            {isWallet ? address : "0x000000000"}
+                        </AddrText>
+                    </AddrWrapper>
                 <SidebarMenu>
                     {items.map((item, index) => (
                         <SidebarLink to={item} onClick={toggle} key={index}>
                             {item}
                         </SidebarLink>
                     ))}
+
                 </SidebarMenu>
                 <SideBtnWrap>
                     <SidebarRoute to="/newCampaign">Create campaign</SidebarRoute>

@@ -133,3 +133,37 @@ export const BurgerS = styled.div`
       }
     }
   `
+
+  
+/** **************  ADDRESS BOX ***************** */
+
+
+export const AddrWrapper = styled.div`
+display: flex;
+height: 20px;
+width: 100px;
+border-radius: 11px;
+padding: 8px 15px;
+background: #001111;
+    align-items: center;
+justify-content: flex-start;
+position: absolute;
+margin-top: -150px;
+margin-left: 30px;
+
+`
+
+export const AddrText = styled.span`
+font-size: 16px;
+color: #ffffff;
+`
+export const ColorBall = styled.button`
+border-radius: 800px;
+padding: 3.5px;
+background:  ${({ active }) => (active ? "green" : "red")};
+margin-right: 10px;
+margin-top: 4px;
+cursor: ${({ active }) => (active ? "default" : "pointer")};
+outline: none;
+border: none;
+`

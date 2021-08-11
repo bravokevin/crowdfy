@@ -32,7 +32,7 @@ const App: any = () => {
   const addWallet  = async ()=>{
 
     if(window.ethereum) {
-      
+
         window.web3 = new Web3(window.ethereum)
         await window.ethereum.enable();
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -79,7 +79,7 @@ const sliceAccount = (account: any) => {
     <Router>
     <Navbar toggle={toggle} items={ITEMS} isWallet={isWallet} setAddress={addWallet} address ={wallet} />
 
-    <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} />
+    <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} isWallet={isWallet} setAddress={addWallet} address ={wallet} />
       <Route path="/" exact component={HomePage} />
       <Route path="/newCampaign" >
         <CreateCampaignPage sendData ={campaignCreationData}/>

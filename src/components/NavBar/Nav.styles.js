@@ -74,14 +74,14 @@ align-items: center;
 list-style: none;
 text-align: center;
  list-style-type: none;
-margin-right: -60%;
+margin-right: -15%;
 
 @media screen and (max-width: 1211px){
-    margin-right: -50%;
+    margin-right: -10%;
 }
 
 @media screen and (max-width: 1000px){
-    margin-right: -35%;
+    /* margin-right: -35%; */
 }
 @media screen and (max-width: 768px){
     display: none;
@@ -155,6 +155,9 @@ background: #001111;
     align-items: center;
 /* flex-direction: row; */
 justify-content: flex-start;
+@media screen and (max-width: 768px){
+    display: none;
+}
 `
 
 export const AddrText = styled.span`
