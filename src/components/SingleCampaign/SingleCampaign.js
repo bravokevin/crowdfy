@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, NButton } from '../Buttons';
+import { NButton } from '../Buttons';
 
 import {
   Container,
@@ -57,6 +57,7 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 
      <ButtonWrapper>
        <NButton primary={true}>Fund campaign</NButton>
+       <NButton primary={true}>Withdraw</NButton> 
      </ButtonWrapper>
         </CampaignWrapper>
       </Wrapper>

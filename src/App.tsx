@@ -60,14 +60,14 @@ const sliceAccount = (account: any) => {
   return account.slice(0,10)
 }
 
-// useEffect(() =>{
-//     const DefiningMetamask = async ()=>{
+useEffect(() =>{
+    const DefiningMetamask = async ()=>{
 
-//         await loadWeb3()
-//     } 
-//      DefiningMetamask();
-// }, [])
-// // detect metamask 
+        await addWallet()
+    } 
+     DefiningMetamask();
+}, [])
+// detect metamask 
 
 
   const campaignCreationData = (values: any, cid:string) =>{
@@ -82,7 +82,7 @@ const sliceAccount = (account: any) => {
     <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} isWallet={isWallet} setAddress={addWallet} address ={wallet} />
       <Route path="/" exact component={HomePage} />
       <Route path="/newCampaign" >
-        <CreateCampaignPage sendData ={campaignCreationData}/>
+        <CreateCampaignPage sendData = {campaignCreationData}/>
       </Route>
       <Route path="/campaigns" component={Campaigns}/>
       <Route path='/single' component={SingleCampaign}/>

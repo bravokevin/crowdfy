@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import Logo from "../../Crowdfy.png"
 
 import { Link } from 'react-router-dom';
@@ -10,9 +10,24 @@ import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, 
 
 
 const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
+    const [scrollNav, setScrollNav] = useState(false)
+
+
+    const changeNav = () => {
+        if (window.scrollY >= 200) {
+            setScrollNav(true)
+        }
+        else {
+            setScrollNav(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', changeNav)
+    }, [])
     return (
         <>
-            <Nav>
+            <Nav scrollNav={scrollNav}>
                 <NavbarContainer>
                     <NavLogoWrapper to="/">
                     <NavLogo  src={Logo}></NavLogo>

@@ -137,9 +137,9 @@ export const CreateCampaignPage = ({ sendData }) => {
 
     const CampaignFields = [
         { label: "campaign name", type: "text", autoFocus: true, value: values.campaignName, placeholder: "My campaign", name: "campaignName" },
-        { label: "funding goal", type: "number", value: values.fundingGoal, placeholder: "In WEI", name: "fundingGoal" },
+        { label: "funding goal", type: "number", value: values.fundingGoal, placeholder: "In Eth", name: "fundingGoal" },
         { label: "deadline", type: "datetime-local", value: deadline, minimum: getDate, name: "deadline" },
-        { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In WEI", customError: errors.fundingCap, name: "fundingCap" },
+        { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap" },
         { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
     ]
 

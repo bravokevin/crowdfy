@@ -3,10 +3,10 @@ import { Link as LinkR } from 'react-router-dom';
 
 
 export const Nav = styled.nav`
-background:transparent;
+background: transparent;
 height: 80px;
 margin-top: -80px;
-display: flex;
+display: ${({scrollNav}) =>(scrollNav ? "none" : "flex")};;
 justify-content: center;
 align-items: center;
 font-size: 1rem;
@@ -167,9 +167,9 @@ color: #ffffff;
 export const ColorBall = styled.button`
 border-radius: 800px;
 padding: 3.5px;
-background:  ${({ active }) => (active ? "green" : "red")};
+background:  ${({ active }) => (active ? "#00CD00" : "red")};
 margin-right: 10px;
-margin-top: 4px;
+margin-top: 2px;
 cursor: ${({ active }) => (active ? "default" : "pointer")};
 outline: none;
 border: none;
