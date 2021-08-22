@@ -2,10 +2,6 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 export const CardContainer = styled.div`
-/* color: #000;
-background: #fff;
-width: 100%;
-opacity: 0.4; */
 `
 export const CardArea = styled.div`
 display: flex;
@@ -17,6 +13,11 @@ justify-content: center;
 align-items: center;
 top: 0;
 right: 0;
+
+@media screen and (max-width: 1100px){
+    margin-top: 80px;
+
+}
 `
 
 export const CardWrapper = styled(Link)`
@@ -42,8 +43,8 @@ margin: 20px;
 }
 
 @media screen and (max-width: 560px){
-    width: 300px;
-    height: 450px;
+    width: 250px;
+    height: 400px;
 }
 `
 

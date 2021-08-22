@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { create } from 'ipfs-http-client'
 
-import Web3 from 'web3'
 
-
-import useForm from "./components/createCampaign/useForm";
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
 import { SingleCampaign } from './components/SingleCampaign/SingleCampaign';
-import { Route } from 'react-router-dom';
+
 
 
 
@@ -43,7 +40,6 @@ export const CreateCampaignPage = ({ sendData }) => {
         if (input === 'campaignName') {
             titleS.textContent = value || "My campaign"
         }
-
     }
 
     const handleChange = input => e => {
@@ -89,7 +85,8 @@ export const CreateCampaignPage = ({ sendData }) => {
         setIsSubmiting(true);
         const valueObj = JSON.stringify(values)
         console.log('uploading data')
-        const cid = await ipfs.add(valueObj);
+        // console.log(ipfs)
+        const cid = await ipfs.add(values);
         console.log(cid)
 
         //send data to the parent
@@ -155,7 +152,7 @@ export const CreateCampaignPage = ({ sendData }) => {
             />
             {/* <Route exact path="/post/:id" render={({ match }) => (
                 <SingleCampaign values={values} id={(p => p.id === match.params.id)}/> */}
-            )} />
+            >
         </>
     )
 }

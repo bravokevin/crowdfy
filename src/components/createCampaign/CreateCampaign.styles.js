@@ -5,8 +5,8 @@ export const Container = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 0 15px;
-height: 1500px;
+padding: 0 45px;
+height: 1100px;
 position: relative;
 z-index: 1;
 `
@@ -60,12 +60,12 @@ margin: 30px 20px 20px 20px;
 export const Form = styled.form`
 background: whitesmoke;
 max-width: 1200px;
-height: 800;
+height: min-content;
 width: 100%;
 z-index: 1;
 display: grid;
 padding: 0px 0px 15px 0px;
-margin-top: 100px;
+margin-top: 300px;
 border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
 `
@@ -79,7 +79,7 @@ justify-content: center;
 grid-template-columns: 1fr 1fr;
 z-index: 3;
 border-bottom: 2px solid rgba(0,0,0,0.3);
-@media screen and (max-width: 700px){
+@media screen and (max-width: 780px){
     grid-template-columns: 1fr;
 }
 `
@@ -90,7 +90,7 @@ flex-direction:column;
 justify-content: flex-start;
 padding: 8px 15px;
 text-transform: capitalize;
-@media screen and (max-width:700px){
+@media screen and (max-width:780px){
     grid-column-start:1;
 }
 `

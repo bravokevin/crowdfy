@@ -39,8 +39,6 @@ const App: any = () => {
         const account = sliceAccount(accounts[0]);
         setWallet(account)
         setIsWallet(true)
-
-
     }
     else if(window.web3) {
         window.web3 = new Web3(window.web3.currentProvider)

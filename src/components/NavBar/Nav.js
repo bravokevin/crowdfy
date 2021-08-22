@@ -14,7 +14,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
 
 
     const changeNav = () => {
-        if (window.scrollY >= 200) {
+        if (window.scrollY >= 100) {
             setScrollNav(true)
         }
         else {
