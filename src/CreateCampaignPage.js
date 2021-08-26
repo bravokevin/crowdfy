@@ -1,22 +1,16 @@
-import { useState, useEffect } from 'react';
-import { create } from 'ipfs-http-client'
+import { useState } from 'react';
 
+
+import { updateCollection } from './db';
+
+import { createEntry } from './dbUtils';
 
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
-import { SingleCampaign } from './components/SingleCampaign/SingleCampaign';
-
-
 
 
 export const CreateCampaignPage = ({ sendData }) => {
 
-
-    const ipfs = create({
-        host: 'ipfs.infura.io',
-        port: 5001,
-        protocol: 'https',
-    })
     ///campaign fields
     const [values, setValue] = useState({
         campaignImage: '',
@@ -74,8 +68,8 @@ export const CreateCampaignPage = ({ sendData }) => {
 
 
     const submit = async (event) => {
-        setErrors(customValidation(values));
         event.preventDefault();
+        setErrors(customValidation(values));
 
         // if (Object.keys(errors).length > 0) {
         //     alert("check the fields");
@@ -83,14 +77,22 @@ export const CreateCampaignPage = ({ sendData }) => {
         // }
 
         setIsSubmiting(true);
-        const valueObj = JSON.stringify(values)
-        console.log('uploading data')
-        // console.log(ipfs)
-        const cid = await ipfs.add(values);
-        console.log(cid)
+
+
+        // const newEntry = await createEntry(values);
+        // console.log(newEntry)
+        // const campaignss = await getCampaignByName(values.campaignName);
+
+        // await collectionFromSchema() NOTE : LA COLECCTION YA ESTA CREADA
+
+        console.log("**************** Creating and store Instance ****************")
+
+        await createEntry(values);
+
+        console.log("**************** Instance Created ****************")
 
         //send data to the parent
-        sendData(values, cid.path.toString())
+        // sendData(values, cid.path.toString()) 
 
         //reset all values.
         setValue({

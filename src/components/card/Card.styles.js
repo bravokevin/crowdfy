@@ -23,11 +23,12 @@ right: 0;
 export const CardWrapper = styled(Link)`
 z-index: 999;
 display: grid;
-grid-auto-rows: minmax(auto, 1fr);
+grid-auto-rows: minmax(180px, 1fr);
 width: 250px;
 height: 400px;
 text-decoration: none;
 cursor: pointer;
+transition: all 0.2s ease-in-out;
 text-align: center;
 padding: 10px 15px 0px 15px;
 font-size: 2rem;
@@ -36,6 +37,10 @@ background: #000;
 border: none;
 outline: none;
 margin: 20px;
+&:hover{
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.05);
+    }
 
 @media screen and (max-width: 768px){
     width: 200px;
@@ -99,13 +104,13 @@ export const CardDescription = styled.p`
 margin-bottom: 5px;
 font-size: 13px;
 text-align: left;
-line-height: 8px;
 
 `
 export const CardFounds = styled.p`
+color: #dd0df0;
 text-align: left;
 font-size: 15px;
-margin-top: 80px;
+margin-top: 10px;
 font-weight: 700;
 letter-spacing: 1.4px;
 /* margin-bottom: -20px; */

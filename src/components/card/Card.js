@@ -13,21 +13,23 @@ import {
     ImgContainer
 } from './Card.styles'
 
-const Card = () => {
+
+const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, longDescription }) => {
     return (
         <CardContainer>
             {/* <CardArea> */}
-                <CardWrapper>
-                    <ImgContainer>
-                        <CardImg />
-                    </ImgContainer>
-                    <CardTextContainer>
-                        <CardTopline>TopLine</CardTopline>
-                        <CardTittle> Tittle</CardTittle>
-                        <CardDescription>Description</CardDescription>
-                        <CardFounds>Founds</CardFounds>
-                    </CardTextContainer>
-                </CardWrapper>
+            <CardWrapper>
+                <ImgContainer>
+                    <CardImg src={campaignImage} />
+                </ImgContainer>
+                <CardTextContainer>
+                    <CardTopline>deadline: {deadline}</CardTopline>
+                    <CardTittle>{campaignName}</CardTittle>
+                    <CardDescription>{shortDescription}</CardDescription>
+                </CardTextContainer>
+                <CardFounds>Collected</CardFounds>
+
+            </CardWrapper>
             {/* </CardArea> */}
         </CardContainer>
     )

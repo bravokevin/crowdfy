@@ -67,7 +67,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                   onChange={handleChange(label)}
                   value={value}
                   placeholder={placeholder}
-                  required
+                  // required
                   min={minimum()}
                   />  
                   :
@@ -77,7 +77,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                     onChange={handleChange(name)}
                     value={value}
                     placeholder={placeholder}
-                    required
+                    // required
                   />
                   }
                   {/* if there is a custom error shows up */}
