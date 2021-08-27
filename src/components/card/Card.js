@@ -14,11 +14,10 @@ import {
 } from './Card.styles'
 
 
-const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, longDescription }) => {
+const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, longDescription, _id }) => {
     return (
         <CardContainer>
-            {/* <CardArea> */}
-            <CardWrapper>
+            <CardWrapper to={`campaign/${_id}`}>
                 <ImgContainer>
                     <CardImg src={campaignImage} />
                 </ImgContainer>
@@ -27,10 +26,8 @@ const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, 
                     <CardTittle>{campaignName}</CardTittle>
                     <CardDescription>{shortDescription}</CardDescription>
                 </CardTextContainer>
-                <CardFounds>Collected</CardFounds>
-
+                <CardFounds>Collected:</CardFounds>
             </CardWrapper>
-            {/* </CardArea> */}
         </CardContainer>
     )
 }

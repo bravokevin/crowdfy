@@ -42,7 +42,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                     <NavMenu>
                         {items.map((item, index) => (
                             <NavItem>
-                                <NavLinks to={item}>
+                                <NavLinks to={`/${item}`}>
                                     {item}
                                 </NavLinks>
                             </NavItem>

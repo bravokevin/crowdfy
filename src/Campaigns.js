@@ -1,12 +1,21 @@
 import { Component } from 'react'
 import Card from './components/card/Card'
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+} from "react-router-dom";
+
 import { CardArea } from './components/card/Card.styles'
 import { getAllCampaigns } from './dbUtils'
+import { SingleCampaign } from './components/SingleCampaign/SingleCampaign';
 
 class Campaigns extends Component {
 
-       async componentDidMount() {
+    async componentDidMount() {
         await this.getCampaigns();
     }
 
@@ -27,7 +36,7 @@ class Campaigns extends Component {
         return (
             <CardArea>
                 {this.state.campaigns.map((campaign) => (
-                    <Card {...campaign} />
+                    <Card key={campaign._id} {...campaign} />
                 ))}
             </CardArea >
         )

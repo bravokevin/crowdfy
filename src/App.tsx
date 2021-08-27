@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Web3 from 'web3'
 
 import HomePage from "./components/HomePage";
@@ -9,6 +9,7 @@ import SideBar from "./components/NavBar/sideBar/SideBar";
 import Campaigns from "./Campaigns";
 import CreateCampaignPage from "./CreateCampaignPage";
 import { SingleCampaign } from "./components/SingleCampaign/SingleCampaign";
+import { notFound404 } from "./404";
 
 
 const ITEMS = ["campaigns"]
@@ -75,15 +76,32 @@ const App: any = () => {
   return (
     <>
       <Router>
-        <Navbar toggle={toggle} items={ITEMS} isWallet={isWallet} setAddress={addWallet} address={wallet} />
+        <Navbar toggle={toggle}
+          items={ITEMS}
+          isWallet={isWallet}
+          setAddress={addWallet}
+          address={wallet} />
 
-        <SideBar isOpen={isOpen} toggle={toggle} items={ITEMS} open={open} isWallet={isWallet} setAddress={addWallet} address={wallet} />
-        <Route path="/" exact component={HomePage} />
-        <Route path="/newCampaign" >
-          <CreateCampaignPage sendData={campaignCreationData} />
-        </Route>
-        <Route path="/campaigns" component={Campaigns} />
-        <Route path='/single' component={SingleCampaign} />
+        <SideBar isOpen={isOpen}
+          toggle={toggle}
+          items={ITEMS}
+          open={open}
+          isWallet={isWallet}
+          setAddress={addWallet}
+          address={wallet} />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/newCampaign" >
+            <CreateCampaignPage sendData={campaignCreationData} />
+          </Route>
+          <Route path="/campaigns" component={Campaigns} />
+          <Route path='/campaign/:id' render={(props) => {
+            return (<SingleCampaign {...props} />)
+          }} />
+          <Redirect from="/campaign/campaigns" to="/campaigns" />
+          <Route component={notFound404} />
+        </Switch>
+
       </Router>
     </>
   );
