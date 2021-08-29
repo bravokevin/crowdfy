@@ -11,12 +11,10 @@ const Hero = () => {
     const onHover = () => {
         setHover(!hover)
     }
-
-
     return (
         <HeroContainer>
             <HeroBg>
-                <VideoBg src={image.default}/>
+                <VideoBg src={image.default} />
             </HeroBg>
             <HeroContent>
                 <HeroH1> Founds the people that you care about</HeroH1>
@@ -24,19 +22,18 @@ const Hero = () => {
                     Helps people from all around the world in a descentralize way.
                 </HeroP>
                 <HeroBtnWrapper>
-                    <Button to="/newCampaign" 
-                    primary={true}
-                    light={true}
-                    onMouseEnter={onHover} onMouseLeave={onHover} >
+                    <Button to="/newCampaign"
+                        primary={true}
+                        light={true}
+                        onMouseEnter={onHover} onMouseLeave={onHover} >
                         Create Campaign
                     </Button>
-                    <Button to="/campaigns" 
-                    primary={false}
-                    onMouseEnter={onHover} onMouseLeave={onHover}>
+                    <Button to="/campaigns"
+                        primary={false}
+                        onMouseEnter={onHover} onMouseLeave={onHover}>
                         Found a campaign
                     </Button>
                 </HeroBtnWrapper>
-
             </HeroContent>
         </HeroContainer>
     )

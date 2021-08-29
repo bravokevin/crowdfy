@@ -1,8 +1,5 @@
-import React from 'react'
-
 import {
     CardContainer,
-    CardArea,
     CardWrapper,
     CardImg,
     CardTextContainer,
@@ -14,12 +11,12 @@ import {
 } from './Card.styles'
 
 
-const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, longDescription, _id }) => {
+const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, _id }) => {
     return (
         <CardContainer>
-            <CardWrapper to={`campaign/${_id}`}>
+            <CardWrapper to={`/campaign/${_id}`}>
                 <ImgContainer>
-                    <CardImg src={campaignImage} />
+                    <CardImg src={`https://ipfs.infura.io/ipfs/${campaignImage}`} />
                 </ImgContainer>
                 <CardTextContainer>
                     <CardTopline>deadline: {deadline}</CardTopline>

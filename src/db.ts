@@ -111,6 +111,10 @@ const schema = {
     beneficiary: { type: 'string' },
     shortDescription: { type: 'string' },
     longDescription: { type: 'string' },
+    campaignAddress: {
+      description: "the instance of the campaign by its smart contract address",
+      type: 'string'
+    }
   },
 }
 
@@ -178,10 +182,12 @@ export const collectionFromSchema = async (): Promise<void> => {
   await client.newCollection(threadID, { name: collectionName, schema: schema })
 }
 
-export const updateCollection = async (): Promise<void> =>{
+export const updateCollection = async (): Promise<void> => {
   const identity = await getIdentity();
   const client = await Client.withKeyInfo(keyInfo)
   await client.getToken(identity)
   await client.updateCollection(threadID, { name: collectionName, schema: schema })
 
 }
+
+

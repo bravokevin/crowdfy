@@ -1,22 +1,13 @@
 import { Component } from 'react'
 import Card from './components/card/Card'
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams
-} from "react-router-dom";
-
 import { CardArea } from './components/card/Card.styles'
 import { getAllCampaigns } from './dbUtils'
-import { SingleCampaign } from './components/SingleCampaign/SingleCampaign';
 
 class Campaigns extends Component {
 
     async componentDidMount() {
         await this.getCampaigns();
+    
     }
 
     getCampaigns = async () => {

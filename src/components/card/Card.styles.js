@@ -13,13 +13,11 @@ justify-content: center;
 align-items: center;
 top: 0;
 right: 0;
-
+margin-top: 180px;
 @media screen and (max-width: 1100px){
-    margin-top: 80px;
-
+    margin-top: 120px;
 }
 `
-
 export const CardWrapper = styled(Link)`
 z-index: 999;
 display: grid;
@@ -48,8 +46,8 @@ margin: 20px;
 }
 
 @media screen and (max-width: 560px){
-    width: 250px;
-    height: 400px;
+    width: 300px;
+    height: 450px;
 }
 `
 
@@ -59,7 +57,7 @@ margin-left: -15px;
 margin-right: -15px;
 border-radius: 9px 9px 0 0;
 max-height: 100%;
-/* background: #0f0ff0; */
+background: #d808d1;
 `
 
 export const CardImg = styled.img`
@@ -68,7 +66,6 @@ border-radius: 9px 9px 0 0;
 height: 100%;
 -o-object-fit: cover;
 object-fit: cover;
-background: blue;
 border-color: none;
 `
 

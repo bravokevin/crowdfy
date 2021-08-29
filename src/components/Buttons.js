@@ -36,7 +36,7 @@ export const NButton = styled.button`
     font-size: 21px;
     margin: 20px;
   	border: ${({primary}) =>(primary ? 'none' : "1px solid #fff") };
-    cursor: pointer;
+    cursor: ${({isSubmiting}) =>(isSubmiting ? 'wait' : "pointer") };
     text-decoration: none;
     display: flex;
     justify-content: center;

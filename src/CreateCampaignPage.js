@@ -1,15 +1,19 @@
 import { useState } from 'react';
-
-
-import { updateCollection } from './db';
+import { create } from 'ipfs-http-client'
 
 import { createEntry } from './dbUtils';
-
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
 
 
+
 export const CreateCampaignPage = ({ sendData }) => {
+
+    const ipfs = create({
+        host: 'ipfs.infura.io',
+        port: 5001,
+        protocol: 'https',
+    })
 
     ///campaign fields
     const [values, setValue] = useState({
@@ -20,8 +24,11 @@ export const CreateCampaignPage = ({ sendData }) => {
         fundingCap: null,
         beneficiary: '',
         shortDescription: '',
-        longDescription: ''
+        longDescription: '',
+        campaignAddress: ''
     })
+
+    const falseAddress = "0x00000000000000000000000000000000000000000"
 
     const [errors, setErrors] = useState({})
 
@@ -48,22 +55,33 @@ export const CreateCampaignPage = ({ sendData }) => {
         setTopTittle(input, value);
     }
 
-    const captureFile = (event) => {
-        //sets the image to the cover
+    /**
+     * sets the file to the cover image 
+     * convert the file to buffer to store it in IPFS
+     * sets the resulting IPFS hash to the 'campaignImage' value    
+     */
+    const captureFile = async (event) => {
+        //put the image in the cover 
         const imagePlace = document.querySelector("#coverImage")
         const file = event.target.files[0]
         imagePlace.src = URL.createObjectURL(file);
 
-        //convert the image to a buffer
+        // convert the image to a buffer to store in IPFS
         const reader = new window.FileReader();
         reader.readAsArrayBuffer(file)
-        const { name } = event.target
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
+            const cid = await ipfs.add(Buffer(reader.result));
+            const imageHash = cid.path.toString()
+            const { name } = event.target
             setValue({
                 ...values,
-                [name]: Buffer(reader.result)
+                [name]: imageHash
             })
+
         }
+
+
+
     }
 
 
@@ -78,9 +96,13 @@ export const CreateCampaignPage = ({ sendData }) => {
 
         setIsSubmiting(true);
 
+        /**
+         * TODO: 
+         * update the schema to add the campaign field
+         * 'create the instance of the contract'
+        *   store the address of the instaciated contract in the thread'
+        * */
 
-        // const newEntry = await createEntry(values);
-        // console.log(newEntry)
         // const campaignss = await getCampaignByName(values.campaignName);
 
         // await collectionFromSchema() NOTE : LA COLECCTION YA ESTA CREADA
@@ -95,6 +117,8 @@ export const CreateCampaignPage = ({ sendData }) => {
         // sendData(values, cid.path.toString()) 
 
         //reset all values.
+        const imagePlace = document.querySelector("#coverImage")
+        imagePlace.src = undefined;
         setValue({
             campaignImage: '',
             campaignName: '',
@@ -103,7 +127,8 @@ export const CreateCampaignPage = ({ sendData }) => {
             fundingCap: 0,
             beneficiary: '',
             shortDescription: '',
-            longDescription: ''
+            longDescription: '',
+            campaignAddress: ''
         })
         setTopTittle("campaignName", "My campaign");
 
@@ -114,8 +139,7 @@ export const CreateCampaignPage = ({ sendData }) => {
     }
 
     // example hash QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
-
-    // example direction https://ipfs.infura.io/ipfs/QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
+    // example direction https://ipfs.infura.io/ipfs/QmNd3VfSULv5okJktefxAUNR9DhsthBFjAeaqHFWyMyrfa
     const {
         campaignName,
         fundingGoal,
@@ -124,15 +148,12 @@ export const CreateCampaignPage = ({ sendData }) => {
         beneficiary
     } = values
 
-    const falseAddress = "0x00000000000000000000000000000000000000000"
-
     const getDate = () => {
         let date = new Date().toISOString();
         let search = date.indexOf('.')
         date = date.slice(0, search - 3)
         return date
     }
-
 
     const CampaignFields = [
         { label: "campaign name", type: "text", autoFocus: true, value: values.campaignName, placeholder: "My campaign", name: "campaignName" },
@@ -141,6 +162,8 @@ export const CreateCampaignPage = ({ sendData }) => {
         { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap" },
         { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
     ]
+
+
 
     return (
         <>

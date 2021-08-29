@@ -1,17 +1,23 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Logo from "../../Crowdfy.png"
-
-
-
 import { BurgerS } from './sideBar/SideBar.styles';
-
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink, NavLogoWrapper, AddrWrapper, AddrText, ColorBall  } from './Nav.styles'
-
+import {
+    Nav,
+    NavbarContainer,
+    NavLogo,
+    MobileIcon,
+    NavMenu,
+    NavItem, NavLinks,
+    NavBtn, NavBtnLink,
+    NavLogoWrapper, 
+    AddrWrapper, 
+    AddrText, 
+    ColorBall
+} from './Nav.styles'
 
 
 const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
     const [scrollNav, setScrollNav] = useState(false)
-
 
     const changeNav = () => {
         if (window.scrollY >= 100) {
@@ -30,7 +36,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
             <Nav scrollNav={scrollNav}>
                 <NavbarContainer>
                     <NavLogoWrapper to="/">
-                    <NavLogo  src={Logo}></NavLogo>
+                        <NavLogo src={Logo}></NavLogo>
                     </NavLogoWrapper >
                     <MobileIcon onClick={toggle}>
                         <BurgerS>
@@ -52,7 +58,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                         <NavBtnLink to="/newCampaign">Create campaign</NavBtnLink>
                     </NavBtn>
                     <AddrWrapper>
-                    <ColorBall active={isWallet}/>
+                        <ColorBall active={isWallet} />
                         <AddrText onClick={setAddress}>
                             {isWallet ? address : "0x000000000"}
                         </AddrText>

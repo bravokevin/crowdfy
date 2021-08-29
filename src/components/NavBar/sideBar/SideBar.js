@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 import {
     SidebarContainer,
     Icon,
@@ -11,11 +8,6 @@ import {
     SidebarRoute,
     BurgerS, AddrWrapper, AddrText, ColorBall 
 } from './SideBar.styles.js'
-
-
-
-import Logo from "../../../Crowdfy.png"
-import { NavLogo } from '../Nav.styles.js'
 
 
 const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) => {
@@ -41,7 +33,6 @@ const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) 
                             {item}
                         </SidebarLink>
                     ))}
-
                 </SidebarMenu>
                 <SideBtnWrap>
                     <SidebarRoute to="/newCampaign">Create campaign</SidebarRoute>

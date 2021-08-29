@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import { NButton } from '../Buttons';
 
@@ -25,6 +25,7 @@ export const SingleCampaign = (props) => {
 
   const [values, setValues] = useState({});
   let params = useParams();
+
   useEffect(() => {
     const mount = async () =>{
       const campaignValues = await getCampaignById(params.id.toString())
@@ -35,17 +36,18 @@ export const SingleCampaign = (props) => {
   }, [])
 
 
+
   return (
     <Container>
       <Wrapper>
         <CampaignImageWrapper>
-          <CampaignImage />
+          <CampaignImage src={`https://ipfs.infura.io/ipfs/${values.campaignImage}`} />
         </CampaignImageWrapper>
 
         <ShortFieldsWrapepr>
-          <ValuesWrapper>
-            <Field>Beneficiary</Field>
-            <ValueField>{values.beneficiary}</ValueField>
+          <ValuesWrapper style={{flexDirection: 'column', alignItems:'center'}}>
+            <Field >Beneficiary</Field>
+            <ValueField style={{fontSize:'12px'}}>{values.beneficiary}</ValueField>
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Funding Cap</Field>
