@@ -11,6 +11,7 @@ import {
 
 
 const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) => {
+
     return (
         <SidebarContainer isOpen={isOpen} onClick={toggle}>
             <Icon>
@@ -24,7 +25,7 @@ const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) 
             <AddrWrapper>
                     <ColorBall active={isWallet}/>
                         <AddrText onClick={setAddress}>
-                            {isWallet ? address : "0x000000000"}
+                            {isWallet ? address.slice(0, 10) : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 <SidebarMenu>

@@ -9,9 +9,9 @@ import {
     NavMenu,
     NavItem, NavLinks,
     NavBtn, NavBtnLink,
-    NavLogoWrapper, 
-    AddrWrapper, 
-    AddrText, 
+    NavLogoWrapper,
+    AddrWrapper,
+    AddrText,
     ColorBall
 } from './Nav.styles'
 
@@ -31,6 +31,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
     }, [])
+
     return (
         <>
             <Nav scrollNav={scrollNav}>
@@ -60,7 +61,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                     <AddrWrapper>
                         <ColorBall active={isWallet} />
                         <AddrText onClick={setAddress}>
-                            {isWallet ? address : "0x000000000"}
+                            {isWallet ? address.slice(0,10) : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 </NavbarContainer>

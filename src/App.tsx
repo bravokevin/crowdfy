@@ -19,7 +19,7 @@ const App: any = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false)
   const [wallet, setWallet] = useState({
-    account: ''
+    account: 'Not account set'
   });
   const [isWallet, setIsWallet] = useState(false);
 
@@ -37,15 +37,13 @@ const App: any = () => {
       window.web3 = new Web3(window.ethereum)
       await window.ethereum.enable();
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      const account = sliceAccount(accounts[0]);
-      setWallet(account)
+      setWallet(accounts[0])
       setIsWallet(true)
     }
     else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider)
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      const account = sliceAccount(accounts[0]);
-      setWallet(account)
+      setWallet(accounts[0])
       setIsWallet(true)
 
     }
@@ -53,10 +51,6 @@ const App: any = () => {
       window.alert('Non-ehtereum browser detected. Try instaling metamask')
     }
 
-  }
-
-  const sliceAccount = (account: string) => {
-    return account.slice(0, 10)
   }
 
   useEffect(() => {
@@ -96,7 +90,7 @@ const App: any = () => {
           </Route>
           <Route path="/campaigns" component={Campaigns} />
           <Route path='/campaign/:id' render={(props) => {
-            return (<SingleCampaign {...props} />)
+            return (<SingleCampaign {...props} account={wallet} />)
           }} />
           <Redirect from="/campaign/campaigns" to="/campaigns" />
           <Route component={notFound404} />

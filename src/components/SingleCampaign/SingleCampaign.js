@@ -27,16 +27,40 @@ export const SingleCampaign = (props) => {
   let params = useParams();
 
   useEffect(() => {
-    const mount = async () =>{
+    const mount = async () => {
       const campaignValues = await getCampaignById(params.id.toString())
       setValues(campaignValues);
-      console.log('se cargo')
     }
     mount()
   }, [])
 
+  const compareDates = () => {
+    if (Date.parse(values.deadline) < Date.parse(new Date())) return true
+    else return false
+  }
+  const compareAddress = () => {
+    if (props.account.toString().toLowerCase() === values.beneficiary.toString().toLowerCase()) return true
+    else return false
+  }
 
+  const buttons = () => {
+    if (compareDates()) {
+      if (compareAddress()) {
+        return (
+          <ButtonWrapper>
+            <NButton primary={true}>Get a refound</NButton>
+            <NButton primary={true}>Withdraw</NButton>
+          </ButtonWrapper>
 
+        )
+      }
+      else {
+        return <NButton primary={true}>Get a refound</NButton>
+      }
+
+    } else { return <NButton primary={true}>Found campaign</NButton> }
+
+  }
   return (
     <Container>
       <Wrapper>
@@ -45,13 +69,17 @@ export const SingleCampaign = (props) => {
         </CampaignImageWrapper>
 
         <ShortFieldsWrapepr>
-          <ValuesWrapper style={{flexDirection: 'column', alignItems:'center'}}>
+          <ValuesWrapper style={{ flexDirection: 'column', alignItems: 'center' }}>
             <Field >Beneficiary</Field>
-            <ValueField style={{fontSize:'12px'}}>{values.beneficiary}</ValueField>
+            <ValueField style={{ fontSize: '12px' }}>{values.beneficiary}</ValueField>
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Funding Cap</Field>
             <ValueField>{`${values.fundingCap} ETH`}</ValueField>
+          </ValuesWrapper>
+          <ValuesWrapper>
+            <Field>Deadline</Field>
+            <ValueField>{values.deadline}</ValueField>
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Collected</Field>
@@ -65,8 +93,7 @@ export const SingleCampaign = (props) => {
           <CampaignShortDescription>{values.shortDescription}</CampaignShortDescription>
           <CampaignLongDescription>{values.longDescription}</CampaignLongDescription>
           <ButtonWrapper>
-            <NButton primary={true}>Fund campaign</NButton>
-            <NButton primary={true}>Withdraw</NButton>
+           { buttons()}
           </ButtonWrapper>
         </CampaignWrapper>
       </Wrapper>

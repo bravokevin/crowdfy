@@ -129,13 +129,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.9);
 @media screen and (max-width:768px){
     max-width: 100%;
     max-height: 300px; 
-    grid-template-columns: 310px 1fr 1fr;
-} 
-@media screen and (max-width:570px){
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+} 
 
 `
 
@@ -147,30 +143,14 @@ display: flex;
 justify-content: flex-start;
 align-items: flex-start;
 padding:10px 0px;
-@media screen and (max-width:768px){
-flex-direction: column;
-}
-@media screen and (max-width:570px){
-    flex-direction: row;
-}
 `
 export const Field = styled.p`
 display:inline;
 margin-right: 10px;
 font-weight:620;
-@media screen and (max-width:768px){
-    margin: 0px;
-}
-@media screen and (max-width:570px){
-    margin-right: 10px;
-}
+
 `
 export const ValueField = styled.p`
 display:inline;
-@media screen and (max-width:768px){
-    margin: 0px;
-}
-@media screen and (max-width:570px){
-    margin-right: 10px;
-}
+
 `
