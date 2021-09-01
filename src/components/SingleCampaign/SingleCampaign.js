@@ -104,7 +104,7 @@ export const SingleCampaign = (props) => {
         <CampaignWrapper>
           <CampaignTittle>{values.campaignName}</CampaignTittle>
           <CampaignShortDescription>{values.shortDescription}</CampaignShortDescription>
-          <CampaignLongDescription>{values.longDescription}</CampaignLongDescription>
+          <CampaignLongDescription >{values.longDescription}</CampaignLongDescription>
           <ButtonWrapper>
            { buttons()}
           </ButtonWrapper>

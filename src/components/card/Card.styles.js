@@ -101,6 +101,7 @@ export const CardDescription = styled.p`
 margin-bottom: 5px;
 font-size: 13px;
 text-align: left;
+white-space: pre-line;
 
 `
 export const CardFounds = styled.p`

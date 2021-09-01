@@ -91,11 +91,13 @@ export const CampaignShortDescription = styled.p`
 font-size: 16px;
 align-self: flex-start;
 color: gray;
+white-space: pre-line;
 `
 
 export const CampaignLongDescription = styled.p`
 font-size: 16px;
 align-self: flex-start;
+white-space: pre-line;
 `
 
 
