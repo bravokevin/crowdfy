@@ -46,7 +46,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             />
 
             <FormImageLabel htmlFor="imageInput">
-              <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add icon" />
+              <img src="https://img.icons8.com/ios/50/fa314a/add.png" alt="add Cover" />
             </FormImageLabel>
 
             <TopLine id='campaignTittle'>My campaign</TopLine>
@@ -57,7 +57,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                   <FormLabel >{label}</FormLabel>
 
                   {/* sets min value to the date input only */}
-                  {type === 'datetime-local' ?
+                  {label === 'deadline' ?
                     <FormInput
                       type={type}
                       autoFocus={autoFocus}
@@ -74,6 +74,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
                       onChange={handleChange(name)}
                       value={value}
                       placeholder={placeholder}
+                      min={0}
                     // required
                     />
                   }

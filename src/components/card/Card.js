@@ -17,6 +17,13 @@ const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, 
         if (Date.parse(deadline) < Date.parse(new Date())) return false
         else return true
     }
+    const convertDate = (unix) => {
+        let date = new Date(unix).toISOString();
+        let search = date.indexOf('.')
+        date = date.slice(0, search - 3)
+        return date
+
+    }
     return (
         <CardContainer>
             <CardWrapper to={`/campaign/${_id}`}>
@@ -24,7 +31,7 @@ const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, 
                     <CardImg src={`https://ipfs.infura.io/ipfs/${campaignImage}`} />
                 </ImgContainer>
                 <CardTextContainer>
-                    <CardTopline>{compareDates() ? `deadline: ${deadline}` : "Finalized"}</CardTopline>
+                    <CardTopline>{compareDates() ? `deadline: ${convertDate(deadline)}` : "Finalized"}</CardTopline>
                     <CardTittle>{campaignName}</CardTittle>
                     <CardDescription>{shortDescription}</CardDescription>
                 </CardTextContainer>

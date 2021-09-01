@@ -7,7 +7,6 @@ class Campaigns extends Component {
 
     async componentDidMount() {
         await this.getCampaigns();
-
     }
 
     getCampaigns = async () => {
@@ -22,7 +21,6 @@ class Campaigns extends Component {
             campaigns: []
         }
     }
-
 
 
     render() {

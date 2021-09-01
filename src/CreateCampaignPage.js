@@ -7,7 +7,10 @@ import customValidation from "./components/createCampaign/validation";
 
 
 
-export const CreateCampaignPage = ({ sendData }) => {
+export const CreateCampaignPage = () => {
+
+    //the space in where is going to be the covr image
+    const imagePlace = document.querySelector("#coverImage")
 
     const ipfs = create({
         host: 'ipfs.infura.io',
@@ -19,9 +22,9 @@ export const CreateCampaignPage = ({ sendData }) => {
     const [values, setValue] = useState({
         campaignImage: '',
         campaignName: '',
-        fundingGoal: null,
+        fundingGoal: 0,
         deadline: '',
-        fundingCap: null,
+        fundingCap: 0,
         beneficiary: '',
         shortDescription: '',
         longDescription: '',
@@ -45,14 +48,24 @@ export const CreateCampaignPage = ({ sendData }) => {
 
     const handleChange = input => e => {
         const { value } = e.target
-
+        setTopTittle(input, value);
         //sets title to the topline 
         setValue({
             ...values,
             [input]: value
         })
 
-        setTopTittle(input, value);
+    }
+
+    const addToIPFS = async (input) => {
+        try {
+            const cid = await ipfs.add(Buffer(input));
+            return cid
+        }
+        catch (error) {
+            alert(error)
+            return null;
+        }
     }
 
     /**
@@ -70,18 +83,16 @@ export const CreateCampaignPage = ({ sendData }) => {
         const reader = new window.FileReader();
         reader.readAsArrayBuffer(file)
         reader.onloadend = async () => {
-            const cid = await ipfs.add(Buffer(reader.result));
+            //store the image in the ipfs and grab the result
+            const cid = await addToIPFS(reader.result)
+            //the address in where the image was stored
             const imageHash = cid.path.toString()
             const { name } = event.target
             setValue({
                 ...values,
                 [name]: imageHash
             })
-
         }
-
-
-
     }
 
 
@@ -93,60 +104,59 @@ export const CreateCampaignPage = ({ sendData }) => {
         //     alert("check the fields");
         //     return
         // }
-
         setIsSubmiting(true);
 
         /**
          * TODO: 
-         * update the schema to add the campaign field
-         * 'create the instance of the contract'
         *   store the address of the instaciated contract in the thread'
         * */
 
-        // const campaignss = await getCampaignByName(values.campaignName);
-
-        // await collectionFromSchema() NOTE : LA COLECCTION YA ESTA CREADA
-
+        const instance = {
+            campaignImage: values.campaignImage,
+            campaignName: values.campaignName,
+            fundingGoal: Number(values.fundingGoal),
+            deadline: Date.parse(values.deadline),
+            fundingCap: Number(values.fundingCap),
+            beneficiary: values.beneficiary,
+            shortDescription: values.shortDescription,
+            longDescription: values.longDescription,
+            campaignAddress: values.campaignAddress
+        }
+        // NOTE : LA COLECCTION YA ESTA CREADA
+        var isError = false
+        //sets the values with their respective type
         console.log("**************** Creating and store Instance ****************")
+        try {
+            await createEntry(instance);
 
-        await createEntry(values);
-
+        }
+        catch (error) {
+            alert(error)
+            isError = true
+            return isError
+        }
         console.log("**************** Instance Created ****************")
 
-        //send data to the parent
-        // sendData(values, cid.path.toString()) 
+        //reset all values. if no errors
+        if (!isError) {
+            imagePlace.src = null;
+            setValue({
+                campaignImage: '',
+                campaignName: '',
+                fundingGoal: 0,
+                deadline: '',
+                fundingCap: 0,
+                beneficiary: '',
+                shortDescription: '',
+                longDescription: '',
+                campaignAddress: ''
+            })
+            setTopTittle("campaignName", "My campaign");
+            setIsSubmiting(false);
+        }
+ 
 
-        //reset all values.
-        const imagePlace = document.querySelector("#coverImage")
-        imagePlace.src = undefined;
-        setValue({
-            campaignImage: '',
-            campaignName: '',
-            fundingGoal: 0,
-            deadline: '',
-            fundingCap: 0,
-            beneficiary: '',
-            shortDescription: '',
-            longDescription: '',
-            campaignAddress: ''
-        })
-        setTopTittle("campaignName", "My campaign");
-
-        // se le envia informacion al contrato
-
-        setIsSubmiting(false);
-        // TODO: guardar el hash en el contrato
     }
-
-    // example hash QmRGbN95yyHdP3TcWzMdgZhrEhVVKUGELWNrKwCg8nx8qW
-    // example direction https://ipfs.infura.io/ipfs/QmNd3VfSULv5okJktefxAUNR9DhsthBFjAeaqHFWyMyrfa
-    const {
-        campaignName,
-        fundingGoal,
-        deadline,
-        fundingCap,
-        beneficiary
-    } = values
 
     const getDate = () => {
         let date = new Date().toISOString();
@@ -158,12 +168,10 @@ export const CreateCampaignPage = ({ sendData }) => {
     const CampaignFields = [
         { label: "campaign name", type: "text", autoFocus: true, value: values.campaignName, placeholder: "My campaign", name: "campaignName" },
         { label: "funding goal", type: "number", value: values.fundingGoal, placeholder: "In Eth", name: "fundingGoal" },
-        { label: "deadline", type: "datetime-local", value: deadline, minimum: getDate, name: "deadline" },
-        { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap" },
+        { label: "deadline", type: "datetime-local", value: values.deadline, minimum: getDate, name: "deadline" },
+        { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap", },
         { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
     ]
-
-
 
     return (
         <>

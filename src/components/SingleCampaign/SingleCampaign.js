@@ -18,7 +18,6 @@ import {
   Field,
   ValueField,
   ButtonWrapper
-
 } from './SingleCampaign.styles';
 
 export const SingleCampaign = (props) => {
@@ -28,8 +27,14 @@ export const SingleCampaign = (props) => {
 
   useEffect(() => {
     const mount = async () => {
-      const campaignValues = await getCampaignById(params.id.toString())
-      setValues(campaignValues);
+      try{
+        const campaignValues = await getCampaignById(params.id.toString())
+        setValues(campaignValues);
+      }
+      catch(error){
+        alert(error)
+      }
+
     }
     mount()
   }, [])
@@ -42,7 +47,6 @@ export const SingleCampaign = (props) => {
     if (props.account.toString().toLowerCase() === values.beneficiary.toString().toLowerCase()) return true
     else return false
   }
-
   const buttons = () => {
     if (compareDates()) {
       if (compareAddress()) {
@@ -51,7 +55,6 @@ export const SingleCampaign = (props) => {
             <NButton primary={true}>Get a refound</NButton>
             <NButton primary={true}>Withdraw</NButton>
           </ButtonWrapper>
-
         )
       }
       else {
@@ -61,6 +64,16 @@ export const SingleCampaign = (props) => {
     } else { return <NButton primary={true}>Found campaign</NButton> }
 
   }
+
+  const convertDate = (unix) => {
+    let date = new Date(unix).toISOString();
+    let search = date.indexOf('.')
+    date = date.slice(0, search - 3)
+    return date
+
+}
+
+
   return (
     <Container>
       <Wrapper>
@@ -79,7 +92,7 @@ export const SingleCampaign = (props) => {
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Deadline</Field>
-            <ValueField>{values.deadline}</ValueField>
+            <ValueField>{values.deadline ? convertDate(values.deadline) : ''}</ValueField>
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Collected</Field>

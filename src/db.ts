@@ -73,9 +73,9 @@ export const threadID = new ThreadID(
 export interface CrowdfyCampaign {
   campaignImage?: any,
   campaignName: string,
-  fundingGoal: string,
+  fundingGoal: number,
   deadline: string,
-  fundingCap: string,
+  fundingCap: number,
   beneficiary: string,
   shortDescription?: string,
   longDescription?: string
@@ -104,10 +104,13 @@ const schema = {
     campaignName: { type: 'string' },
     fundingGoal: {
       description: "The minimum amount accepted to the campaign to be succesful",
-      type: 'string'
+      type: 'number'
     },
-    deadline: { type: 'string' },
-    fundingCap: { type: 'string' },
+    deadline: {
+      description: 'the deadline of the campaign in unix timestamp',
+      type: 'number'
+    },
+    fundingCap: { type: 'number' },
     beneficiary: { type: 'string' },
     shortDescription: { type: 'string' },
     longDescription: { type: 'string' },
