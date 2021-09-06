@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { create } from 'ipfs-http-client'
+import { withRouter } from 'react-router';
 
-import { createEntry } from './dbUtils';
+import { createEntry, getCampaignByName } from './dbUtils';
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
 
+import { loadBlockchainData } from './web3Utils';
+import { createCampaign } from './contractFunctions';
+
+export const CreateCampaignPage = (props) => {
+    const [contract, setContract] = useState();
 
 
-export const CreateCampaignPage = () => {
 
     //the space in where is going to be the covr image
     const imagePlace = document.querySelector("#coverImage")
@@ -28,7 +33,7 @@ export const CreateCampaignPage = () => {
         beneficiary: '',
         shortDescription: '',
         longDescription: '',
-        campaignAddress: ''
+        campaignAddress: ""
     })
 
     const falseAddress = "0x00000000000000000000000000000000000000000"
@@ -75,7 +80,6 @@ export const CreateCampaignPage = () => {
      */
     const captureFile = async (event) => {
         //put the image in the cover 
-        const imagePlace = document.querySelector("#coverImage")
         const file = event.target.files[0]
         imagePlace.src = URL.createObjectURL(file);
 
@@ -97,7 +101,24 @@ export const CreateCampaignPage = () => {
 
 
     const submit = async (event) => {
-        event.preventDefault();
+
+         contract.events.CampaignCreated({ fromBlock: 'latest', filter: {deadline: values.deadline, beneficiary: values.beneficiary}})
+        .on('data', async(event) => {
+            const instance = {
+                campaignImage: values.campaignImage,
+                campaignName: values.campaignName,
+                fundingGoal: Number(values.fundingGoal),
+                deadline: Date.parse(values.deadline),
+                fundingCap: Number(values.fundingCap),
+                beneficiary: values.beneficiary,
+                shortDescription: values.shortDescription,
+                longDescription: values.longDescription,
+                campaignAddress: event.returnValues.campaignAddress
+            }
+            await createEntry(instance);
+        })
+        
+        event.preventDefault(); 
         setErrors(customValidation(values));
 
         // if (Object.keys(errors).length > 0) {
@@ -110,52 +131,59 @@ export const CreateCampaignPage = () => {
          * TODO: 
         *   store the address of the instaciated contract in the thread'
         * */
+        await createCampaign(
+            contract,
+            values.campaignName,
+            Number(values.fundingGoal),
+            Date.parse(values.deadline),
+            Number(values.fundingCap),
+            values.beneficiary
+        )
 
-        const instance = {
-            campaignImage: values.campaignImage,
-            campaignName: values.campaignName,
-            fundingGoal: Number(values.fundingGoal),
-            deadline: Date.parse(values.deadline),
-            fundingCap: Number(values.fundingCap),
-            beneficiary: values.beneficiary,
-            shortDescription: values.shortDescription,
-            longDescription: values.longDescription,
-            campaignAddress: values.campaignAddress
-        }
+            props.history.push(`/campaignCreated/${values.beneficiary}`, {
+                campaignImage: values.campaignImage,
+                campaignName: values.campaignName,
+                fundingGoal: Number(values.fundingGoal),
+                deadline: Date.parse(values.deadline),
+                fundingCap: Number(values.fundingCap),
+                beneficiary: values.beneficiary,
+                shortDescription: values.shortDescription,
+                longDescription: values.longDescription
+            })
+
+        // console.log(instance)
         // NOTE : LA COLECCTION YA ESTA CREADA
-        var isError = false
-        //sets the values with their respective type
-        console.log("**************** Creating and store Instance ****************")
-        try {
-            await createEntry(instance);
+        // var isError = false
+        // sets the values with their respective type
+        // console.log("**************** Creating and store Instance ****************")
+        // try {
+        //     // await createEntry(instance);
 
-        }
-        catch (error) {
-            alert(error)
-            isError = true
-            return isError
-        }
-        console.log("**************** Instance Created ****************")
+        // }
+        // catch (error) {
+        //     alert(error)
+        //     isError = true
+        //     return isError
+        // }
+        // console.log("**************** Instance Created ****************")
 
         //reset all values. if no errors
-        if (!isError) {
-            imagePlace.src = null;
-            setValue({
-                campaignImage: '',
-                campaignName: '',
-                fundingGoal: 0,
-                deadline: '',
-                fundingCap: 0,
-                beneficiary: '',
-                shortDescription: '',
-                longDescription: '',
-                campaignAddress: ''
-            })
-            setTopTittle("campaignName", "My campaign");
-            setIsSubmiting(false);
-        }
- 
-
+        // if (!isError) {
+        //     imagePlace.src = null;
+        //     setValue({
+        //         campaignImage: '',
+        //         campaignName: '',
+        //         fundingGoal: 0,
+        //         deadline: '',
+        //         fundingCap: 0,
+        //         beneficiary: '',
+        //         shortDescription: '',
+        //         longDescription: '',
+        //         campaignAddress: ''
+        //     })
+        //     setTopTittle("campaignName", "My campaign");
+        //     setIsSubmiting(false);
+        // }
     }
 
     const getDate = () => {
@@ -172,7 +200,12 @@ export const CreateCampaignPage = () => {
         { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap", },
         { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
     ]
-
+    useEffect(() => {
+        loadBlockchainData()
+            .then(value => {
+                setContract(value)
+            })
+    }, [])
     return (
         <>
             <CreateCampaign
@@ -180,7 +213,7 @@ export const CreateCampaignPage = () => {
                 handleChange={handleChange}
                 values={values}
                 captureFile={captureFile}
-                submit={submit}
+                submit={submit.bind(this)}
                 isSubmiting={isSubmiting}
             />
             {/* <Route exact path="/post/:id" render={({ match }) => (
@@ -190,4 +223,4 @@ export const CreateCampaignPage = () => {
     )
 }
 
-export default CreateCampaignPage;
+export default withRouter(CreateCampaignPage);

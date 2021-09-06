@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { addWallet, loadBlockchainData } from "./web3Utils";
+import { addWallet, handleAccountsChanged } from "./web3Utils";
 
 import HomePage from "./components/HomePage";
 
@@ -8,6 +8,7 @@ import Navbar from "./components/NavBar/Nav";
 import SideBar from "./components/NavBar/sideBar/SideBar";
 import Campaigns from "./Campaigns";
 import CreateCampaignPage from "./CreateCampaignPage";
+import { SingleCampaignCreated } from "./components/SingleCampaign/SingleCampaignCreated";
 import { SingleCampaign } from "./components/SingleCampaign/SingleCampaign";
 import { notFound404 } from "./404";
 
@@ -21,9 +22,7 @@ const App: any = () => {
   const [isOpen, setIsOpen] = useState(false);
 
 
-  const [contracts, setContracts] = useState({
-    fabricContract: '',
-  });
+
 
 
   const [wallet, setWallet] = useState({account: ''});
@@ -51,7 +50,11 @@ const App: any = () => {
     DefiningMetamask();
   }, [])
   // detect metamask 
+// useEffect(() =>{
+//  ethereum.on('accountsChanged', handleAccountsChanged(wallet.account))
+//     .then( (newAccount: string) =>{ setWallet({account: newAccount}) })
 
+// })
 
 //estar mirando constante mente si el usuario s cambio de cuenta.
   return (
@@ -60,7 +63,7 @@ const App: any = () => {
         <Navbar toggle={toggle}
           items={NAV_ITMES}
           isWallet={isWallet}
-          setAddress={addWallet}
+          setAddress={handleAccountsChanged}
           address={wallet} />
 
         <SideBar isOpen={isOpen}
@@ -68,7 +71,7 @@ const App: any = () => {
           items={NAV_ITMES}
           open={isOpen}
           isWallet={isWallet}
-          setAddress={addWallet}
+          setAddress={handleAccountsChanged}
           address={wallet} />
         <Switch>
           <Route path="/" exact component={HomePage} />
@@ -79,6 +82,7 @@ const App: any = () => {
           <Route path='/campaign/:id' render={(props) => {
             return (<SingleCampaign {...props} account={wallet} />)
           }} />
+          <Route path='/campaignCreated/:add' component={SingleCampaignCreated}/>
           <Redirect from="/campaign/campaigns" to="/campaigns" />
           <Route component={notFound404} />
         </Switch>

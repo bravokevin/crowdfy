@@ -21,23 +21,33 @@ const compareAddress = (beneficiaryAddress: string, actualAddress: string) => {
  * @param beneficiary the beneficiary who is going to recive the found of the campaign(if succesfull)
  */
 export const createCampaign = async (
-    campaignCreator: string,
+    FabricContract,
     campaignName: string,
     foundingGoal: number,
-    foundingCap: number,
     deadline: number,
-    beneficiary: string) => {
+    foundingCap: number,
+    beneficiary: string
+) => {
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-
+    
 
     try {
-        const instance = await FabricContract.methods.createCampaign().send({ from: campaignCreator })
+        const instance = await FabricContract.methods.createCampaign(
+            campaignName,
+            foundingGoal,
+            deadline,
+            foundingCap,
+            beneficiary
+        ).send({ from: accounts[0] })
     }
     catch (err) {
         alert(err)
     }
 
 }
+
+
 
 /**
  * 
