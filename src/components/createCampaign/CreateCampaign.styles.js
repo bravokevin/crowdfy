@@ -93,7 +93,7 @@ justify-content: center;
 grid-template-rows: 1fr;
 z-index: 3;
 padding: 8px 15px;
-margin: 0 auto;
+margin: auto;
 border-bottom: 2px solid rgba(0,0,0,0.3);
 `
 export const ShortFieldWrapper =styled.div`

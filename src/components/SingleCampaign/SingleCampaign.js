@@ -106,13 +106,13 @@ export const SingleCampaign = (props) => {
 
       return (
         <ReactCircleModal
-          backgroundColor='#c413dc'
+          backgroundColor='rgba(255, 0, 238, 0.48)'
           toogleComponent={onClick => (
             <NButton primary={true} onClick={onClick}>Contribute</NButton>
           )}
         >
           {(onClick) => (
-            <FormShortsFieldsPop>
+            <FormShortsFieldsPop onClick={onClick}>
               <FormLabelPop>Amount to contribute</FormLabelPop>
               <FormInput onChange={handleChange.bind(this)} type='number'></FormInput>
               <NButton primary={true} onClick={async () => {
