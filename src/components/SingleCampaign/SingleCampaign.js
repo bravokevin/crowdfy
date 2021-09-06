@@ -30,9 +30,24 @@ export const SingleCampaign = (props) => {
   const [values, setValues] = useState({});
   const [contract, setContract] = useState();
   const [amount, setAmount] = useState();
+  const [contractValues, setContractValues] = useState();
 
   let params = useParams();
+  const destructCampaign = (struct) => {
+    const { campaignName, fundingGoal, fundingCap, deadline, beneficiary, owner, created, state, amountRised } = struct;
 
+    return {
+        campaignName,
+        fundingGoal: Number(fundingGoal),
+        fundingCap: Number(fundingCap),
+        deadline: Number(deadline),
+        beneficiary,
+        owner,
+        created: Number(created),
+        state: Number(state),
+        amountRised: Number(amountRised)
+    }
+};
   useEffect(() => {
 
     try {
@@ -40,8 +55,11 @@ export const SingleCampaign = (props) => {
         setValues(campaignValues);
         loadCrowdfyInstance(campaignValues.campaignAddress)
           .then((instance) => {
+            instance.methods.theCampaign().call()
+            .then((result) =>{
+              setContractValues(destructCampaign(result))
+            })
             setContract(instance)
-
           })
       })
 
@@ -118,6 +136,15 @@ export const SingleCampaign = (props) => {
 
   }
 
+  const getPercentage = () =>{
+    const percentage = (contractValues.amountRised / contractValues.fundingCap ) * 100
+    console.log(contractValues.amountRised)
+    console.log(contractValues.fundingCap)
+    console.log(percentage)
+
+    return String(percentage);
+  }
+
 
   return (
     <Container>
@@ -141,7 +168,7 @@ export const SingleCampaign = (props) => {
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Collected</Field>
-            <ValueField><ProgressBar value='100'>100%</ProgressBar></ValueField>
+            <ValueField><ProgressBar max= '100' value={contractValues? getPercentage(): '0'}/></ValueField>
           </ValuesWrapper>
 
         </ShortFieldsWrapepr>

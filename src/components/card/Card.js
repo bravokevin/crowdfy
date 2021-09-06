@@ -35,7 +35,6 @@ const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, 
                     <CardTittle>{campaignName}</CardTittle>
                     <CardDescription>{shortDescription}</CardDescription>
                 </CardTextContainer>
-                <CardFounds>Collected:</CardFounds>
             </CardWrapper>
         </CardContainer>
     )

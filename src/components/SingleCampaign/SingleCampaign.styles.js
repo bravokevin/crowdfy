@@ -130,9 +130,9 @@ border-radius: 15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.9);
 @media screen and (max-width:768px){
     max-width: 100%;
-    max-height: 300px; 
+    max-height: 350px; 
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 50px 50px 50px;
 } 
 
 `
@@ -144,7 +144,7 @@ justify-self: center;
 display: flex;
 justify-content: flex-start;
 align-items: flex-start;
-padding:10px 0px;
+padding:5px 0px;
 `
 export const Field = styled.p`
 display:inline;
