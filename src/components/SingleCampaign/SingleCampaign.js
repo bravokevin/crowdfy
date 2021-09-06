@@ -87,9 +87,18 @@ export const SingleCampaign = (props) => {
   }
 
 
+  const getPercentage = () =>{
+    const percentage = (contractValues.amountRised / contractValues.fundingCap ) * 100
+    console.log(contractValues.amountRised)
+    console.log(contractValues.fundingCap)
+    console.log(percentage)
 
+    return String(percentage);
+  }
+
+  //arreglar botones
   const buttons = () => {
-    if (compareDates()) {
+    if (Number(getPercentage()) >= 100 && compareAddress() ) {
       if (compareAddress()) {
         return (
           <ButtonWrapper>
@@ -114,7 +123,7 @@ export const SingleCampaign = (props) => {
           {(onClick) => (
             <FormShortsFieldsPop onClick={onClick}>
               <FormLabelPop>Amount to contribute</FormLabelPop>
-              <FormInput onChange={handleChange.bind(this)} type='number'></FormInput>
+              <FormInput onChange={handleChange.bind(this) } onClick="none" type='number'></FormInput>
               <NButton primary={true} onClick={async () => {
                 makeContribution(props.account, contract, amount).then(() => {
                   onClick()
@@ -136,14 +145,6 @@ export const SingleCampaign = (props) => {
 
   }
 
-  const getPercentage = () =>{
-    const percentage = (contractValues.amountRised / contractValues.fundingCap ) * 100
-    console.log(contractValues.amountRised)
-    console.log(contractValues.fundingCap)
-    console.log(percentage)
-
-    return String(percentage);
-  }
 
 
   return (
@@ -168,7 +169,7 @@ export const SingleCampaign = (props) => {
           </ValuesWrapper>
           <ValuesWrapper>
             <Field>Collected</Field>
-            <ValueField><ProgressBar max= '100' value={contractValues? getPercentage(): '0'}/></ValueField>
+            <ValueField><ProgressBar max= '100' value={contractValues ? getPercentage(): '0'}/></ValueField>
           </ValuesWrapper>
 
         </ShortFieldsWrapepr>

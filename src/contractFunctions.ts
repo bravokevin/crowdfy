@@ -79,7 +79,7 @@ export const withdraw = async (
  */
 export const getRefound = async (currentAddress: string, crowdfyInstance) => {
     try {
-        await crowdfyInstance.methods.getRefound().send({
+        await crowdfyInstance.methods.claimFounds().send({
             from: currentAddress
         });
     }
