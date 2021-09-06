@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import detectEthereumProvider from '@metamask/detect-provider';
+
 
 import CrowdfyFabric from "./contracts/CrowdfyFabric.json"
 import Crowdfy from './contracts/Crowdfy.json'
@@ -10,7 +10,7 @@ const contactFabricAddress: string = '0x623CC812a8Ace0197E772080b3709D594B5E87CA
 
 //detects metamask and stores the ethereum wallet
 export const addWallet = async () => {
-  const provider = await detectEthereumProvider();
+
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     try {
@@ -59,18 +59,12 @@ export const loadBlockchainData = async () => {
  * @returns return the contract to interact with
  */
 export const loadCrowdfyInstance = async (instanceAddress: string) => {
-
+  window.web3 = new Web3(window.ethereum);
   const web3 = window.web3
-
-  // detecting network id
-  const networkId = await web3.eth.net.getId()
-  const networkData = Crowdfy.networks[networkId]
-
-  if (networkData === networkId) {
-    const crowdfyInstance = web3.eth.Contract(CrowdfyABI, instanceAddress);
+  
+    const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
     return crowdfyInstance
-  } else {
-    window.alert('Smart contract not deployed to detected network, please change to the rinkenby Network')
-  }
+
+
 
 }

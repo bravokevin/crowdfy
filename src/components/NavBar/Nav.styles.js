@@ -163,6 +163,7 @@ justify-content: flex-start;
 export const AddrText = styled.span`
 font-size: 16px;
 color: #ffffff;
+text-transform: uppercase;
 `
 export const ColorBall = styled.button`
 border-radius: 800px;

@@ -59,7 +59,6 @@ export const CreateCampaignPage = (props) => {
             ...values,
             [input]: value
         })
-
     }
 
     const addToIPFS = async (input) => {
@@ -102,23 +101,23 @@ export const CreateCampaignPage = (props) => {
 
     const submit = async (event) => {
 
-         contract.events.CampaignCreated({ fromBlock: 'latest', filter: {deadline: values.deadline, beneficiary: values.beneficiary}})
-        .on('data', async(event) => {
-            const instance = {
-                campaignImage: values.campaignImage,
-                campaignName: values.campaignName,
-                fundingGoal: Number(values.fundingGoal),
-                deadline: Date.parse(values.deadline),
-                fundingCap: Number(values.fundingCap),
-                beneficiary: values.beneficiary,
-                shortDescription: values.shortDescription,
-                longDescription: values.longDescription,
-                campaignAddress: event.returnValues.campaignAddress
-            }
-            await createEntry(instance);
-        })
-        
-        event.preventDefault(); 
+        contract.events.CampaignCreated({ fromBlock: 'latest', filter: { deadline: values.deadline, beneficiary: values.beneficiary } })
+            .on('data', async (event) => {
+                const instance = {
+                    campaignImage: values.campaignImage,
+                    campaignName: values.campaignName,
+                    fundingGoal: Number(values.fundingGoal),
+                    deadline: Date.parse(values.deadline),
+                    fundingCap: Number(values.fundingCap),
+                    beneficiary: values.beneficiary,
+                    shortDescription: values.shortDescription,
+                    longDescription: values.longDescription,
+                    campaignAddress: event.returnValues.campaignAddress
+                }
+                await createEntry(instance);
+            })
+
+        event.preventDefault();
         setErrors(customValidation(values));
 
         // if (Object.keys(errors).length > 0) {
@@ -140,16 +139,16 @@ export const CreateCampaignPage = (props) => {
             values.beneficiary
         )
 
-            props.history.push(`/campaignCreated/${values.beneficiary}`, {
-                campaignImage: values.campaignImage,
-                campaignName: values.campaignName,
-                fundingGoal: Number(values.fundingGoal),
-                deadline: Date.parse(values.deadline),
-                fundingCap: Number(values.fundingCap),
-                beneficiary: values.beneficiary,
-                shortDescription: values.shortDescription,
-                longDescription: values.longDescription
-            })
+        props.history.push(`/campaignCreated/${values.beneficiary}`, {
+            campaignImage: values.campaignImage,
+            campaignName: values.campaignName,
+            fundingGoal: Number(values.fundingGoal),
+            deadline: Date.parse(values.deadline),
+            fundingCap: Number(values.fundingCap),
+            beneficiary: values.beneficiary,
+            shortDescription: values.shortDescription,
+            longDescription: values.longDescription
+        })
 
         // console.log(instance)
         // NOTE : LA COLECCTION YA ESTA CREADA

@@ -156,3 +156,9 @@ export const ValueField = styled.p`
 display:inline;
 
 `
+
+export const ProgressBar = styled.progress`
+/* width: 200px; */
+
+`
+

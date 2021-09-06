@@ -83,7 +83,19 @@ border-bottom: 2px solid rgba(0,0,0,0.3);
     grid-template-columns: 1fr;
 }
 `
-
+export const FormShortsFieldsPop = styled.div`
+width:100%;
+max-width:400px;
+background-color: whitesmoke;
+border-radius: 20px;
+display: grid;
+justify-content: center;
+grid-template-rows: 1fr;
+z-index: 3;
+padding: 8px 15px;
+margin: 0 auto;
+border-bottom: 2px solid rgba(0,0,0,0.3);
+`
 export const ShortFieldWrapper =styled.div`
 display: flex;
 flex-direction:column;
@@ -100,7 +112,11 @@ margin-bottom: 5px;
 font-size: 14px;
 color: blue;
 `
-
+export const FormLabelPop = styled.label`
+font-size: 16px;
+margin-bottom:10px;
+color: #000000;
+`
 export const FormInput = styled.input`
 padding: 10px 16px;
 margin-bottom: 30px;

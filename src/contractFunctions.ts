@@ -1,4 +1,5 @@
 //recordar importar el contrato
+import Web3 from 'web3';
 
 
 const compareDates = (deadline: string) => {
@@ -29,9 +30,6 @@ export const createCampaign = async (
     beneficiary: string
 ) => {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-    
-
     try {
         const instance = await FabricContract.methods.createCampaign(
             campaignName,
@@ -58,21 +56,17 @@ export const createCampaign = async (
  * 
  * @dev compares the beneficiary of the campaign and the actual account user => only the beneficiary can call this function
  */
-export const withdraw = async (beneficiary: string,
+export const withdraw = async (
     actualAddress: string,
-    crowdfyInstance) => {
+    crowdfyInstance): void => {
 
-    if (compareAddress(beneficiary, actualAddress)) {
         try {
-            await crowdfyInstance.methods.withdraw().send({ from: beneficiary });
+            await crowdfyInstance.methods.withdraw().send({ from: actualAddress });
         }
         catch (err) {
             alert(err)
         }
-    }
-    else {
-        alert('Only beneficiary can call this function')
-    }
+ 
 
 }
 
@@ -106,18 +100,17 @@ export const getRefound = async (currentAddress: string, crowdfyInstance) => {
  */
 export const makeContribution = async (
     currentAddress: string,
-    deadline: string,
-    crowdfyInstance) => {
+    crowdfyInstance, 
+    value) => {
 
-    if (compareDates(deadline)) {
         try {
             await crowdfyInstance.methods.contribute().send({
-                from: currentAddress
+                from: currentAddress,
+                value: Web3.utils.toWei(String(value))
             })
         }
         catch (err) {
             alert(err)
         }
-    }
-    return true
+
 }

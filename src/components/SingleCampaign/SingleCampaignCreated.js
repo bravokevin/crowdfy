@@ -1,4 +1,4 @@
-import { NButton } from '../Buttons';
+import { Button } from '../Buttons';
 
 import {
   Container,
@@ -42,16 +42,16 @@ export const SingleCampaignCreated = ({location:
         <CampaignImageWrapper>
           <CampaignImage src={campaignImage ? `https://ipfs.infura.io/ipfs/${campaignImage}` : 'none'} />
         </CampaignImageWrapper>
-        <ShortFieldsWrapepr>
+        <ShortFieldsWrapepr style ={{    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr'}}>
           <ValuesWrapper style={{ flexDirection: 'column', alignItems: 'center' }}>
             <Field >Beneficiary</Field>
             <ValueField style={{ fontSize: '12px' }}>{beneficiary}</ValueField>
           </ValuesWrapper>
           <ValuesWrapper>
-          <ValuesWrapper>
             <Field>FundingGoal</Field>
-            <ValueField>{fundingGoal}</ValueField>
+            <ValueField>{`${fundingGoal} ETH`}</ValueField>
           </ValuesWrapper>
+          <ValuesWrapper>
             <Field>Funding Cap</Field>
             <ValueField>{`${fundingCap} ETH`}</ValueField>
           </ValuesWrapper>
@@ -66,7 +66,7 @@ export const SingleCampaignCreated = ({location:
           <CampaignShortDescription>{shortDescription}</CampaignShortDescription>
           <CampaignLongDescription >{longDescription}</CampaignLongDescription>
           <ButtonWrapper>
-            <NButton primary={true} to="/campaigns">See all campaigns</NButton>
+            <Button primary={true} to="/campaigns">See all campaigns</Button>
           </ButtonWrapper>
         </CampaignWrapper>
       </Wrapper>
