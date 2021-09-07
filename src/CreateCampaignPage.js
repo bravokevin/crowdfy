@@ -8,6 +8,7 @@ import customValidation from "./components/createCampaign/validation";
 
 import { loadBlockchainData } from './web3Utils';
 import { createCampaign } from './contractFunctions';
+import { prependListener } from 'process';
 
 export const CreateCampaignPage = (props) => {
     const [contract, setContract] = useState();
@@ -149,40 +150,6 @@ export const CreateCampaignPage = (props) => {
             shortDescription: values.shortDescription,
             longDescription: values.longDescription
         })
-
-        // console.log(instance)
-        // NOTE : LA COLECCTION YA ESTA CREADA
-        // var isError = false
-        // sets the values with their respective type
-        // console.log("**************** Creating and store Instance ****************")
-        // try {
-        //     // await createEntry(instance);
-
-        // }
-        // catch (error) {
-        //     alert(error)
-        //     isError = true
-        //     return isError
-        // }
-        // console.log("**************** Instance Created ****************")
-
-        //reset all values. if no errors
-        // if (!isError) {
-        //     imagePlace.src = null;
-        //     setValue({
-        //         campaignImage: '',
-        //         campaignName: '',
-        //         fundingGoal: 0,
-        //         deadline: '',
-        //         fundingCap: 0,
-        //         beneficiary: '',
-        //         shortDescription: '',
-        //         longDescription: '',
-        //         campaignAddress: ''
-        //     })
-        //     setTopTittle("campaignName", "My campaign");
-        //     setIsSubmiting(false);
-        // }
     }
 
     const getDate = () => {
@@ -202,7 +169,10 @@ export const CreateCampaignPage = (props) => {
     useEffect(() => {
         loadBlockchainData()
             .then(value => {
-                setContract(value)
+                if(value){
+                    setContract(value)
+                }
+                else{alert("Please Connect your wallet")}
             })
     }, [])
     return (

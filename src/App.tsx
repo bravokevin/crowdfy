@@ -21,11 +21,7 @@ const App: any = () => {
   //to close or open the sidebar
   const [isOpen, setIsOpen] = useState(false);
 
-
-
-
-
-  const [wallet, setWallet] = useState({account: ''});
+  const [wallet, setWallet] = useState({ account: '' });
   const [isWallet, setIsWallet] = useState(false);
 
 
@@ -35,28 +31,26 @@ const App: any = () => {
 
 
   useEffect(() => {
-    const DefiningMetamask = async () => {
 
-      const account = await addWallet();
-      setWallet(account)
-      setIsWallet(true);
+    addWallet()
+      .then((account) => {
+      
+        if(account){
+          setWallet(account)
+          setIsWallet(true);
+        }
 
-      // const fabricContract = await loadBlockchainData();
+      })
 
-      // setContracts({
-      //   fabricContract
-      // })
-    }
-    DefiningMetamask();
   }, [])
-  // detect metamask 
-// useEffect(() =>{
-//  ethereum.on('accountsChanged', handleAccountsChanged(wallet.account))
-//     .then( (newAccount: string) =>{ setWallet({account: newAccount}) })
 
-// })
+  // useEffect(() =>{
+  //  ethereum.on('accountsChanged', handleAccountsChanged(wallet.account))
+  //     .then( (newAccount: string) =>{ setWallet({account: newAccount}) })
 
-//estar mirando constante mente si el usuario s cambio de cuenta.
+  // })
+
+  //estar mirando constante mente si el usuario s cambio de cuenta.
   return (
     <>
       <Router>
@@ -82,7 +76,7 @@ const App: any = () => {
           <Route path='/campaign/:id' render={(props) => {
             return (<SingleCampaign {...props} account={wallet} />)
           }} />
-          <Route path='/campaignCreated/:add' component={SingleCampaignCreated}/>
+          <Route path='/campaignCreated/:add' component={SingleCampaignCreated} />
           <Redirect from="/campaign/campaigns" to="/campaigns" />
           <Route component={notFound404} />
         </Switch>

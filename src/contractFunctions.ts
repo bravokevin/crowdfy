@@ -66,8 +66,6 @@ export const withdraw = async (
         catch (err) {
             alert(err)
         }
- 
-
 }
 
 

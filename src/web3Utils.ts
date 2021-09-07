@@ -19,7 +19,7 @@ export const addWallet = async () => {
     }
     catch (ee) { }
   }
-    else {
+  else {
     window.alert('Non-ehtereum browser detected. Try instaling metamask')
   }
 
@@ -38,17 +38,24 @@ export const handleAccountsChanged = async (currentAccount?: string): Promise<st
 
 //conects the factory contract and detcts the id of the current network
 export const loadBlockchainData = async () => {
-  window.web3 = new Web3(window.ethereum);
-  const web3 = window.web3
-  // detecting network id
-  const networkId = await web3.eth.net.getId()
-    const networkData:string = CrowdfyFabric.networks[networkId]
-    if(networkData) {
+
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum);
+    const web3 = window.web3
+    // detecting network id
+    const networkId = await web3.eth.net.getId()
+    const networkData: string = CrowdfyFabric.networks[networkId]
+    if (networkData) {
       const FabricContract = new web3.eth.Contract(FabricABI, contactFabricAddress);
       return FabricContract
     } else {
       window.alert('Smart contract not deployed to detected network.')
     }
+
+  }
+  else {
+    window.alert('Non-ehtereum browser detected. Try instaling metamask')
+  }
 }
 
 
@@ -59,12 +66,16 @@ export const loadBlockchainData = async () => {
  * @returns return the contract to interact with
  */
 export const loadCrowdfyInstance = async (instanceAddress: string) => {
-  window.web3 = new Web3(window.ethereum);
-  const web3 = window.web3
+  if(window.ethereu){
+    window.web3 = new Web3(window.ethereum);
+    const web3 = window.web3
   
     const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
     return crowdfyInstance
-
+  }
+  else {
+    window.alert('Non-ehtereum browser detected. Try instaling metamask')
+  }
 
 
 }
