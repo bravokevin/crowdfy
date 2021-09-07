@@ -32,7 +32,7 @@ const App: any = () => {
   useEffect(() => {
     addWallet()
       .then((account) => {
-        if(account){
+        if (account) {
           setWallet(account)
           setIsWallet(true);
         }
@@ -40,11 +40,16 @@ const App: any = () => {
 
   }, [])
 
-  // useEffect(() =>{
-  //  ethereum.on('accountsChanged', handleAccountsChanged(wallet.account))
-  //     .then( (newAccount: string) =>{ setWallet({account: newAccount}) })
+  useEffect(() => {
+    ethereum.on('accountsChanged', async () => {
+     handleAccountsChanged(wallet.account)
+     .then((newAccount) =>{
+      setWallet(newAccount)
+     })
 
-  // })
+
+    })
+  })
 
   //estar mirando constante mente si el usuario s cambio de cuenta.
   return (

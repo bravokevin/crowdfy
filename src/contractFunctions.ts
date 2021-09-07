@@ -38,13 +38,14 @@ export const createCampaign = async (
             foundingCap,
             beneficiary
         ).send({ from: accounts[0] })
+        return true
     }
     catch (err) {
-        alert(err)
+        alert(err.message)
+        return false
     }
 
 }
-
 
 
 /**
@@ -64,10 +65,9 @@ export const withdraw = async (
             await crowdfyInstance.methods.withdraw().send({ from: actualAddress });
         }
         catch (err) {
-            alert(err)
+            alert(err.message)
         }
 }
-
 
 /**
  * 
@@ -82,7 +82,7 @@ export const getRefound = async (currentAddress: string, crowdfyInstance) => {
         });
     }
     catch (err) {
-        alert(err)
+        alert(err.message)
         return false
     }
     return true
@@ -100,7 +100,7 @@ export const makeContribution = async (
     currentAddress: string,
     crowdfyInstance, 
     value) => {
-
+        console.log(currentAddress)
         try {
             await crowdfyInstance.methods.contribute().send({
                 from: currentAddress,
@@ -108,7 +108,7 @@ export const makeContribution = async (
             })
         }
         catch (err) {
-            alert(err)
+            alert(err.message)
         }
 
 }

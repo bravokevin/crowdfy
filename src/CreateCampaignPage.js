@@ -127,11 +127,7 @@ export const CreateCampaignPage = (props) => {
         // }
         setIsSubmiting(true);
 
-        /**
-         * TODO: 
-        *   store the address of the instaciated contract in the thread'
-        * */
-        await createCampaign(
+        const result = await createCampaign(
             contract,
             values.campaignName,
             Number(values.fundingGoal),
@@ -139,17 +135,23 @@ export const CreateCampaignPage = (props) => {
             Number(values.fundingCap),
             values.beneficiary
         )
+        if (result) {
+            props.history.push(`/campaignCreated/${values.beneficiary}`, {
+                campaignImage: values.campaignImage,
+                campaignName: values.campaignName,
+                fundingGoal: Number(values.fundingGoal),
+                deadline: Date.parse(values.deadline),
+                fundingCap: Number(values.fundingCap),
+                beneficiary: values.beneficiary,
+                shortDescription: values.shortDescription,
+                longDescription: values.longDescription
+            })
+            setIsSubmiting(false);
+        }
+        else{
+            
+        }
 
-        props.history.push(`/campaignCreated/${values.beneficiary}`, {
-            campaignImage: values.campaignImage,
-            campaignName: values.campaignName,
-            fundingGoal: Number(values.fundingGoal),
-            deadline: Date.parse(values.deadline),
-            fundingCap: Number(values.fundingCap),
-            beneficiary: values.beneficiary,
-            shortDescription: values.shortDescription,
-            longDescription: values.longDescription
-        })
     }
 
     const getDate = () => {
@@ -169,10 +171,10 @@ export const CreateCampaignPage = (props) => {
     useEffect(() => {
         loadBlockchainData()
             .then(value => {
-                if(value){
+                if (value) {
                     setContract(value)
                 }
-                else{alert("Please Connect your wallet")}
+                else { alert("Please Connect your wallet") }
             })
     }, [])
     return (

@@ -14,6 +14,8 @@ export const addWallet = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     try {
+      await window.ethereum.enable();
+
       const accounts = await ethereum.request({ method: 'eth_accounts' });
       return accounts[0];
     }
@@ -31,7 +33,6 @@ export const handleAccountsChanged = async (currentAccount?: string): Promise<st
     console.log('Please connect to MetaMask.');
   } else if (accounts[0] !== currentAccount) {
     return accounts[0];
-
   }
 }
 
@@ -66,16 +67,12 @@ export const loadBlockchainData = async () => {
  * @returns return the contract to interact with
  */
 export const loadCrowdfyInstance = async (instanceAddress: string) => {
-  if(window.ethereu){
     window.web3 = new Web3(window.ethereum);
     const web3 = window.web3
   
     const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
     return crowdfyInstance
-  }
-  else {
-    window.alert('Non-ehtereum browser detected. Try instaling metamask')
-  }
+  
 
 
 }

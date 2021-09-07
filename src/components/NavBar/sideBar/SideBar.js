@@ -23,9 +23,9 @@ const SideBar = ({ isOpen, toggle, items, open, isWallet, setAddress, address}) 
             </Icon>
             <SidebarWrapper>
             <AddrWrapper>
-                    <ColorBall active={isWallet}/>
-                        <AddrText onClick={setAddress}>
-                            {isWallet ? address.slice(0, 10) : "0x000000000"}
+                    <ColorBall active={isWallet} onClick={setAddress}/>
+                        <AddrText >
+                            {address > 10 ? address.slice(0, 10) : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 <SidebarMenu>

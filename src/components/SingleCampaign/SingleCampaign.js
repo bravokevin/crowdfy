@@ -46,32 +46,24 @@ export const SingleCampaign = (props) => {
       amountRised: Number(amountRised)
     }
   };
+  
   useEffect(() => {
-
     try {
       getCampaignById(params.id.toString()).then((campaignValues) => {
         setValues(campaignValues);
         loadCrowdfyInstance(campaignValues.campaignAddress)
           .then((instance) => {
-            if (instance) {
               instance.methods.theCampaign().call()
                 .then((result) => {
                   setContractValues(destructCampaign(result))
-                })
               setContract(instance)
-            }
-            else{
-              alert("Please connect your wallet")
-            }
+            })
           })
       })
-
     }
     catch (error) {
       alert(error)
     }
-
-
   }, [])
 
   const handleChange = e => {
@@ -80,10 +72,6 @@ export const SingleCampaign = (props) => {
 
   const getPercentage = () => {
     const percentage = (contractValues.amountRised / contractValues.fundingCap) * 100
-    console.log(contractValues.amountRised)
-    console.log(contractValues.fundingCap)
-    console.log(percentage)
-
     return String(percentage);
   }
 
@@ -96,7 +84,7 @@ export const SingleCampaign = (props) => {
   }
 
   return (
-    contractValues ?
+    // contractValues ?
       <Container>
         <Wrapper>
           <CampaignImageWrapper>
@@ -128,6 +116,7 @@ export const SingleCampaign = (props) => {
             <CampaignShortDescription>{values.shortDescription}</CampaignShortDescription>
             <CampaignLongDescription >{values.longDescription}</CampaignLongDescription>
             <ButtonWrapper>
+              {contractValues ? 
               <Button handleChange={handleChange}
                 getPercentage={getPercentage}
                 account={props.account}
@@ -135,16 +124,17 @@ export const SingleCampaign = (props) => {
                 amount={amount}
                 beneficiary={values.beneficiary}
                 deadline={values.deadline} />
+              : ''}
             </ButtonWrapper>
           </CampaignWrapper>
         </Wrapper>
       </Container>
-      :
-      <Container>
-        <Wrapper >
-          <p style={{margin: 'auto', color: 'white'}}>"Plesae connect metamask"</p>
-        </Wrapper>
-      </Container>
+      // :
+      // <Container>
+      //   <Wrapper >
+      //     <p style={{margin: 'auto', color: 'white'}}>"Plesae connect metamask"</p>
+      //   </Wrapper>
+      // </Container>
   )
 }
 

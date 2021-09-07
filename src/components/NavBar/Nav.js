@@ -61,7 +61,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                     <AddrWrapper>
                         <ColorBall active={isWallet} />
                         <AddrText onClick={setAddress}>
-                            {isWallet ? address.slice(0,10) : "0x000000000"}
+                            {address > 10 ? address.slice(0,10) : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 </NavbarContainer>
