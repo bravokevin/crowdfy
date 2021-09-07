@@ -29,17 +29,13 @@ const App: any = () => {
     setIsOpen(!isOpen)
   }
 
-
   useEffect(() => {
-
     addWallet()
       .then((account) => {
-      
         if(account){
           setWallet(account)
           setIsWallet(true);
         }
-
       })
 
   }, [])
