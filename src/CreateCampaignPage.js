@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { create } from 'ipfs-http-client'
 import { withRouter } from 'react-router';
 
-import { createEntry, getCampaignByName } from './dbUtils';
+import { createEntry} from './dbUtils';
 import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
 import customValidation from "./components/createCampaign/validation";
 
 import { loadBlockchainData } from './web3Utils';
 import { createCampaign } from './contractFunctions';
-import { prependListener } from 'process';
+
 
 export const CreateCampaignPage = (props) => {
     const [contract, setContract] = useState();
@@ -149,7 +149,7 @@ export const CreateCampaignPage = (props) => {
             setIsSubmiting(false);
         }
         else{
-            
+
         }
 
     }

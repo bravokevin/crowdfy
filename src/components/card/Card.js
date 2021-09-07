@@ -6,7 +6,6 @@ import {
     CardTopline,
     CardTittle,
     CardDescription,
-    CardFounds,
     ImgContainer
 } from './Card.styles'
 

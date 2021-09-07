@@ -1,17 +1,5 @@
-//recordar importar el contrato
 import Web3 from 'web3';
-
-
-const compareDates = (deadline: string) => {
-    if (Date.parse(deadline) < Date.parse(new Date().toString())) return true
-    else return false
-}
-const compareAddress = (beneficiaryAddress: string, actualAddress: string) => {
-    if (beneficiaryAddress.toString().toLowerCase()
-        ===
-        actualAddress.toString().toLowerCase()) return true
-    else return false
-}
+import { Contract } from "web3-eth-contract";
 
 /**
  * 
@@ -22,7 +10,7 @@ const compareAddress = (beneficiaryAddress: string, actualAddress: string) => {
  * @param beneficiary the beneficiary who is going to recive the found of the campaign(if succesfull)
  */
 export const createCampaign = async (
-    FabricContract,
+    FabricContract: Contract,
     campaignName: string,
     foundingGoal: number,
     deadline: number,
@@ -31,7 +19,7 @@ export const createCampaign = async (
 ) => {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     try {
-        const instance = await FabricContract.methods.createCampaign(
+         await FabricContract.methods.createCampaign(
             campaignName,
             foundingGoal,
             deadline,
@@ -47,7 +35,6 @@ export const createCampaign = async (
 
 }
 
-
 /**
  * 
  * @param crowdfyInstance the actual instance of the crowdfy campaign contract
@@ -59,7 +46,7 @@ export const createCampaign = async (
  */
 export const withdraw = async (
     actualAddress: string,
-    crowdfyInstance): void => {
+    crowdfyInstance: Contract): Promise<void> => {
 
         try {
             await crowdfyInstance.methods.withdraw().send({ from: actualAddress });
@@ -75,7 +62,7 @@ export const withdraw = async (
  * @param currentAddress the actual account of metamask of the user
  * @returns boolean 
  */
-export const getRefound = async (currentAddress: string, crowdfyInstance) => {
+export const getRefound = async (currentAddress: string, crowdfyInstance: Contract) => {
     try {
         await crowdfyInstance.methods.claimFounds().send({
             from: currentAddress
@@ -98,8 +85,8 @@ export const getRefound = async (currentAddress: string, crowdfyInstance) => {
  */
 export const makeContribution = async (
     currentAddress: string,
-    crowdfyInstance, 
-    value) => {
+    crowdfyInstance:Contract, 
+    value: String) => {
         console.log(currentAddress)
         try {
             await crowdfyInstance.methods.contribute().send({

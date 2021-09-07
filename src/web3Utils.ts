@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 
+import { AbiItem } from 'web3-utils';
 
 import CrowdfyFabric from "./contracts/CrowdfyFabric.json"
 import Crowdfy from './contracts/Crowdfy.json'
@@ -45,7 +46,7 @@ export const loadBlockchainData = async () => {
     const web3 = window.web3
     // detecting network id
     const networkId = await web3.eth.net.getId()
-    const networkData: string = CrowdfyFabric.networks[networkId]
+    const networkData: AbiItem = CrowdfyFabric.networks[networkId] 
     if (networkData) {
       const FabricContract = new web3.eth.Contract(FabricABI, contactFabricAddress);
       return FabricContract

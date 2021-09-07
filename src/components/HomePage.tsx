@@ -1,8 +1,4 @@
-import React, { Component, useState } from 'react';
 import Hero from './hero/Hero.js';
-
-
-
 
 export const HomePage = () => {
 
