@@ -15,7 +15,6 @@ import {
     ColorBall
 } from './Nav.styles'
 
-
 const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
     const [scrollNav, setScrollNav] = useState(false)
 
@@ -48,7 +47,7 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                     </MobileIcon>
                     <NavMenu>
                         {items.map((item, index) => (
-                            <NavItem>
+                            <NavItem key={index}>
                                 <NavLinks to={`/${item}`}>
                                     {item}
                                 </NavLinks>

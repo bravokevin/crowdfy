@@ -10,7 +10,7 @@ import {
 } from './Card.styles'
 
 
-const Card = ({ campaignImage, campaignName, fundingGoal, deadline, fundingCap, shortDescription, _id }) => {
+const Card = ({ campaignImage, campaignName, deadline, shortDescription, _id }) => {
 
     const compareDates = () => {
         if (Date.parse(deadline) < Date.parse(new Date())) return false

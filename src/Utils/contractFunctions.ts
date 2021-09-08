@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import { Contract } from "web3-eth-contract";
 
 /**
- * 
+ * @param fabricContract //the instance of the fabric crowdfy contract
  * @param campaignName the name of the campaign
  * @param foundingGoal the minimun that the campaign have to achive to be succesfull
  * @param foundingCap the maximum value that the campaign can handle
@@ -10,16 +10,16 @@ import { Contract } from "web3-eth-contract";
  * @param beneficiary the beneficiary who is going to recive the found of the campaign(if succesfull)
  */
 export const createCampaign = async (
-    FabricContract: Contract,
+    fabricContract: Contract,
     campaignName: string,
     foundingGoal: number,
     deadline: number,
     foundingCap: number,
     beneficiary: string
-) => {
+): Promise<boolean> => {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     try {
-         await FabricContract.methods.createCampaign(
+        await fabricContract.methods.createCampaign(
             campaignName,
             foundingGoal,
             deadline,
@@ -36,7 +36,6 @@ export const createCampaign = async (
 }
 
 /**
- * 
  * @param crowdfyInstance the actual instance of the crowdfy campaign contract
  * @param beneficiary the beneficiary of the campaign 
  * @param actualAddress the actual account of metamask used by the user
@@ -48,36 +47,34 @@ export const withdraw = async (
     actualAddress: string,
     crowdfyInstance: Contract): Promise<void> => {
 
-        try {
-            await crowdfyInstance.methods.withdraw().send({ from: actualAddress });
-        }
-        catch (err) {
-            alert(err.message)
-        }
+    try {
+        await crowdfyInstance.methods.withdraw().send({ from: actualAddress });
+    }
+    catch (err) {
+        alert(err.message)
+    }
 }
 
 /**
- * 
  * @param crowdfyInstance the actual instance of the crowdfy contract
  * @param currentAddress the actual account of metamask of the user
  * @returns boolean 
  */
-export const getRefound = async (currentAddress: string, crowdfyInstance: Contract) => {
+export const getRefound = async (currentAddress: string, crowdfyInstance: Contract): Promise<boolean> => {
     try {
         await crowdfyInstance.methods.claimFounds().send({
             from: currentAddress
         });
+        return true
     }
     catch (err) {
         alert(err.message)
         return false
     }
-    return true
 }
 
 
 /**
- * 
  * @param crowdfyInstance the actual instance of the crowdfy campaign value
  * @param deadline the deadline of the campaign
  * @param currentAddress the actual account user 
@@ -85,17 +82,15 @@ export const getRefound = async (currentAddress: string, crowdfyInstance: Contra
  */
 export const makeContribution = async (
     currentAddress: string,
-    crowdfyInstance:Contract, 
-    value: String) => {
-        console.log(currentAddress)
-        try {
-            await crowdfyInstance.methods.contribute().send({
-                from: currentAddress,
-                value: Web3.utils.toWei(String(value))
-            })
-        }
-        catch (err) {
-            alert(err.message)
-        }
-
+    crowdfyInstance: Contract,
+    value: String): Promise<void> => {
+    try {
+        await crowdfyInstance.methods.contribute().send({
+            from: currentAddress,
+            value: Web3.utils.toWei(String(value))
+        })
+    }
+    catch (err) {
+        alert(err.message)
+    }
 }

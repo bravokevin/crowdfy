@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react';
 import { create } from 'ipfs-http-client'
 import { withRouter } from 'react-router';
 
-import { createEntry} from './dbUtils';
-import { CreateCampaign } from "./components/createCampaign/CreateCampaign";
-import customValidation from "./components/createCampaign/validation";
+import { createEntry } from '../Utils/dbUtils';
+import { CreateCampaign } from "../components/createCampaign/CreateCampaign";
+import customValidation from "../components/createCampaign/validation";
 
-import { loadBlockchainData } from './web3Utils';
-import { createCampaign } from './contractFunctions';
-
-
-export const CreateCampaignPage = (props) => {
-    const [contract, setContract] = useState();
+import { loadBlockchainData } from '../Utils/web3Utils';
+import { createCampaign } from '../Utils/contractFunctions';
 
 
+const CreateCampaignPage = (props) => {
+    const [contract, setContract] = useState();//the fabric contract instance already initiated
+    const falseAddress = "0x00000000000000000000000000000000000000000"
 
     //the space in where is going to be the covr image
     const imagePlace = document.querySelector("#coverImage")
 
+    //ipfs config obj
     const ipfs = create({
         host: 'ipfs.infura.io',
         port: 5001,
@@ -36,14 +36,10 @@ export const CreateCampaignPage = (props) => {
         longDescription: '',
         campaignAddress: ""
     })
-
-    const falseAddress = "0x00000000000000000000000000000000000000000"
-
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({}) //the custom errors variables
 
     //prevent the user submit twice the information
     const [isSubmiting, setIsSubmiting] = useState(false);
-
 
     const setTopTittle = (input, value) => {
         const titleS = document.querySelector('#campaignTittle')
@@ -52,6 +48,7 @@ export const CreateCampaignPage = (props) => {
         }
     }
 
+    //handle change in the input values...
     const handleChange = input => e => {
         const { value } = e.target
         setTopTittle(input, value);
@@ -62,6 +59,7 @@ export const CreateCampaignPage = (props) => {
         })
     }
 
+    ///@notice stores the image in ipfs and returns the CID
     const addToIPFS = async (input) => {
         try {
             const cid = await ipfs.add(Buffer(input));
@@ -82,7 +80,6 @@ export const CreateCampaignPage = (props) => {
         //put the image in the cover 
         const file = event.target.files[0]
         imagePlace.src = URL.createObjectURL(file);
-
         // convert the image to a buffer to store in IPFS
         const reader = new window.FileReader();
         reader.readAsArrayBuffer(file)
@@ -101,9 +98,12 @@ export const CreateCampaignPage = (props) => {
 
 
     const submit = async (event) => {
-
+        setIsSubmiting(true);
+        //listen for the event to be able to grab the address of the campaign newly created and store it in threadDB
         contract.events.CampaignCreated({ fromBlock: 'latest', filter: { deadline: values.deadline, beneficiary: values.beneficiary } })
             .on('data', async (event) => {
+                console.log('creating instance in db')
+
                 const instance = {
                     campaignImage: values.campaignImage,
                     campaignName: values.campaignName,
@@ -116,41 +116,52 @@ export const CreateCampaignPage = (props) => {
                     campaignAddress: event.returnValues.campaignAddress
                 }
                 await createEntry(instance);
+                console.log('instance db created')
+
             })
 
         event.preventDefault();
         setErrors(customValidation(values));
 
-        // if (Object.keys(errors).length > 0) {
-        //     alert("check the fields");
-        //     return
-        // }
-        setIsSubmiting(true);
-
-        const result = await createCampaign(
-            contract,
-            values.campaignName,
-            Number(values.fundingGoal),
-            Date.parse(values.deadline),
-            Number(values.fundingCap),
-            values.beneficiary
-        )
-        if (result) {
-            props.history.push(`/campaignCreated/${values.beneficiary}`, {
-                campaignImage: values.campaignImage,
-                campaignName: values.campaignName,
-                fundingGoal: Number(values.fundingGoal),
-                deadline: Date.parse(values.deadline),
-                fundingCap: Number(values.fundingCap),
-                beneficiary: values.beneficiary,
-                shortDescription: values.shortDescription,
-                longDescription: values.longDescription
-            })
+        //prevent submit if there are errors
+        if (Object.keys(errors).length > 0) {
+            alert("check the fields");
+            return
+        }
+        try {
+            console.log('creating contract')
+            const result = await createCampaign(
+                contract,
+                values.campaignName,
+                Number(values.fundingGoal),
+                Date.parse(values.deadline),
+                Number(values.fundingCap),
+                values.beneficiary
+            )
+            console.log('contract created')
+            if (result) {
+                console.log('starting send instance to the other vaina')
+                props.history.push(`/campaignCreated/${values.beneficiary}`, {
+                    campaignImage: values.campaignImage,
+                    campaignName: values.campaignName,
+                    fundingGoal: Number(values.fundingGoal),
+                    deadline: Date.parse(values.deadline),
+                    fundingCap: Number(values.fundingCap),
+                    beneficiary: values.beneficiary,
+                    shortDescription: values.shortDescription,
+                    longDescription: values.longDescription
+                })
+                console.log('finishing send instance to the other vaina')
+                setIsSubmiting(false);
+            }
+            else { }
+        }
+        catch (err) {
             setIsSubmiting(false);
+            return
         }
-        else{
 
-        }
+
 
     }
 
@@ -187,8 +198,6 @@ export const CreateCampaignPage = (props) => {
                 submit={submit.bind(this)}
                 isSubmiting={isSubmiting}
             />
-            {/* <Route exact path="/post/:id" render={({ match }) => (
-                <SingleCampaign values={values} id={(p => p.id === match.params.id)}/> */}
             >
         </>
     )

@@ -8,9 +8,8 @@ export default function customValidation(value) {
          errors.beneficiary = "Beneficiary address is invalid"
      }
      //cheks if funding cap is major thatn funding goal
-     if(value.fundingGoal >= value.fundingCap){
-        errors.fundingCap = "Funding cap must be major than funding goal"
-     }
-     
+    //  if(value.fundingGoal >= value.fundingCap){
+    //     errors.fundingCap = "Funding cap must be major than funding goal"
+    //  }
     return errors;
 }

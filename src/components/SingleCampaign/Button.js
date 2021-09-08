@@ -2,7 +2,7 @@ import ReactCircleModal from 'react-circle-modal'
 import { NButton } from "../Buttons"
 import { FormLabelPop, FormInput, FormShortsFieldsPop } from '../createCampaign/CreateCampaign.styles';
 
-import { getRefound, withdraw, makeContribution } from '../../contractFunctions';
+import { getRefound, withdraw, makeContribution } from '../../Utils/contractFunctions';
 
 
 export const Button = ({handleChange, getPercentage, account, contract, amount, beneficiary, deadline}) => {
@@ -30,7 +30,7 @@ export const Button = ({handleChange, getPercentage, account, contract, amount, 
     else if (!compareDates() && getPercentage() < 100) {
         return (
             <ReactCircleModal
-                backgroundColor='rgba(255, 0, 238, 0.48)'
+                backgroundColor='rgba(255, 0, 238, 0.55)'
                 toogleComponent={onClick => (
                     <NButton primary={true} onClick={onClick}>Contribute</NButton>
                 )}
@@ -38,7 +38,7 @@ export const Button = ({handleChange, getPercentage, account, contract, amount, 
                 {(onClick) => (
                     <FormShortsFieldsPop onClick={onClick}>
                         <FormLabelPop>Amount to contribute</FormLabelPop>
-                        <FormInput onChange={handleChange.bind(this)} onClick="none" type='number'></FormInput>
+                        <FormInput onChange={handleChange.bind(this)} onClick='none' type='number'></FormInput>
                         <NButton primary={true} onClick={async () => {
                             makeContribution(account, contract, amount).then(() => {
                                 onClick()

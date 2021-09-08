@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import { getCampaignById } from '../../dbUtils';
+import { getCampaignById } from '../../Utils/dbUtils';
 
 import { Button } from './Button';
 
@@ -21,7 +21,7 @@ import {
   ProgressBar
 } from './SingleCampaign.styles';
 
-import { loadCrowdfyInstance } from '../../web3Utils';
+import { loadCrowdfyInstance } from '../../Utils/web3Utils';
 
 export const SingleCampaign = (props) => {
 
@@ -46,7 +46,7 @@ export const SingleCampaign = (props) => {
       amountRised: Number(amountRised)
     }
   };
-  
+
   useEffect(() => {
     try {
       getCampaignById(params.id.toString()).then((campaignValues) => {
@@ -84,7 +84,6 @@ export const SingleCampaign = (props) => {
   }
 
   return (
-    // contractValues ?
       <Container>
         <Wrapper>
           <CampaignImageWrapper>
@@ -129,12 +128,7 @@ export const SingleCampaign = (props) => {
           </CampaignWrapper>
         </Wrapper>
       </Container>
-      // :
-      // <Container>
-      //   <Wrapper >
-      //     <p style={{margin: 'auto', color: 'white'}}>"Plesae connect metamask"</p>
-      //   </Wrapper>
-      // </Container>
+
   )
 }
 

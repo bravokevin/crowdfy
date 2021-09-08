@@ -1,7 +1,7 @@
 import { Component } from 'react'
-import Card from './components/card/Card'
-import { CardArea } from './components/card/Card.styles'
-import { getAllCampaigns } from './dbUtils'
+import Card from '../components/card/Card'
+import { CardArea } from '../components/card/Card.styles'
+import { getAllCampaigns } from '../Utils/dbUtils'
 
 class Campaigns extends Component {
 

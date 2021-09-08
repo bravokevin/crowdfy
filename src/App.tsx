@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { addWallet, handleAccountsChanged } from "./web3Utils";
+import { addWallet, handleAccountsChanged } from "./Utils/web3Utils";
 
-import HomePage from "./components/HomePage";
-
+import HomePage from "./Pages/HomePage";
 import Navbar from "./components/NavBar/Nav";
 import SideBar from "./components/NavBar/sideBar/SideBar";
-import Campaigns from "./Campaigns";
-import CreateCampaignPage from "./CreateCampaignPage";
+import Campaigns from "./Pages/Campaigns";
+import CreateCampaignPage from "./Pages/CreateCampaignPage";
 import { SingleCampaignCreated } from "./components/SingleCampaign/SingleCampaignCreated";
 import { SingleCampaign } from "./components/SingleCampaign/SingleCampaign";
-import { notFound404 } from "./404";
+import { notFound404 } from "./Pages/404";
 
 
 const NAV_ITMES = ["campaigns"]
 
 const App: any = () => {
 
-
-  //to close or open the sidebar
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false); //to close or open the sidebar
   const [wallet, setWallet] = useState({ account: '' });
   const [isWallet, setIsWallet] = useState(false);
-
 
   const toggle = () => {
     setIsOpen(!isOpen)
@@ -37,21 +32,17 @@ const App: any = () => {
           setIsWallet(true);
         }
       })
-
   }, [])
 
   useEffect(() => {
     ethereum.on('accountsChanged', async () => {
-     handleAccountsChanged(wallet.account)
-     .then((newAccount) =>{
-      setWallet(newAccount)
-     })
-
-
+      handleAccountsChanged(wallet.account)
+        .then((newAccount) => {
+          setWallet(newAccount)
+        })
     })
   })
 
-  //estar mirando constante mente si el usuario s cambio de cuenta.
   return (
     <>
       <Router>
@@ -81,7 +72,6 @@ const App: any = () => {
           <Redirect from="/campaign/campaigns" to="/campaigns" />
           <Route component={notFound404} />
         </Switch>
-
       </Router>
     </>
   );

@@ -60,7 +60,6 @@ export const SingleCampaignCreated = ({location:
             <ValueField>{convertDate(deadline)}</ValueField>
           </ValuesWrapper>
         </ShortFieldsWrapepr>
-
         <CampaignWrapper>
           <CampaignTittle>{campaignName}</CampaignTittle>
           <CampaignShortDescription>{shortDescription}</CampaignShortDescription>

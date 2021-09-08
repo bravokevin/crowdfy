@@ -56,7 +56,6 @@ const threadObj = {
   }
 }
 
-
 /**
  * the Trhead ID of the database 
  * @dev this is a unique thread ID where all the users can store theirs campaigns data once created
@@ -84,9 +83,6 @@ export interface CrowdfyCampaign {
 /**
  * the JSON schema representation of the campaign
  */
-
-
-
 const schema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   title: 'Campaign',
@@ -120,8 +116,6 @@ const schema = {
     }
   },
 }
-
-
 
 /**
  * @dev this enviroment (dev) uses a unsafe key for agile and developmen porpuses

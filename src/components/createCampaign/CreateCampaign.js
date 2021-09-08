@@ -1,4 +1,3 @@
-import React from 'react'
 import { NButton } from '../Buttons'
 
 import {
@@ -26,7 +25,6 @@ import {
 
 export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, captureFile, isSubmiting }) => {
 
-
   return (
     <Container>
       <Wrapper>
@@ -52,34 +50,36 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             <TopLine id='campaignTittle'>My campaign</TopLine>
             <FormShortsFields>
 
-              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError, name }) => (
-                <ShortFieldWrapper style={{ gridColumnEnd: finish, gridColumnStart: start }} >
-                  <FormLabel >{label}</FormLabel>
+              {CampaignFields.map(({ label, type, autoFocus, start, finish, value, placeholder, minimum, customError, name }, index) => (
+                <ShortFieldWrapper key={index+4} style={{ gridColumnEnd: finish, gridColumnStart: start }} >
+                  <FormLabel key={index +1}>{label}</FormLabel>
 
                   {/* sets min value to the date input only */}
                   {label === 'deadline' ?
                     <FormInput
+                      key={index}
                       type={type}
                       autoFocus={autoFocus}
                       onChange={handleChange(label)}
                       value={value}
                       placeholder={placeholder}
-                      // required
+                      required
                       min={minimum()}
                     />
                     :
                     <FormInput
+                      key={index}
                       type={type}
                       autoFocus={autoFocus}
                       onChange={handleChange(name)}
                       value={value}
                       placeholder={placeholder}
-                      min={0}
-                    // required
+                      // min={0}
+                    required
                     />
                   }
                   {/* if there is a custom error shows up */}
-                  {customError && <Error>{customError}</Error>}
+                  {customError && <Error key={index +2}>{customError}</Error>}
 
                 </ShortFieldWrapper>
               ))}
@@ -87,7 +87,6 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
             </FormShortsFields>
 
             <FormLargeFields>
-
               <LargerFieldsWrapper>
                 <TextDescription onChange={handleChange("shortDescription")}
                   value={values.shortDescription}

@@ -1,9 +1,8 @@
 import Web3 from 'web3';
-
 import { AbiItem } from 'web3-utils';
+import CrowdfyFabric from "../contracts/CrowdfyFabric.json"
+import Crowdfy from '../contracts/Crowdfy.json'
 
-import CrowdfyFabric from "./contracts/CrowdfyFabric.json"
-import Crowdfy from './contracts/Crowdfy.json'
 
 const FabricABI = CrowdfyFabric.abi; //the actual ABI of the Fabric Contract
 const CrowdfyABI = Crowdfy.abi// the actual ABI of the crowdfy Contract
@@ -15,9 +14,9 @@ export const addWallet = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     try {
-      await window.ethereum.enable();
+      // await window.ethereum.enable();
 
-      const accounts = await ethereum.request({ method: 'eth_accounts' });
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       return accounts[0];
     }
     catch (ee) { }
@@ -25,7 +24,6 @@ export const addWallet = async () => {
   else {
     window.alert('Non-ehtereum browser detected. Try instaling metamask')
   }
-
 }
 
 export const handleAccountsChanged = async (currentAccount?: string): Promise<string> => {
@@ -46,7 +44,7 @@ export const loadBlockchainData = async () => {
     const web3 = window.web3
     // detecting network id
     const networkId = await web3.eth.net.getId()
-    const networkData: AbiItem = CrowdfyFabric.networks[networkId] 
+    const networkData: AbiItem = CrowdfyFabric.networks[networkId]
     if (networkData) {
       const FabricContract = new web3.eth.Contract(FabricABI, contactFabricAddress);
       return FabricContract
@@ -60,20 +58,18 @@ export const loadBlockchainData = async () => {
   }
 }
 
-
-
 /**
  * 
  * @param instanceAddress the address of the crowdfy instance that we are going to connect
  * @returns return the contract to interact with
  */
 export const loadCrowdfyInstance = async (instanceAddress: string) => {
-    window.web3 = new Web3(window.ethereum);
-    const web3 = window.web3
-  
-    const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
-    return crowdfyInstance
-  
+  window.web3 = new Web3(window.ethereum);
+  const web3 = window.web3
+
+  const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
+  return crowdfyInstance
+
 
 
 }
