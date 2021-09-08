@@ -19,11 +19,12 @@ export const createCampaign = async (
 ): Promise<boolean> => {
     const accounts = await ethereum.request({ method: 'eth_accounts' });
     try {
+
         await fabricContract.methods.createCampaign(
             campaignName,
-            foundingGoal,
+            Web3.utils.toWei(String(foundingGoal)),
             deadline,
-            foundingCap,
+            Web3.utils.toWei(String(foundingCap)),
             beneficiary
         ).send({ from: accounts[0] })
         return true

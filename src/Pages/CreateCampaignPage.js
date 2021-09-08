@@ -103,7 +103,6 @@ const CreateCampaignPage = (props) => {
         contract.events.CampaignCreated({ fromBlock: 'latest', filter: { deadline: values.deadline, beneficiary: values.beneficiary } })
             .on('data', async (event) => {
                 console.log('creating instance in db')
-
                 const instance = {
                     campaignImage: values.campaignImage,
                     campaignName: values.campaignName,
@@ -129,7 +128,6 @@ const CreateCampaignPage = (props) => {
             return
         }
         try {
-            console.log('creating contract')
             const result = await createCampaign(
                 contract,
                 values.campaignName,
@@ -138,7 +136,6 @@ const CreateCampaignPage = (props) => {
                 Number(values.fundingCap),
                 values.beneficiary
             )
-            console.log('contract created')
             if (result) {
                 console.log('starting send instance to the other vaina')
                 props.history.push(`/campaignCreated/${values.beneficiary}`, {
@@ -151,7 +148,6 @@ const CreateCampaignPage = (props) => {
                     shortDescription: values.shortDescription,
                     longDescription: values.longDescription
                 })
-                console.log('finishing send instance to the other vaina')
                 setIsSubmiting(false);
             }
             else { }
@@ -160,9 +156,6 @@ const CreateCampaignPage = (props) => {
             setIsSubmiting(false);
             return
         }
-
-
-
     }
 
     const getDate = () => {
