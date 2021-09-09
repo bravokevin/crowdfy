@@ -1,12 +1,8 @@
 import {
   Client,
-  Identity,
   KeyInfo,
   PrivateKey,
-  UserAuth,
   ThreadID,
-  Where,
-  Person
 } from '@textile/hub';
 
 export const collectionName: string = "CrowdfyCampaigns"
@@ -21,38 +17,38 @@ const threadObj = {
   "buf": {
     "0": 1,
     "1": 85,
-    "2": 2,
-    "3": 15,
-    "4": 175,
-    "5": 88,
-    "6": 117,
-    "7": 217,
-    "8": 75,
-    "9": 53,
-    "10": 131,
-    "11": 98,
-    "12": 209,
-    "13": 8,
-    "14": 199,
-    "15": 213,
-    "16": 251,
-    "17": 188,
-    "18": 213,
-    "19": 53,
-    "20": 157,
-    "21": 107,
-    "22": 74,
-    "23": 137,
-    "24": 88,
-    "25": 68,
-    "26": 6,
-    "27": 49,
-    "28": 165,
-    "29": 231,
-    "30": 248,
-    "31": 55,
-    "32": 205,
-    "33": 228
+    "2": 59,
+    "3": 150,
+    "4": 210,
+    "5": 61,
+    "6": 233,
+    "7": 30,
+    "8": 31,
+    "9": 201,
+    "10": 184,
+    "11": 157,
+    "12": 233,
+    "13": 47,
+    "14": 168,
+    "15": 18,
+    "16": 208,
+    "17": 23,
+    "18": 146,
+    "19": 134,
+    "20": 241,
+    "21": 3,
+    "22": 6,
+    "23": 181,
+    "24": 245,
+    "25": 127,
+    "26": 102,
+    "27": 94,
+    "28": 42,
+    "29": 184,
+    "30": 179,
+    "31": 115,
+    "32": 36,
+    "33": 179
   }
 }
 
@@ -63,7 +59,7 @@ const threadObj = {
  */
 export const threadID = new ThreadID(
   new Uint8Array(
-    [1, 85, 2, 15, 175, 88, 117, 217, 75, 53, 131, 98, 209, 8, 199, 213, 251, 188, 213, 53, 157, 107, 74, 137, 88, 68, 6, 49, 165, 231, 248, 55, 205, 228]
+    [1, 85, 59, 150, 210, 61, 233, 30, 31, 201, 184, 157, 233, 47, 168, 18, 208, 23, 146, 134, 241, 3, 6, 181, 245, 127, 102, 94, 42, 184, 179, 115, 36, 179]
   )
 )
 
@@ -122,7 +118,7 @@ const schema = {
  * see https://docs.textile.io/tutorials/hub/pki-identities/ for more info
  */
 export const keyInfo: KeyInfo = {
-  key: 'bagqwlgf7vi4ihif55hspqmhjmu',
+  key: 'bql3ly4x3dqrz4oq4vjxz5dlqma',
 }
 
 /**
@@ -160,7 +156,7 @@ export const getIdentity = async (): Promise<PrivateKey> => {
  * @dev this function is only called once (at the moment of the first deploy of the app) 
  this is for only use a database, where all users can store their campaigns data
  */
-const createDB = async (): Promise<ThreadID> => {
+export const createDB = async (): Promise<ThreadID> => {
   const identity = await getIdentity();
   const client = await Client.withKeyInfo(keyInfo)
   await client.getToken(identity)
@@ -179,6 +175,10 @@ export const collectionFromSchema = async (): Promise<void> => {
   await client.newCollection(threadID, { name: collectionName, schema: schema })
 }
 
+
+/**
+ * to update the collection in case if being necesary
+ */
 export const updateCollection = async (): Promise<void> => {
   const identity = await getIdentity();
   const client = await Client.withKeyInfo(keyInfo)

@@ -6,7 +6,7 @@ import Crowdfy from '../contracts/Crowdfy.json'
 
 const FabricABI = CrowdfyFabric.abi; //the actual ABI of the Fabric Contract
 const CrowdfyABI = Crowdfy.abi// the actual ABI of the crowdfy Contract
-const contactFabricAddress: string = '0x623CC812a8Ace0197E772080b3709D594B5E87CA';
+const CONTRACT_FABRIC_ADDRESS: string = '0xFbaca9b7286030B69EC35a7794e742106866A6Ff';
 
 //detects metamask and stores the ethereum wallet
 export const addWallet = async () => {
@@ -46,7 +46,7 @@ export const loadBlockchainData = async () => {
     const networkId = await web3.eth.net.getId()
     const networkData: AbiItem = CrowdfyFabric.networks[networkId]
     if (networkData) {
-      const FabricContract = new web3.eth.Contract(FabricABI, contactFabricAddress);
+      const FabricContract = new web3.eth.Contract(FabricABI, CONTRACT_FABRIC_ADDRESS);
       return FabricContract
     } else {
       window.alert('Smart contract not deployed to detected network.')
@@ -69,7 +69,4 @@ export const loadCrowdfyInstance = async (instanceAddress: string) => {
 
   const crowdfyInstance = new web3.eth.Contract(CrowdfyABI, instanceAddress);
   return crowdfyInstance
-
-
-
 }

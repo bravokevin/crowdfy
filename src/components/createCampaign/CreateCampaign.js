@@ -32,7 +32,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
           <ImageWrapper>
             <Image id="coverImage" />
           </ImageWrapper>
-          <Form onSubmit={submit} method='POST' action=''>
+          <Form onSubmit={submit} method='POST'>
             {/* The image handler */}
             <FormInputImage
               id="imageInput"

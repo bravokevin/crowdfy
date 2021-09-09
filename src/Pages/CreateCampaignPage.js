@@ -12,17 +12,6 @@ import { createCampaign } from '../Utils/contractFunctions';
 
 const CreateCampaignPage = (props) => {
     const [contract, setContract] = useState();//the fabric contract instance already initiated
-    const falseAddress = "0x00000000000000000000000000000000000000000"
-
-    //the space in where is going to be the covr image
-    const imagePlace = document.querySelector("#coverImage")
-
-    //ipfs config obj
-    const ipfs = create({
-        host: 'ipfs.infura.io',
-        port: 5001,
-        protocol: 'https',
-    })
 
     ///campaign fields
     const [values, setValue] = useState({
@@ -36,10 +25,21 @@ const CreateCampaignPage = (props) => {
         longDescription: '',
         campaignAddress: ""
     })
+
     const [errors, setErrors] = useState({}) //the custom errors variables
 
     //prevent the user submit twice the information
     const [isSubmiting, setIsSubmiting] = useState(false);
+
+    //the space in where is going to be the covr image
+    const imagePlace = document.querySelector("#coverImage")
+
+    //ipfs config obj
+    const ipfs = create({
+        host: 'ipfs.infura.io',
+        port: 5001,
+        protocol: 'https',
+    })
 
     const setTopTittle = (input, value) => {
         const titleS = document.querySelector('#campaignTittle')
@@ -96,13 +96,11 @@ const CreateCampaignPage = (props) => {
         }
     }
 
-
     const submit = async (event) => {
-        setIsSubmiting(true);
-        //listen for the event to be able to grab the address of the campaign newly created and store it in threadDB
+        event.preventDefault();
+        // listen for the event to be able to grab the address of the campaign newly created and store it in threadDB
         contract.events.CampaignCreated({ fromBlock: 'latest', filter: { deadline: values.deadline, beneficiary: values.beneficiary } })
             .on('data', async (event) => {
-                console.log('creating instance in db')
                 const instance = {
                     campaignImage: values.campaignImage,
                     campaignName: values.campaignName,
@@ -115,18 +113,24 @@ const CreateCampaignPage = (props) => {
                     campaignAddress: event.returnValues.campaignAddress
                 }
                 await createEntry(instance);
-                console.log('instance db created')
-
             })
 
-        event.preventDefault();
+        setIsSubmiting(true);
         setErrors(customValidation(values));
 
+
         //prevent submit if there are errors
-        if (Object.keys(errors).length > 0) {
-            alert("check the fields");
-            return
-        }
+        // if (Object.keys(errors).length > 0) {
+        //     alert("check the fields");
+        //     console.log('no paso')
+        //     setIsSubmiting(false);
+        //     return
+        // }
+
+        // else {
+
+        // }
+
         try {
             const result = await createCampaign(
                 contract,
@@ -148,29 +152,27 @@ const CreateCampaignPage = (props) => {
                     shortDescription: values.shortDescription,
                     longDescription: values.longDescription
                 })
-                setIsSubmiting(false);
             }
-            else { }
         }
         catch (err) {
-            setIsSubmiting(false);
             return
         }
+        finally {
+            setIsSubmiting(false);
+        }
     }
-
     const getDate = () => {
         let date = new Date().toISOString();
         let search = date.indexOf('.')
         date = date.slice(0, search - 3)
         return date
     }
-
     const CampaignFields = [
         { label: "campaign name", type: "text", autoFocus: true, value: values.campaignName, placeholder: "My campaign", name: "campaignName" },
         { label: "funding goal", type: "number", value: values.fundingGoal, placeholder: "In Eth", name: "fundingGoal" },
         { label: "deadline", type: "datetime-local", value: values.deadline, minimum: getDate, name: "deadline" },
         { label: "funding cap", type: "number", value: values.fundingCap, placeholder: "In Eth", customError: errors.fundingCap, name: "fundingCap", },
-        { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: falseAddress, customError: errors.beneficiary, name: "beneficiary" }
+        { label: "beneficiary", type: "text", finish: 3, start: 1, value: values.beneficiary, placeholder: '0x0000...00', customError: errors.beneficiary, name: "beneficiary" }
     ]
     useEffect(() => {
         loadBlockchainData()

@@ -4,7 +4,7 @@ import { FormLabelPop, FormInput, FormShortsFieldsPop } from '../createCampaign/
 
 import { getRefound, withdraw, makeContribution } from '../../Utils/contractFunctions';
 
-
+//we could improve the logic of the buttons to have similarities with the states of the campaign
 export const Button = ({handleChange, getPercentage, account, contract, amount, beneficiary, deadline}) => {
 
     const compareAddress = () => {
@@ -17,7 +17,7 @@ export const Button = ({handleChange, getPercentage, account, contract, amount, 
         else return false
     }
 
-    if (compareDates() && getPercentage() > 30) {
+    if (compareDates() && getPercentage() > 40) {
         return <NButton primary={true} onClick={async () => { await getRefound(account, contract) }}>Get a refound</NButton>
     }
 
