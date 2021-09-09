@@ -101,7 +101,7 @@ export const CreateCampaign = ({ CampaignFields, handleChange, values, submit, c
               </LargerFieldsWrapper>
             </FormLargeFields>
             <ButtonWrapper>
-              <NButton primary={true} type="submit" disabled={isSubmiting} isSubmmiting={isSubmiting}>Submit Campaign</NButton>
+              <NButton primary={true} type="submit" disabled={isSubmiting} isSubmmiting={isSubmiting}>{isSubmiting ? "Loading... please wait confirmation" : "Create campaign"}</NButton>
             </ButtonWrapper>
           </Form>
         </FormContent>
