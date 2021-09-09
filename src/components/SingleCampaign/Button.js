@@ -6,6 +6,7 @@ import { getRefound, withdraw, makeContribution } from '../../Utils/contractFunc
 
 //we could improve the logic of the buttons to have similarities with the states of the campaign
 export const Button = ({handleChange, getPercentage, account, contract, amount, beneficiary, deadline}) => {
+    
 
     const compareAddress = () => {
         if (account.toString().toLowerCase() === beneficiary.toString().toLowerCase()) return true
