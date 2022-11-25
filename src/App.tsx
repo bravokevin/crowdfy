@@ -46,13 +46,15 @@ const App: any = () => {
   return (
     <>
       <Router>
-        <Navbar toggle={toggle}
-          items={NAV_ITMES}
-          isWallet={isWallet}
-          setAddress={handleAccountsChanged}
-          address={wallet} />
+      <Navbar
+        toggle={toggle}
+        items={NAV_ITMES}
+        isWallet={isWallet}
+        setAddress={handleAccountsChanged}
+        address={wallet}
+      />
 
-        <SideBar isOpen={isOpen}
+      <SideBar isOpen={isOpen}
           toggle={toggle}
           items={NAV_ITMES}
           open={isOpen}

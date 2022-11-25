@@ -1,8 +1,11 @@
 import styled from 'styled-components'
 import { Link as LinkR } from 'react-router-dom';
 
+interface N {
+    scrollNav: boolean
+}
 
-export const Nav = styled.nav`
+export const Nav = styled.nav<N>`
 background: transparent;
 height: 80px;
 margin-top: -80px;
@@ -165,7 +168,12 @@ font-size: 16px;
 color: #ffffff;
 text-transform: uppercase;
 `
-export const ColorBall = styled.button`
+
+interface C {
+    active: boolean
+}
+
+export const ColorBall = styled.button<C>`
 border-radius: 800px;
 padding: 3.5px;
 background:  ${({ active }) => (active ? "#00CD00" : "red")};

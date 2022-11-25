@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Logo from "../../Crowdfy.png"
 import { BurgerS } from './sideBar/SideBar.styles';
+
 import {
     Nav,
     NavbarContainer,
@@ -13,9 +14,18 @@ import {
     AddrWrapper,
     AddrText,
     ColorBall
-} from './Nav.styles'
+} from './sideBar/Nav.styles'
 
-const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
+interface Props {
+    toggle: any,
+    items: string[],
+    isWallet: boolean,
+    setAddress: any,
+    address: any
+}
+
+const Navbar: React.FC <Props> = ({ toggle, items, isWallet, setAddress, address }) => {
+
     const [scrollNav, setScrollNav] = useState(false)
 
     const changeNav = () => {
@@ -60,11 +70,13 @@ const Navbar = ({ toggle, items, isWallet, setAddress, address }) => {
                     <AddrWrapper>
                         <ColorBall active={isWallet} />
                         <AddrText onClick={setAddress}>
-                            {address > 10 ? address.slice(0,10) : "0x000000000"}
+                            {address > 10 ? address.slice(0, 10) : "0x000000000"}
                         </AddrText>
                     </AddrWrapper>
                 </NavbarContainer>
             </Nav>
+
+
         </>
     )
 }
